@@ -1,0 +1,3 @@
+
+let idCars = getJSONData(CATEGORIES_URL)[0].id
+getJSONData(PRODUCTS_URL + + EXT_TYPE)
