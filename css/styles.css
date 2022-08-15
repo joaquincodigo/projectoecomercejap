@@ -188,3 +188,25 @@ a.custom-card:hover {
 .checked {
   color: orange;
 }
+
+.form-control{
+  width: 300px;
+}
+
+.login-input{
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.form-label{
+  display: block;
+}
+
+#login-logo{
+  width: 300px;
+}
+
+::placeholder {
+  text-align: center;
+  color: #ccc;
+}

@@ -1,7 +1,7 @@
 //TODO GET CARS CATEGORY NUMBER
 function insertCategoryTitleHeading(categoryNameString) {
   let categoryNameHeaderElement = document.createElement("h2")
-  categoryNameHeaderElement.classList.add("mt-4", "align-text-top", "text-center")
+  categoryNameHeaderElement.classList.add("mt-4", "align-text-top", "text-center", "px-2")
   categoryNameHeaderElement.innerText = `Categoría: ${categoryNameString}`
   let mainContainerElement = document.getElementById("main-container")
   mainContainerElement.appendChild(categoryNameHeaderElement)
