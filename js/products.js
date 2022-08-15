@@ -1,9 +1,28 @@
+//TODO GET CARS CATEGORY NUMBER
+function insertCategoryTitleHeading(categoryNameString) {
+  let categoryNameHeaderElement = document.createElement("h2")
+  categoryNameHeaderElement.classList.add("mt-4", "align-text-top", "text-center")
+  categoryNameHeaderElement.innerText = `Categoría: ${categoryNameString}`
+  let mainContainerElement = document.getElementById("main-container")
+  mainContainerElement.appendChild(categoryNameHeaderElement)
+}
+
+
+// Fetching JSON product list from the API.
 document.addEventListener("DOMContentLoaded", () => {
-  fetch("https://japceibal.github.io/emercado-api/cats_products/101.json")
-    .then((response) => response.json())
-    .then((dataObject) => dataObject.products)
-    .then((productsArray) => {
-      let HTMLContentToAppend;
+  getJSONData("https://japceibal.github.io/emercado-api/cats_products/101.json")
+    .then(resultObject => resultObject.data)
+    .then(dataObject => {
+
+      // Adding HTML header in main-container
+      // with the category name
+      insertCategoryTitleHeading(dataObject.catName)
+      return dataObject.products})
+    .then(productsArray => {
+      
+      // Iterating the list and generating HTML
+      // content for appending to #main-container
+      let HTMLContentToAppend = "";
       for (const productObject of productsArray) {
         HTMLContentToAppend +=
               `<div class="list-group-item list-group-item-action">
@@ -28,6 +47,6 @@ document.addEventListener("DOMContentLoaded", () => {
       </div>`
       }
       mainContainerElement = document.getElementById("main-container")
-  mainContainerElement.innerHTML = HTMLContentToAppend
-    });
+      mainContainerElement.innerHTML += HTMLContentToAppend
+    })
 });
