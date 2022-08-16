@@ -198,6 +198,10 @@ a.custom-card:hover {
   border-radius: 4px;
 }
 
+#login-container{
+  margin-top: 150px;
+}
+
 .form-label{
   display: block;
 }
@@ -207,6 +211,7 @@ a.custom-card:hover {
 }
 
 ::placeholder {
+  font-style: italic;
   text-align: center;
   color: #ccc;
 }
