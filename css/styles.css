@@ -199,7 +199,7 @@ a.custom-card:hover {
 }
 
 #login-container{
-  margin-top: 150px;
+  margin-top: 30px;
 }
 
 .form-label{
@@ -214,4 +214,13 @@ a.custom-card:hover {
   font-style: italic;
   text-align: center;
   color: #ccc;
+}
+
+
+
+#wrong-input-alert-container{
+  width: 200px;
+  background-color: #ED9DB8;
+  border: 1px solid red;
+  color: red;
 }
