@@ -219,8 +219,15 @@ a.custom-card:hover {
 
 
 #wrong-input-alert-container{
-  width: 200px;
-  background-color: #ED9DB8;
+  display: none;
+  max-width: 200px;
+  background-color: #e2cad2;
   border: 1px solid red;
   color: red;
+  margin: auto;
+  border-radius: 5px;
+}
+
+#category-name-heading{
+  margin-bottom: 30px;
 }
