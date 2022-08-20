@@ -202,6 +202,10 @@ a.custom-card:hover {
   margin-top: 30px;
 }
 
+#landpage-container{
+  display: none !important;
+}
+
 .form-label{
   display: block;
 }
@@ -215,8 +219,6 @@ a.custom-card:hover {
   text-align: center;
   color: #ccc;
 }
-
-
 
 #wrong-input-alert-container{
   display: none;
