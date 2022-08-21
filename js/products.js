@@ -1,7 +1,9 @@
 function fetchCategoryId(categoryNameString) {
+  
   // Fetching category list from API.
   return (
     fetch(CATEGORIES_URL)
+      
       // Parsin JSON response
       .then((response) => response.json())
 
@@ -46,8 +48,7 @@ document.addEventListener("DOMContentLoaded", () => {
       .then((dataObject) => {
         
         // Adding HTML header in #main-container with the category name
-        let categoryName = dataObject.catName;
-        insertCategoryTitleHeading(categoryName);
+        insertCategoryTitleHeading(dataObject.catName);
 
         return dataObject.products;
       })
@@ -71,6 +72,7 @@ document.addEventListener("DOMContentLoaded", () => {
             <div class="mb-1">
               <h4>${productObject.name}</h4>
               <p>${productObject.description}</p>
+              <p class="font-weight-bold">Precio ${productObject.currency} ${productObject.cost}</p>
             </div>
             <small class="text-muted">Vendidos: ${productObject.soldCount}</small>
           </div>
