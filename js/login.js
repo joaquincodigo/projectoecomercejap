@@ -1,32 +1,62 @@
+// Defining Functions
+function isInputEmpty(inputField) {
+  return inputField.value == "";
+}
+
 function showElement(element) {
-  element.setAttribute("style", "display: block !important")
+  element.setAttribute("style", "display: block !important");
 }
 
 function hideElement(element) {
-  element.setAttribute("style", "display: none !important")
+  element.setAttribute("style", "display: none !important");
 }
 
-document.addEventListener("DOMContentLoaded", () => {
-  console.log("> DOM Loaded");
-  let loginPageContainer = document.getElementById('login-page-container');
-  let landPageContainer = document.getElementById('landpage-container');
-  let loginFormElement = document.getElementById('login-form');
-  // let emailInputElement = document.getElementById("email-input");
-  // let passwordInputElement = document.getElementById("password-input");
-  // let wrongInputAlertElement = document.getElementById("wrong-input-alert");
+function showInvalidInputMessage(messageString, inputElement) {
 
+  // Showing the message
+  let invalidMessageContainerElement = document.getElementById(
+    "invalid-input-message-container"
+  );
+  invalidMessageContainerElement.setAttribute("style", "color: red")
+  invalidMessageContainerElement.innerText = messageString;
+
+  // Highlighting the input
+  inputElement.setAttribute(
+    "style",
+    "box-shadow: 0 4px 8px 0 rgba(255, 0, 0, 0.2), 0 6px 20px 0 rgba(255, 0, 0, 0.19)"
+  );
+}
+
+// Waiting for the DOM to load
+document.addEventListener("DOMContentLoaded", () => {
+  // Defining HTML elements
+  let loginPageContainer = document.getElementById("login-page-container");
+  let landPageContainer = document.getElementById("landpage-container");
+  let loginFormElement = document.getElementById("login-form");
+  let userInputElement = document.getElementById("user-input");
+  let passwordInputElement = document.getElementById("password-input");
+
+  // When the form is submitted
   loginFormElement.addEventListener("submit", (event) => {
+    // Stop the page from reloading
     event.preventDefault();
-    console.log("> Login form submitted");
-  
-    hideElement(loginPageContainer)
-    console.log("> Login page hidden");
-    
-    showElement(landPageContainer)
-    console.log("> Landing page displayed");
-    
+
+    // Checking if the fields are valid
+    if (isInputEmpty(userInputElement)) {
+      showInvalidInputMessage(
+        "El email ingresado no es válido.",
+        userInputElement
+      );
+    }
+    else if (isInputEmpty(passwordInputElement)) {
+      showInvalidInputMessage(
+        "La contraseña ingresada no es válida",
+        passwordInputElement
+      );
+    }
+    else {
+      hideElement(loginPageContainer)
+      showElement(landPageContainer)
+    }
   });
 });
-
-
-

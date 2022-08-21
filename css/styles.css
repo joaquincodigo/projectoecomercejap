@@ -2,7 +2,7 @@
 .card-body,
 .container,
 .site-header {
-  font-family: 'Raleway', serif !important;
+  font-family: "Raleway", serif !important;
 }
 
 .jumbotron .display-4 {
@@ -32,8 +32,8 @@ nav a {
   height: 50vh;
   padding: 5em inherit;
   margin-bottom: 0;
-  background-color: #53C0FB;
-  background: url('../img/cover_back.png');
+  background-color: #53c0fb;
+  background: url("../img/cover_back.png");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -73,12 +73,12 @@ footer {
 }
 
 footer p {
-  margin-bottom: .25rem;
+  margin-bottom: 0.25rem;
 }
 
 .site-header a {
   color: white;
-  transition: ease-in-out color .15s;
+  transition: ease-in-out color 0.15s;
 }
 
 .site-header .dropdown-menu a {
@@ -86,7 +86,7 @@ footer p {
 }
 
 .dropzone {
-  border: 2px dashed #0087F7;
+  border: 2px dashed #0087f7;
   border-radius: 5px;
   background: white;
 }
@@ -189,28 +189,28 @@ a.custom-card:hover {
   color: orange;
 }
 
-.form-control{
+.form-control {
   width: 300px;
 }
 
-.login-input{
+.login-input {
   border: 1px solid #ccc;
   border-radius: 4px;
 }
 
-#login-container{
+#login-container {
   margin-top: 30px;
 }
 
-#landpage-container{
+#landpage-container {
   display: none !important;
 }
 
-.form-label{
+.form-label {
   display: block;
 }
 
-#login-logo{
+#login-logo {
   width: 300px;
 }
 
@@ -220,7 +220,7 @@ a.custom-card:hover {
   color: #ccc;
 }
 
-#wrong-input-alert-container{
+#wrong-input-alert-container {
   display: none;
   max-width: 200px;
   background-color: #e2cad2;
@@ -230,12 +230,20 @@ a.custom-card:hover {
   border-radius: 5px;
 }
 
-#category-name-heading{
+#category-name-heading {
   margin-bottom: 30px;
 }
 
-#googleButtonDiv{
+#googleButtonDiv {
   width: 200px;
   margin: auto;
+}
+
+#password-input-container {
+  margin-bottom: 10px !important;
+}
+
+#submit-button{
+  margin-top: 10px !important;
 }
 

@@ -46,29 +46,31 @@
             method="POST"
             action="index.html"
           >
-            <!-- Email Input-->
+            <!-- User Input-->
             <div class="form-outline mb-4">
-              <label class="form-label" for="email-input">Email:</label>
+              <label class="form-label" for="email-input">Usuario:</label>
               <input
-                type="email"
-                id="email-input"
+                type="text"
+                id="user-input"
                 class="login-input"
                 placeholder="Ingresa tu correo"
-                required
               />
             </div>
 
             <!-- Password Input -->
-            <div class="form-outline mb-4">
+            <div class="form-outline mb-4" id="password-input-container">
               <label class="form-label" for="password-input">Contraseña:</label>
               <input
                 type="password"
                 id="password-input"
                 class="login-input"
                 placeholder="Ingresa tu contraseña"
-                required
+                
               />
             </div>
+
+            <!-- Invalid Input Message Container -->
+            <div id="invalid-input-message-container"></div>
 
             <!-- Submit Button -->
             <input
