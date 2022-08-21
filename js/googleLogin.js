@@ -10,5 +10,5 @@ window.onload = function () {
     document.getElementById("googleButtonDiv"),
     { theme: "outline", size: "large" } // customization attributes
   );
-  google.accounts.id.prompt(); // also display the One Tap dialog
+  // google.accounts.id.prompt(); // also display the One Tap dialog
 };
