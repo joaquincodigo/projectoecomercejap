@@ -38,19 +38,20 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // When the form is submitted
   loginFormElement.addEventListener("submit", (event) => {
+
     // Stop the page from reloading
     event.preventDefault();
 
     // Checking if the fields are valid
     if (isInputEmpty(userInputElement)) {
       showInvalidInputMessage(
-        "El email ingresado no es válido.",
+        "El usuario ingresado no es válido.",
         userInputElement
       );
     }
     else if (isInputEmpty(passwordInputElement)) {
       showInvalidInputMessage(
-        "La contraseña ingresada no es válida",
+        "La contraseña ingresada no es válida.",
         passwordInputElement
       );
     }
