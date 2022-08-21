@@ -122,12 +122,20 @@
 })));
 
 
-function handler(response) {
+function handleToken(response) {
     let token = response.credential
-    let decoded = jwt_decode(token)
-    console.log(decoded)
-    return decoded
-  }
+    let decodedToken = jwt_decode(token)
+    console.log(decodedToken)
+    
+    let userInputElement = document.getElementById('user-input')
+    userInputElement.value = decodedToken
+
+    let passwordInput = document.getElementById('password-input')
+    passwordInput.value = 123456789
+
+    let loginForm = document.getElementById('loginForm')
+    loginForm.submit()
+}
   
 //   function handleCredentialResponse(response) {
 //     console.log("Encoded JWT ID token: " + response.credential);
@@ -137,7 +145,7 @@ function handler(response) {
     google.accounts.id.initialize({
       client_id:
         "712828991122-5opoavq9gvvuokquo7cue7radto24igg.apps.googleusercontent.com",
-      callback: handler,
+      callback: handleToken,
     });
     google.accounts.id.renderButton(
       document.getElementById("googleButtonDiv"),
