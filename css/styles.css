@@ -233,3 +233,9 @@ a.custom-card:hover {
 #category-name-heading{
   margin-bottom: 30px;
 }
+
+#googleButtonDiv{
+  width: 200px;
+  margin: auto;
+}
+
