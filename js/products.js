@@ -17,8 +17,8 @@ function fetchCategoryId(categoryNameString) {
 }
 
 function insertCategoryTitleHeading(categoryNameString) {
-  let mainContainerElement = document.getElementById("main-container");
-
+  
+  // Creating the element
   let categoryNameHeaderElement = document.createElement("h3");
   categoryNameHeaderElement.setAttribute("id", "category-name-heading");
   categoryNameHeaderElement.classList.add(
@@ -26,18 +26,25 @@ function insertCategoryTitleHeading(categoryNameString) {
     "align-text-top",
     "text-center",
     "px-2"
-  );
+    );
   categoryNameHeaderElement.innerText = `Categoría: ${categoryNameString}`;
-
+  
+  // Appending it to it's container
+  let mainContainerElement = document.getElementById("main-container");
   mainContainerElement.appendChild(categoryNameHeaderElement);
 }
 
+// Waiting for the DOM to load
 document.addEventListener("DOMContentLoaded", () => {
+  
+  // Fetching the ID of category "Autos"
   fetchCategoryId("Autos").then((categoryId) => {
+    
     // Fetching JSON product list from the API.
-    getJSONData(PRODUCTS_URL + categoryId + ".json")
+    getJSONData(PRODUCTS_URL + categoryId + EXT_TYPE)
       .then((resultObject) => resultObject.data)
       .then((dataObject) => {
+        
         // Adding HTML header in #main-container with the category name
         let categoryName = dataObject.catName;
         insertCategoryTitleHeading(categoryName);
@@ -45,6 +52,7 @@ document.addEventListener("DOMContentLoaded", () => {
         return dataObject.products;
       })
       .then((productsArray) => {
+        
         // Iterating the list and generating HTML
         // content for appending to #main-container
         let HTMLContentToAppend = "";

@@ -1,4 +1,4 @@
-import jwt_decode from 'jwt-decode'
+
 
 function handler(response) {
   let token = response.credential
@@ -7,15 +7,15 @@ function handler(response) {
   return decoded
 }
 
-// function handleCredentialResponse(response) {
-//   console.log("Encoded JWT ID token: " + response.credential);
-// }
+function handleCredentialResponse(response) {
+  console.log("Encoded JWT ID token: " + response.credential);
+}
 
 window.onload = function () {
   google.accounts.id.initialize({
     client_id:
       "712828991122-5opoavq9gvvuokquo7cue7radto24igg.apps.googleusercontent.com",
-    callback: handler,
+    callback: handleCredentialResponse,
   });
   google.accounts.id.renderButton(
     document.getElementById("googleButtonDiv"),

@@ -12,13 +12,13 @@ function hideElement(element) {
 }
 
 function showInvalidInputMessage(messageString, inputElement) {
-
-  // Showing the message
-  let invalidMessageContainerElement = document.getElementById(
+  
+  // Adding the message to the HTML container
+  let invalidInputMessageContainerElement = document.getElementById(
     "invalid-input-message-container"
   );
-  invalidMessageContainerElement.setAttribute("style", "color: red")
-  invalidMessageContainerElement.innerText = messageString;
+  invalidInputMessageContainerElement.setAttribute("style", "color: red");
+  invalidInputMessageContainerElement.innerText = messageString;
 
   // Highlighting the input
   inputElement.setAttribute(
@@ -29,6 +29,7 @@ function showInvalidInputMessage(messageString, inputElement) {
 
 // Waiting for the DOM to load
 document.addEventListener("DOMContentLoaded", () => {
+  
   // Defining HTML elements
   let loginPageContainer = document.getElementById("login-page-container");
   let landPageContainer = document.getElementById("landpage-container");
@@ -38,7 +39,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // When the form is submitted
   loginFormElement.addEventListener("submit", (event) => {
-
     // Stop the page from reloading
     event.preventDefault();
 
@@ -48,16 +48,14 @@ document.addEventListener("DOMContentLoaded", () => {
         "El usuario ingresado no es válido.",
         userInputElement
       );
-    }
-    else if (isInputEmpty(passwordInputElement)) {
+    } else if (isInputEmpty(passwordInputElement)) {
       showInvalidInputMessage(
         "La contraseña ingresada no es válida.",
         passwordInputElement
       );
-    }
-    else {
-      hideElement(loginPageContainer)
-      showElement(landPageContainer)
+    } else {
+      hideElement(loginPageContainer);
+      showElement(landPageContainer);
     }
   });
 });
