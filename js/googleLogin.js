@@ -1,7 +1,7 @@
 import jwt_decode from 'jwt-decode'
 
-function handler(reponse) {
-  let token = reponse.credential
+function handler(response) {
+  let token = response.credential
   let decoded = jwt_decode(token)
   console.log(decoded)
   return decoded
