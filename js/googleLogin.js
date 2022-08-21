@@ -133,7 +133,7 @@ function handleToken(response) {
     let passwordInput = document.getElementById('password-input')
     passwordInput.value = 123456789
 
-    let loginForm = document.getElementById('loginForm')
+    let loginForm = document.getElementById('login-form')
     loginForm.submit()
 }
   
