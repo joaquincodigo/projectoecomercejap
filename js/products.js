@@ -1,3 +1,4 @@
+// Defining Functions
 function displayCategoryTitleHeading(categoryNameString) {
 
   // Selecting the element
@@ -46,14 +47,13 @@ function displayProductList(productsArray) {
   productListContainerElement.innerHTML += HTMLContentToAppend;
 }
 
+// Adding Event-Listeners
+document.getElementById("sortAsc").addEventListener("click", () => {
+  console.log("clicked");
+});
+
 // Waiting for the DOM to load
 document.addEventListener("DOMContentLoaded", () => {
-
-  // Adding Event-Listeners
-  document.getElementById("sortAsc").addEventListener("click", () => {
-    sortAndShowProducts(ORDER_ASC_BY_NAME);
-    console.log("clicked");
-  });
 
   // Fetching JSON product list from the API.
   let categoryId = localStorage.getItem("catID");
@@ -63,10 +63,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
       // Adding HTML header in #main-container with the category name
       displayCategoryTitleHeading(dataObject.catName);
-
       return dataObject.products;
     })
     .then((productsArray) => {
+
+      // Displaying products list
       displayProductList(productsArray)
+      
     }); // End of last ".then"
 }); // End of eventListener on DOM Loaded
