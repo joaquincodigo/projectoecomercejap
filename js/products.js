@@ -43,7 +43,8 @@ function displayProductsList(productsArray) {
         <div class="mb-1">
           <h4>${productObject.name}</h4>
           <p>${productObject.description}</p>
-          <p class="font-weight-bold">Precio ${productObject.currency} ${productObject.cost}</p>
+          <br>
+          <p style="font-weight: bold; font-size: 20px;" style> ${productObject.currency} ${productObject.cost}</p>
         </div>
         <small class="text-muted">Vendidos: ${productObject.soldCount}</small>
       </div>
@@ -74,10 +75,10 @@ function sortList(criteria, list) {
   // Ascending ASCIIbetical order
   if (criteria == "AZ") {
     sortedList = list.sort((a, b) => {
-      if (a.name < b.name) {
+      if (a.cost < b.cost) {
         return -1;
       }
-      if (a.name > b.name) {
+      if (a.cost > b.cost) {
         return 1;
       }
       return 0;
@@ -86,10 +87,10 @@ function sortList(criteria, list) {
     // Decending ASCIIbetical order
   } else if (criteria == "ZA") {
     sortedList = list.sort((a, b) => {
-      if (a.name > b.name) {
+      if (a.cost > b.cost) {
         return -1;
       }
-      if (a.name < b.name) {
+      if (a.cost < b.cost) {
         return 1;
       }
       return 0;
@@ -130,7 +131,10 @@ sortDecendingButton.addEventListener("click", () => {
 });
 
 sortByCountButton.addEventListener("click", () => {
-  console.log("Cliecked Sort By Count Button");
+  console.log("Cliecked Sort By Sold Count Button");
+  let sortedList = sortList("COUNT", PRODUCTS_ARRAY);
+  removeProductList()
+  displayProductsList(sortedList);
 });
 
 clearFiltersButton.addEventListener("click", () => {
