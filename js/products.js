@@ -1,6 +1,14 @@
+// Defining Variables
+var PRODUCTS_ARRAY;
+var CATEGORY_ID = localStorage.getItem("catID");
+let sortAscendingButton = document.getElementById("sortAsc"); // This is a radio input but it works as a button
+let sortDecendingButton = document.getElementById("sortDesc"); // This is a radio input but it works as a button
+let sortByCountButton = document.getElementById("sortByCount"); // This is a radio input but it works as a button
+let filterButton = document.getElementById("rangeFilterCount");
+let clearFiltersButton = document.getElementById("clearRangeFilter");
+
 // Defining Functions
 function displayCategoryTitleHeading(categoryNameString) {
-
   // Selecting the element
   let categoryNameHeadingElement = document.getElementById(
     "category-name-heading"
@@ -18,7 +26,7 @@ function displayCategoryTitleHeading(categoryNameString) {
   categoryNameHeadingElement.innerText = `Categoría: ${categoryNameString}`;
 }
 
-function displayProductList(productsArray) {
+function displayProductsList(productsArray) {
   let HTMLContentToAppend = "";
   for (const productObject of productsArray) {
     HTMLContentToAppend += `<div class="list-group-item list-group-item-action">
@@ -43,32 +51,98 @@ function displayProductList(productsArray) {
   </div>
   </div>`;
   }
-  let productListContainerElement = document.getElementById("product-list-container")
+  let productListContainerElement = document.getElementById(
+    "product-list-container"
+  );
   productListContainerElement.innerHTML += HTMLContentToAppend;
 }
 
+function sortList(criteria, list) {
+  let sortedList;
+
+  // Validating Criteria
+  let validCriteria = ["AZ", "ZA", "COUNT"];
+  if (!validCriteria.includes(criteria)) {
+    throw `Criteria ${criteria} is not a valid one.`;
+  }
+
+  // sortList("AZ", PRODUCTS_ARRAY)
+
+  // Ascending ASCIIbetical order
+  if (criteria == "AZ") {
+    sortedList = list.sort((a, b) => {
+      if (a.name < b.name) {
+        return -1;
+      }
+      if (a.name > b.name) {
+        return 1;
+      }
+      return 0;
+    });
+
+  // Decending ASCIIbetical order
+  } else if (criteria == "ZA") {
+    sortedList = list.sort((a, b) => {
+      if (a.name > b.name) {
+        return -1;
+      }
+      if (a.name < b.name) {
+        return 1;
+      }
+      return 0;
+    });
+
+  // Ascending sold-counter order  
+  } else if (criteria == "COUNT") {
+    sortedList = list.sort((a, b) => {
+      let aCount = parseInt(a.soldCount);
+      let bCount = parseInt(b.soldCount);
+
+      if (aCount > bCount) {
+        return -1;
+      }
+      if (aCount < bCount) {
+        return 1;
+      }
+      return 0;
+    });
+  }
+  console.log("Sorted list result:");
+  for (const product of sortedList) {
+    console.log(product.soldCount);
+  }
+}
+
 // Adding Event-Listeners
-document.getElementById("sortAsc").addEventListener("click", () => {
-  console.log("clicked");
+sortAscendingButton.addEventListener("click", () => {
+  console.log("Cliecked Ascending Button");
+  console.log("Products array: " + PRODUCTS_ARRAY);
+});
+
+sortDecendingButton.addEventListener("click", () => {
+  console.log("Cliecked Decending Button");
+});
+
+sortByCountButton.addEventListener("click", () => {
+  console.log("Cliecked Sort By Count Button");
+});
+
+clearFiltersButton.addEventListener("click", () => {
+  console.log("Cliecked Clear Filters Button");
+});
+
+filterButton.addEventListener("click", () => {
+  console.log("Cliecked Filter Button");
 });
 
 // Waiting for the DOM to load
 document.addEventListener("DOMContentLoaded", () => {
-
   // Fetching JSON product list from the API.
-  let categoryId = localStorage.getItem("catID");
-  getJSONData(PRODUCTS_URL + categoryId + EXT_TYPE)
-    .then((resultObject) => resultObject.data)
-    .then((dataObject) => {
-
-      // Adding HTML header in #main-container with the category name
-      displayCategoryTitleHeading(dataObject.catName);
-      return dataObject.products;
-    })
-    .then((productsArray) => {
-
-      // Displaying products list
-      displayProductList(productsArray)
-      
-    }); // End of last ".then"
+  getJSONData(PRODUCTS_URL + CATEGORY_ID + EXT_TYPE).then((result) => {
+    let data = result.data;
+    PRODUCTS_ARRAY = data.products;
+    // Displaying the page
+    displayCategoryTitleHeading(data.catName);
+    displayProductsList(data.products);
+  });
 }); // End of eventListener on DOM Loaded
