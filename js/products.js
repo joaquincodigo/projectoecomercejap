@@ -57,6 +57,11 @@ function displayProductsList(productsArray) {
   productListContainerElement.innerHTML += HTMLContentToAppend;
 }
 
+function removeProductList() {
+  let listContainerElement = document.getElementById('product-list-container')
+  listContainerElement.innerHTML = ""
+}
+
 function sortList(criteria, list) {
   let sortedList;
 
@@ -65,8 +70,6 @@ function sortList(criteria, list) {
   if (!validCriteria.includes(criteria)) {
     throw `Criteria ${criteria} is not a valid one.`;
   }
-
-  // sortList("AZ", PRODUCTS_ARRAY)
 
   // Ascending ASCIIbetical order
   if (criteria == "AZ") {
@@ -80,7 +83,7 @@ function sortList(criteria, list) {
       return 0;
     });
 
-  // Decending ASCIIbetical order
+    // Decending ASCIIbetical order
   } else if (criteria == "ZA") {
     sortedList = list.sort((a, b) => {
       if (a.name > b.name) {
@@ -92,7 +95,7 @@ function sortList(criteria, list) {
       return 0;
     });
 
-  // Ascending sold-counter order  
+    // Ascending sold-counter order
   } else if (criteria == "COUNT") {
     sortedList = list.sort((a, b) => {
       let aCount = parseInt(a.soldCount);
@@ -107,20 +110,23 @@ function sortList(criteria, list) {
       return 0;
     });
   }
-  console.log("Sorted list result:");
-  for (const product of sortedList) {
-    console.log(product.soldCount);
-  }
+
+  return sortedList;
 }
 
 // Adding Event-Listeners
 sortAscendingButton.addEventListener("click", () => {
   console.log("Cliecked Ascending Button");
-  console.log("Products array: " + PRODUCTS_ARRAY);
+  let sortedList = sortList("AZ", PRODUCTS_ARRAY);
+  removeProductList()
+  displayProductsList(sortedList);
 });
 
 sortDecendingButton.addEventListener("click", () => {
   console.log("Cliecked Decending Button");
+  let sortedList = sortList("ZA", PRODUCTS_ARRAY);
+  removeProductList()
+  displayProductsList(sortedList);
 });
 
 sortByCountButton.addEventListener("click", () => {
