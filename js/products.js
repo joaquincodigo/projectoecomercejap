@@ -59,8 +59,8 @@ function displayProductsList(productsArray) {
 }
 
 function removeProductList() {
-  let listContainerElement = document.getElementById('product-list-container')
-  listContainerElement.innerHTML = ""
+  let listContainerElement = document.getElementById("product-list-container");
+  listContainerElement.innerHTML = "";
 }
 
 function sortList(criteria, list) {
@@ -111,7 +111,6 @@ function sortList(criteria, list) {
       return 0;
     });
   }
-
   return sortedList;
 }
 
@@ -119,26 +118,26 @@ function sortList(criteria, list) {
 sortAscendingButton.addEventListener("click", () => {
   console.log("Cliecked Ascending Button");
   let sortedList = sortList("AZ", PRODUCTS_ARRAY);
-  removeProductList()
+  removeProductList();
   displayProductsList(sortedList);
 });
 
 sortDecendingButton.addEventListener("click", () => {
   console.log("Cliecked Decending Button");
   let sortedList = sortList("ZA", PRODUCTS_ARRAY);
-  removeProductList()
+  removeProductList();
   displayProductsList(sortedList);
 });
 
 sortByCountButton.addEventListener("click", () => {
   console.log("Cliecked Sort By Sold Count Button");
   let sortedList = sortList("COUNT", PRODUCTS_ARRAY);
-  removeProductList()
+  removeProductList();
   displayProductsList(sortedList);
 });
 
 clearFiltersButton.addEventListener("click", () => {
-  console.log("Cliecked Clear Filters Button");
+  console.log("Clicked Clear Filters Button");
 });
 
 filterButton.addEventListener("click", () => {
