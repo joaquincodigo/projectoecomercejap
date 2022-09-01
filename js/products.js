@@ -71,7 +71,7 @@ function sortList(criteria, list) {
   let sortedList;
 
   // Ascending ASCIIbetical order
-  if (criteria == "AZ") {
+  if (criteria == "0 -> 9") {
     sortedList = list.sort((a, b) => {
       if (a.cost < b.cost) {
         return -1;
@@ -83,7 +83,7 @@ function sortList(criteria, list) {
     });
 
     // Decending ASCIIbetical order
-  } else if (criteria == "ZA") {
+  } else if (criteria == "9 -> 0") {
     sortedList = list.sort((a, b) => {
       if (a.cost > b.cost) {
         return -1;
@@ -138,14 +138,14 @@ function clearFiltersInputs() {
 // Adding Event-Listeners
 sortAscendingButton.addEventListener("click", () => {
   console.log("Cliecked Ascending Button");
-  let sortedList = sortList("AZ", CURRENTLY_SHOWN_PRODUCTS); // Just for clarity. Sort modifies the original array.
+  let sortedList = sortList("0 -> 9", CURRENTLY_SHOWN_PRODUCTS); // Just for clarity. Sort modifies the original array.
   removeProductList();
   insertProductsList(sortedList);
 });
 
 sortDecendingButton.addEventListener("click", () => {
   console.log("Cliecked Decending Button");
-  let sortedList = sortList("ZA", CURRENTLY_SHOWN_PRODUCTS); // Just for clarity. Sort modifies the original array.
+  let sortedList = sortList("9 -> 0", CURRENTLY_SHOWN_PRODUCTS); // Just for clarity. Sort modifies the original array.
   removeProductList();
   insertProductsList(sortedList);
 });
@@ -173,6 +173,7 @@ filterButton.addEventListener("click", () => {
 
 // Waiting for the DOM to load
 document.addEventListener("DOMContentLoaded", () => {
+  insertNavbar();
   // Fetching JSON product list from the API.
   getJSONData(PRODUCTS_URL + CATEGORY_ID + EXT_TYPE).then((result) => {
     let data = result.data;
