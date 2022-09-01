@@ -51,7 +51,6 @@
 
     <!-- Main -->
     <main class="pb-5 container">
-
       <!-- Category Name Heading -->
       <h3 id="category-name-heading"></h3>
 
@@ -69,14 +68,18 @@
                 name="options"
                 id="sortAsc"
               />
-              <label class="btn btn-light" for="sortAsc">A-Z</label>
+              <label class="btn btn-light" for="sortAsc"
+                >Precio (Menor a mayor)</label
+              >
               <input
                 type="radio"
                 class="btn-check"
                 name="options"
                 id="sortDesc"
               />
-              <label class="btn btn-light" for="sortDesc">Z-A</label>
+              <label class="btn btn-light" for="sortDesc"
+                >Precio (Mayor a menor)</label
+              >
               <input
                 type="radio"
                 class="btn-check"
@@ -118,7 +121,7 @@
                     Filtrar
                   </button>
                   <button class="btn btn-link btn-sm" id="clearRangeFilter">
-                    Limpiar
+                    Eliminar Filtros
                   </button>
                 </div>
               </div>
@@ -132,7 +135,6 @@
 
       <!-- Product list generated in products.js will be added here. -->
       <div id="product-list-container"></div>
-
     </main>
 
     <!-- Footer -->

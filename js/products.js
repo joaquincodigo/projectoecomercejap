@@ -121,7 +121,7 @@ function filteredProductsList() {
     }
     let max = filterInputMax.value;
     if (!max) {
-      max = 99999999999;
+      max = 99999999; // I know this isnt elegant but it works.
     }
 
     return cost >= min && cost <= max;
@@ -130,7 +130,7 @@ function filteredProductsList() {
   return filteredList;
 }
 
-function clearFilters() {
+function clearFiltersInputs() {
   filterInputMin.value = "";
   filterInputMax.value = "";
 }
@@ -159,7 +159,7 @@ sortByCountButton.addEventListener("click", () => {
 
 clearFiltersButton.addEventListener("click", () => {
   console.log("Clicked Clear Filters Button");
-  clearFilters();
+  clearFiltersInputs();
   removeProductList();
   insertProductsList(FETCHED_PRODUCTS_ARRAY);
 });
