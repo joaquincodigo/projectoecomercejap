@@ -1,4 +1,4 @@
-// Defining Variables
+//// DEFINING VARIABLES ////
 var FETCHED_PRODUCTS_ARRAY;
 var CURRENTLY_SHOWN_PRODUCTS;
 var CATEGORY_ID = localStorage.getItem("catID");
@@ -9,8 +9,9 @@ let filterButton = document.getElementById("rangeFilterCount");
 let clearFiltersButton = document.getElementById("clearRangeFilter");
 let filterInputMin = document.getElementById("rangeFilterCountMin");
 let filterInputMax = document.getElementById("rangeFilterCountMax");
+let searchInput = document.getElementById("search-input");
 
-// Defining Functions
+//// DEFINING FUNCTIONS ////
 function insertCategoryTitleHeading(categoryNameString) {
   // Selecting the element
   let categoryNameHeadingElement = document.getElementById(
@@ -116,12 +117,18 @@ function filteredProductsList() {
   let filteredList = FETCHED_PRODUCTS_ARRAY.filter((product) => {
     let cost = product.cost;
     let min = filterInputMin.value;
-    if (!min) {
-      min = 0;
-    }
     let max = filterInputMax.value;
+
+    if (!min && !max) {
+      return true; // All elements pass the test.
+    }
+
+    if (!min) {
+      return cost <= max;
+    }
+
     if (!max) {
-      max = 99999999; // I know this isnt elegant but it works.
+      return cost >= min;
     }
 
     return cost >= min && cost <= max;
@@ -135,7 +142,7 @@ function clearFiltersInputs() {
   filterInputMax.value = "";
 }
 
-// Adding Event-Listeners
+//// ADDING EVENT LISTENERS ////
 sortAscendingButton.addEventListener("click", () => {
   console.log("Cliecked Ascending Button");
   let sortedList = sortList("0 -> 9", CURRENTLY_SHOWN_PRODUCTS); // Just for clarity. Sort modifies the original array.
@@ -171,7 +178,7 @@ filterButton.addEventListener("click", () => {
   insertProductsList(filteredList);
 });
 
-// Waiting for the DOM to load
+//// TRIGGERED ON DOM LOADED ////
 document.addEventListener("DOMContentLoaded", () => {
   insertNavbar();
   // Fetching JSON product list from the API.
