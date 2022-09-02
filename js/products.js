@@ -10,8 +10,58 @@ let clearFiltersButton = document.getElementById("clearRangeFilter");
 let filterInputMin = document.getElementById("rangeFilterCountMin");
 let filterInputMax = document.getElementById("rangeFilterCountMax");
 let searchInput = document.getElementById("search-input");
+let searchButton = document.getElementById("search-button");
 
 //// DEFINING FUNCTIONS ////
+function searchProduct(searchInput) {
+  // Transforming input into a tag list
+  let searchTags = searchInput.toLowerCase().split(" ");
+
+  // These tags aren't useful for searching
+  let excludedTags = ["de", "la", "el", "con", "que"];
+
+  // Removing worthless tags
+  for (const tag of searchTags) {
+    if (excludedTags.includes(tag)) {
+      searchTags.pop(tag);
+    }
+  }
+
+  // Resetting search status
+  for (const product of FETCHED_PRODUCTS_ARRAY) {
+    product.itsASearchMatch = false;
+  }
+
+  // The actual search
+  for (const searchTag of searchTags) {
+    for (const product of FETCHED_PRODUCTS_ARRAY) {
+      let productNameWords = product.name.toLowerCase().split(" ");
+      let productDescriptionWords = product.description
+        .toLowerCase()
+        .split(" ");
+      // console.log("PRODUCT NAME WORDS:");
+      // console.log(productNameWords);
+      // console.log("PRODUCT DESCRIPTION WORDS");
+      // console.log(productDescriptionWords);
+      console.log(
+        `Is search tag ${searchTag} included in the name of the product ${productNameWords} ?`
+      );
+      if (
+        productNameWords.includes(searchTag) ||
+        productDescriptionWords.includes(searchTag)
+      ) {
+        console.log("ITS A MATCH!");
+        product.itsASearchMatch = true;
+      } else {
+        console.log("ITS NOT A MATCH");
+      }
+    }
+  }
+
+  let results = FETCHED_PRODUCTS_ARRAY.filter((product) => product.itsAMatch);
+  console.log(results);
+}
+
 function insertCategoryTitleHeading(categoryNameString) {
   // Selecting the element
   let categoryNameHeadingElement = document.getElementById(
@@ -143,6 +193,10 @@ function clearFiltersInputs() {
 }
 
 //// ADDING EVENT LISTENERS ////
+searchButton.addEventListener("click", () => {
+  searchProduct(searchInput.value);
+});
+
 sortAscendingButton.addEventListener("click", () => {
   console.log("Cliecked Ascending Button");
   let sortedList = sortList("0 -> 9", CURRENTLY_SHOWN_PRODUCTS); // Just for clarity. Sort modifies the original array.
@@ -181,10 +235,12 @@ filterButton.addEventListener("click", () => {
 //// TRIGGERED ON DOM LOADED ////
 document.addEventListener("DOMContentLoaded", () => {
   insertNavbar();
+
   // Fetching JSON product list from the API.
   getJSONData(PRODUCTS_URL + CATEGORY_ID + EXT_TYPE).then((result) => {
     let data = result.data;
     FETCHED_PRODUCTS_ARRAY = data.products;
+
     // Displaying the page
     insertCategoryTitleHeading(data.catName);
     insertProductsList(data.products);
