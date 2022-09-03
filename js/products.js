@@ -2,82 +2,114 @@
 var FETCHED_PRODUCTS_ARRAY;
 var CURRENTLY_SHOWN_PRODUCTS;
 var CATEGORY_ID = localStorage.getItem("catID");
-let sortAscendingButton = document.getElementById("sortAsc"); // This is a radio input but it works as a button
-let sortDecendingButton = document.getElementById("sortDesc"); // This is a radio input but it works as a button
-let sortByCountButton = document.getElementById("sortByCount"); // This is a radio input but it works as a button
-let filterButton = document.getElementById("rangeFilterCount");
-let clearFiltersButton = document.getElementById("clearRangeFilter");
-let filterInputMin = document.getElementById("rangeFilterCountMin");
-let filterInputMax = document.getElementById("rangeFilterCountMax");
-let searchInput = document.getElementById("search-input");
-let searchButton = document.getElementById("search-button");
+let sortAscendingButtonEl = document.getElementById("sortAsc"); // This is a radio input but it works as a button
+let sortDecendingButtonEl = document.getElementById("sortDesc"); // This is a radio input but it works as a button
+let sortByCountButtonEl = document.getElementById("sortByCount"); // This is a radio input but it works as a button
+let filterButtonEl = document.getElementById("rangeFilterCount");
+let clearFiltersButtonEl = document.getElementById("clearRangeFilter");
+let filterInputMinEl = document.getElementById("rangeFilterCountMin");
+let filterInputMaxEl = document.getElementById("rangeFilterCountMax");
+let searchInputEl = document.getElementById("search-input");
+let searchButtonEl = document.getElementById("search-button");
 
 //// DEFINING FUNCTIONS ////
-function searchProduct(searchInput) {
-  // Transforming input into a tag list
-  let searchTags = searchInput.toLowerCase().split(" ");
+function searchProducts(searchInput) {
+  if (searchInput) {
+    let searchTags = generateTagList(searchInput);
+    resetSearchMatchFlags();
+    for (const searchTag of searchTags) {
+      for (const product of FETCHED_PRODUCTS_ARRAY) {
+        productNameTags = generateTagList(product.name);
+        productDescriptionTags = generateTagList(product.description);
 
-  // These tags aren't useful for searching
-  let excludedTags = ["de", "la", "el", "con", "que"];
-
-  // Removing worthless tags
-  for (const tag of searchTags) {
-    if (excludedTags.includes(tag)) {
-      searchTags.pop(tag);
+        if (
+          productNameTags.includes(searchTag) ||
+          productDescriptionTags.includes(searchTag)
+        ) {
+          product.itsASearchMatch = true;
+        }
+      }
     }
-  }
 
-  // Resetting search status
+    let searchResults = FETCHED_PRODUCTS_ARRAY.filter(
+      (product) => product.itsASearchMatch
+    );
+
+    return searchResults;
+  }
+  resetSearchMatchFlags();
+  return FETCHED_PRODUCTS_ARRAY;
+}
+
+function resetSearchMatchFlags() {
   for (const product of FETCHED_PRODUCTS_ARRAY) {
     product.itsASearchMatch = false;
   }
+}
 
-  // The actual search
-  for (const searchTag of searchTags) {
-    for (const product of FETCHED_PRODUCTS_ARRAY) {
-      let productNameWords = product.name.toLowerCase().split(" ");
-      let productDescriptionWords = product.description
-        .toLowerCase()
-        .split(" ");
-      // console.log("PRODUCT NAME WORDS:");
-      // console.log(productNameWords);
-      // console.log("PRODUCT DESCRIPTION WORDS");
-      // console.log(productDescriptionWords);
-      console.log(
-        `Is search tag ${searchTag} included in the name of the product ${productNameWords} ?`
-      );
-      if (
-        productNameWords.includes(searchTag) ||
-        productDescriptionWords.includes(searchTag)
-      ) {
-        console.log("ITS A MATCH!");
-        product.itsASearchMatch = true;
-      } else {
-        console.log("ITS NOT A MATCH");
-      }
-    }
-  }
+function generateTagList(string) {
+  let worthlessTags = ["de", "la", "el", "con", "que", "y", "se", "", " ", " "];
+  let stringWords = string.toLowerCase().split(" ");
+  let tagList = stringWords.map((word) => removeSymbols(word));
+  let usefulTagList = tagList.filter((tag) => !worthlessTags.includes(tag));
 
-  let results = FETCHED_PRODUCTS_ARRAY.filter((product) => product.itsAMatch);
-  console.log(results);
+  return usefulTagList;
+}
+
+function removeSymbols(string) {
+  let letters = [
+    "a",
+    "b",
+    "c",
+    "d",
+    "e",
+    "f",
+    "g",
+    "h",
+    "i",
+    "j",
+    "k",
+    "l",
+    "m",
+    "n",
+    "o",
+    "p",
+    "q",
+    "r",
+    "s",
+    "t",
+    "u",
+    "v",
+    "w",
+    "x",
+    "y",
+    "z",
+    "á",
+    "é",
+    "í",
+    "ó",
+    "ú",
+    " ",
+  ];
+
+  stringArray = string.toLowerCase().split("");
+  stringArrayWithNoSymbols = stringArray.filter(
+    (char) => letters.includes(char) // Only letters are allowed
+  );
+  stringWithNoSymbols = stringArrayWithNoSymbols.join("");
+
+  return stringWithNoSymbols;
 }
 
 function insertCategoryTitleHeading(categoryNameString) {
-  // Selecting the element
-  let categoryNameHeadingElement = document.getElementById(
-    "category-name-heading"
-  );
-
-  // Styling
-  categoryNameHeadingElement.classList.add(
+  let categoryNameHeadingEl = document.getElementById("category-name-heading");
+  categoryNameHeadingEl.classList.add(
     "mt-4",
     "align-text-top",
     "text-center",
     "px-2"
   );
-
-  // Inserting text
-  categoryNameHeadingElement.innerText = `Categoría: ${categoryNameString}`;
+  categoryNameHeadingEl.innerText = `Categoría: ${categoryNameString}`;
 }
 
 function insertProductsList(productsArray) {
@@ -121,7 +153,7 @@ function removeProductList() {
 function sortList(criteria, list) {
   let sortedList;
 
-  // Ascending ASCIIbetical order
+  // Ascending cost order
   if (criteria == "0 -> 9") {
     sortedList = list.sort((a, b) => {
       if (a.cost < b.cost) {
@@ -133,7 +165,7 @@ function sortList(criteria, list) {
       return 0;
     });
 
-    // Decending ASCIIbetical order
+    // Decending cost order
   } else if (criteria == "9 -> 0") {
     sortedList = list.sort((a, b) => {
       if (a.cost > b.cost) {
@@ -166,8 +198,8 @@ function sortList(criteria, list) {
 function filteredProductsList() {
   let filteredList = FETCHED_PRODUCTS_ARRAY.filter((product) => {
     let cost = product.cost;
-    let min = filterInputMin.value;
-    let max = filterInputMax.value;
+    let min = filterInputMinEl.value;
+    let max = filterInputMaxEl.value;
 
     if (!min && !max) {
       return true; // All elements pass the test.
@@ -188,61 +220,55 @@ function filteredProductsList() {
 }
 
 function clearFiltersInputs() {
-  filterInputMin.value = "";
-  filterInputMax.value = "";
+  filterInputMinEl.value = "";
+  filterInputMaxEl.value = "";
+}
+
+function refreshProductsList(listData) {
+  removeProductList();
+  insertProductsList(listData);
 }
 
 //// ADDING EVENT LISTENERS ////
-searchButton.addEventListener("click", () => {
-  searchProduct(searchInput.value);
+searchButtonEl.addEventListener("click", () => {
+  refreshProductsList(searchProducts(searchInputEl.value.trim()));
 });
 
-sortAscendingButton.addEventListener("click", () => {
-  console.log("Cliecked Ascending Button");
+searchInputEl.addEventListener("submit", () => {});
+
+sortAscendingButtonEl.addEventListener("click", () => {
   let sortedList = sortList("0 -> 9", CURRENTLY_SHOWN_PRODUCTS); // Just for clarity. Sort modifies the original array.
-  removeProductList();
-  insertProductsList(sortedList);
+  refreshProductsList(sortedList);
 });
 
-sortDecendingButton.addEventListener("click", () => {
-  console.log("Cliecked Decending Button");
+sortDecendingButtonEl.addEventListener("click", () => {
   let sortedList = sortList("9 -> 0", CURRENTLY_SHOWN_PRODUCTS); // Just for clarity. Sort modifies the original array.
-  removeProductList();
-  insertProductsList(sortedList);
+  refreshProductsList(sortedList);
 });
 
-sortByCountButton.addEventListener("click", () => {
-  console.log("Cliecked Sort By Sold Count Button");
+sortByCountButtonEl.addEventListener("click", () => {
   let sortedList = sortList("COUNT", CURRENTLY_SHOWN_PRODUCTS); // Just for clarity. Sort modifies the original array.
-  removeProductList();
-  insertProductsList(sortedList);
+  refreshProductsList(sortedList);
 });
 
-clearFiltersButton.addEventListener("click", () => {
-  console.log("Clicked Clear Filters Button");
+clearFiltersButtonEl.addEventListener("click", () => {
   clearFiltersInputs();
-  removeProductList();
-  insertProductsList(FETCHED_PRODUCTS_ARRAY);
+  refreshProductsList(FETCHED_PRODUCTS_ARRAY);
 });
 
-filterButton.addEventListener("click", () => {
-  console.log("Clicked Filter Button");
+filterButtonEl.addEventListener("click", () => {
   filteredList = filteredProductsList();
-  removeProductList();
-  insertProductsList(filteredList);
+  refreshProductsList(filteredList);
 });
 
 //// TRIGGERED ON DOM LOADED ////
 document.addEventListener("DOMContentLoaded", () => {
   insertNavbar();
-
   // Fetching JSON product list from the API.
   getJSONData(PRODUCTS_URL + CATEGORY_ID + EXT_TYPE).then((result) => {
     let data = result.data;
     FETCHED_PRODUCTS_ARRAY = data.products;
-
-    // Displaying the page
     insertCategoryTitleHeading(data.catName);
     insertProductsList(data.products);
   });
-}); // End of eventListener on DOM Loaded
+});
