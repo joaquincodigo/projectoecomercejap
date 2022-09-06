@@ -115,7 +115,7 @@ function insertCategoryTitleHeading(categoryNameString) {
 function insertProductsList(productsArray) {
   let HTMLContentToAppend = "";
   for (const productObject of productsArray) {
-    HTMLContentToAppend += `<div class="list-group-item list-group-item-action">
+    HTMLContentToAppend += `<div id="${productObject.id}" class="list-group-item list-group-item-action">
   <div class="row">
     <div class="col-3">
       <img
@@ -229,6 +229,20 @@ function refreshProductsList(listData) {
   insertProductsList(listData);
 }
 
+function addLinksToProducts() {
+  /* Each HTML element for each product in the list was created
+   with insertProductsList(). That function includes the API's 
+   product ID as its own HTML ID attribute value for each element*/
+
+  let productElements = document.getElementsByClassName("list-group-item");
+  for (const productElement of productElements) {
+    productElement.addEventListener("click", () => {
+      localStorage.setItem("productId", productElement.id.toString());
+      window.location.href = "product-info.html";
+    });
+  }
+}
+
 //// ADDING EVENT LISTENERS ////
 searchButtonEl.addEventListener("click", () => {
   refreshProductsList(searchProducts(searchInputEl.value.trim()));
@@ -270,5 +284,6 @@ document.addEventListener("DOMContentLoaded", () => {
     FETCHED_PRODUCTS_ARRAY = data.products;
     insertCategoryTitleHeading(data.catName);
     insertProductsList(data.products);
+    addLinksToProducts();
   });
 });
