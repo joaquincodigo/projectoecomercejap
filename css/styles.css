@@ -259,33 +259,3 @@ a.custom-card:hover {
 ::placeholder {
   text-align: center !important;
 }
-
-#main-product-container {
-  border: solid;
-  margin: 10%;
-  display: flex;
-}
-
-#product-image {
-  border: 1px solid #ff0000;
-  background-color: red;
-  width: 30%;
-  /* padding: 30px; */
-}
-
-#product-data-container {
-  display: flex;
-  flex-direction: column;
-}
-
-#price-and-button-container {
-  display: flex;
-}
-
-#price-container {
-  display: flex;
-}
-
-#category-container {
-  background-color: gray;
-}
