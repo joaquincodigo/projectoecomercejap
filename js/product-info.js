@@ -1,17 +1,59 @@
 //// DECLARING VARIABLES ////
 const PRODUCT_ID = localStorage.getItem("productId");
-const mainElement = document.getElementsByTagName("main")[0];
+const mainContainerElement = document.getElementById("main-container");
+
+// NAVIGATION BAR
+// <div id="category-container">
+//   <p>eMercado > ${product.category}</p>
+// </div>
 
 //// DEFINING FUNCTIONS ////
-function insertProductElements(product) {
-  let title = (document.createElement("p").innerHTML = product.name);
-  let images = (document.createElement("img").src = product.images[0]);
-  let description = (document.createElement("p").innerHTML =
-    product.description);
-  //   let description = (document.createElement("p").innerHTML = product.description);
-  //     let description = (document.createElement("p").innerHTML = product.description);
+function insertProductData(product) {
+  mainContainerElement.innerHTML = `
 
-  mainElement.innerHTML = image;
+  <!-- Location -->
+
+  <div id="main-product-container">
+    <div id="image-container">
+      <img id="product-image" src="${product.images[0]}" alt="PRODUCT NAME">
+    </div>
+
+    <!-- Product Info -->
+    <div id="product-data-container">
+      <h2 id="product-name">${product.name}</h2>
+
+      <div #rating-container>
+        <span>X X X X </span>
+      </div>
+
+      <div class="separator-container">
+        <hr> 
+      </div>
+
+      <div id="price-and-button-container">
+
+        <div id="price-container">
+          <h3><span id="currency">${product.currency}</span><span id="price">${product.cost}</span></h3>
+        </div>
+
+        <div id="button-container">
+          <button class="btn btn-primary">COMPRAR</button>
+        </div>
+
+      </div>
+
+      <div class="separator-container">
+        <hr>
+      </div>
+
+      <div id="description-container">
+        <p class="font-weight-normal">${product.description}</p>
+      </div>
+
+    </div>
+  </div>
+  
+  `;
 }
 
 //// ADDING EVENT LISTENERS ////
@@ -20,7 +62,6 @@ function insertProductElements(product) {
 document.addEventListener("DOMContentLoaded", () => {
   insertNavbar();
   getJSONData(PRODUCT_INFO_URL + PRODUCT_ID + EXT_TYPE).then((response) => {
-    let productData = response.data;
-    insertProductElements(productData);
+    insertProductData(response.data);
   });
 });
