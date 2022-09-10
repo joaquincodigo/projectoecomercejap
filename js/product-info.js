@@ -56,6 +56,25 @@ function insertProductData(product) {
   `;
 }
 
+function insertRelatedProducts(product) {
+  for (const relatedProduct of product.relatedProducts) {
+    let nameElement = document.createElement("p");
+    nameElement.innerText = relatedProduct.name;
+    nameElement.classList.add("related-product-name");
+
+    let imageElement = document.createElement("img");
+    imageElement.src = relatedProduct.image;
+    imageElement.classList.add("related-product-image");
+
+    let containerElement = document.createElement("div");
+    containerElement.classList.add("related-product-container");
+    containerElement.appendChild(nameElement);
+    containerElement.appendChild(imageElement);
+
+    mainContainerElement.appendChild(containerElement);
+  }
+}
+
 //// ADDING EVENT LISTENERS ////
 
 //// ON DOM LOADED ////
@@ -63,5 +82,6 @@ document.addEventListener("DOMContentLoaded", () => {
   insertNavbar();
   getJSONData(PRODUCT_INFO_URL + PRODUCT_ID + EXT_TYPE).then((response) => {
     insertProductData(response.data);
+    insertRelatedProducts(response.data);
   });
 });

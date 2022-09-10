@@ -1,5 +1,5 @@
 //// DEFINING VARIABLES ////
-var FETCHED_PRODUCTS_ARRAY;
+var FETCHED_PRODUCTS_LIST;
 var CURRENTLY_SHOWN_PRODUCTS;
 var CATEGORY_ID = localStorage.getItem("catID");
 let sortAscendingButtonEl = document.getElementById("sortAsc"); // This is a radio input but it works as a button
@@ -18,7 +18,7 @@ function searchProducts(searchInput) {
     let searchTags = generateTagList(searchInput);
     resetSearchMatchFlags();
     for (const searchTag of searchTags) {
-      for (const product of FETCHED_PRODUCTS_ARRAY) {
+      for (const product of FETCHED_PRODUCTS_LIST) {
         productNameTags = generateTagList(product.name);
         productDescriptionTags = generateTagList(product.description);
 
@@ -31,18 +31,18 @@ function searchProducts(searchInput) {
       }
     }
 
-    let searchResults = FETCHED_PRODUCTS_ARRAY.filter(
+    let searchResults = FETCHED_PRODUCTS_LIST.filter(
       (product) => product.itsASearchMatch
     );
 
     return searchResults;
   }
   resetSearchMatchFlags();
-  return FETCHED_PRODUCTS_ARRAY;
+  return FETCHED_PRODUCTS_LIST;
 }
 
 function resetSearchMatchFlags() {
-  for (const product of FETCHED_PRODUCTS_ARRAY) {
+  for (const product of FETCHED_PRODUCTS_LIST) {
     product.itsASearchMatch = false;
   }
 }
@@ -196,7 +196,7 @@ function sortList(criteria, list) {
 }
 
 function filteredProductsList() {
-  let filteredList = FETCHED_PRODUCTS_ARRAY.filter((product) => {
+  let filteredList = FETCHED_PRODUCTS_LIST.filter((product) => {
     let cost = product.cost;
     let min = filterInputMinEl.value;
     let max = filterInputMaxEl.value;
@@ -229,7 +229,7 @@ function refreshProductsList(listData) {
   insertProductsList(listData);
 }
 
-function addLinksToProducts() {
+function addLinksToProductListElements() {
   /* Each HTML element for each product in the list was created
    with insertProductsList(). That function includes the API's 
    product ID as its own HTML ID attribute value for each element*/
@@ -267,7 +267,7 @@ sortByCountButtonEl.addEventListener("click", () => {
 
 clearFiltersButtonEl.addEventListener("click", () => {
   clearFiltersInputs();
-  refreshProductsList(FETCHED_PRODUCTS_ARRAY);
+  refreshProductsList(FETCHED_PRODUCTS_LIST);
 });
 
 filterButtonEl.addEventListener("click", () => {
@@ -278,12 +278,11 @@ filterButtonEl.addEventListener("click", () => {
 //// TRIGGERED ON DOM LOADED ////
 document.addEventListener("DOMContentLoaded", () => {
   insertNavbar();
-  // Fetching JSON product list from the API.
-  getJSONData(PRODUCTS_URL + CATEGORY_ID + EXT_TYPE).then((result) => {
-    let data = result.data;
-    FETCHED_PRODUCTS_ARRAY = data.products;
-    insertCategoryTitleHeading(data.catName);
-    insertProductsList(data.products);
-    addLinksToProducts();
+  let productListURL = PRODUCTS_URL + CATEGORY_ID + EXT_TYPE;
+  getJSONData(productListURL).then((result) => {
+    FETCHED_PRODUCTS_LIST = result.data.products;
+    insertCategoryTitleHeading(result.data.catName);
+    insertProductsList(FETCHED_PRODUCTS_LIST);
+    addLinksToProductListElements();
   });
 });
