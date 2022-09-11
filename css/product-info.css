@@ -68,3 +68,14 @@
   height: 100%;
   object-fit: contain;
 }
+
+.related-product-image {
+  width: 100px;
+}
+
+#comments-container {
+  content: "";
+  width: 100px;
+  height: 100px;
+  background-color: yellow;
+}
