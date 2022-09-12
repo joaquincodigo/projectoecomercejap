@@ -1,22 +1,21 @@
-//////////////////////////////////////////////////////////////////////
-//  In is script I use two styles for modifiying the DOM:           //
-//                                                                  //
-//  > Template Literals                                             //
-//  > Document Object Methods                                       //
-//                                                                  //
-//  I'm doing this because I'm trying to show that im competent     //
-//  with both. In a real world page, I would choose just one style  //
-//  and stick to it.                                                //
-//////////////////////////////////////////////////////////////////////
+/*
+  In is script I use two styles for modifiying the DOM: 
 
-//// DECLARING VARIABLES ////
+  > Template Literals
+  > Document Object Methods
+
+  I'm doing this because I'm trying to practice both. In a real
+  world page, I would choose just one style and stick with it.
+*/
+
+// DECLARING VARIABLES
 var PRODUCT_OBJECT;
 const PRODUCT_ID = localStorage.getItem("productId");
 const PRODUCT_URL = PRODUCT_INFO_URL + PRODUCT_ID + EXT_TYPE;
 const COMMENTS_URL = PRODUCT_INFO_COMMENTS_URL + PRODUCT_ID + EXT_TYPE;
 const mainContainerElement = document.getElementById("main-container");
 
-//// DEFINING FUNCTIONS ////
+//DEFINING FUNCTIONS
 function insertBreadcrumsBar() {
   // Modifying the DOM by using template literals
   mainContainerElement.innerHTML = `
@@ -28,8 +27,6 @@ function insertBreadcrumsBar() {
 
 function insertProductData() {
   // Modifying the DOM by using template literals
-  console.log(PRODUCT_OBJECT);
-
   let { images, name, currency, cost, description } = PRODUCT_OBJECT;
   mainContainerElement.innerHTML += `
 
@@ -106,24 +103,46 @@ function insertComments() {
       let commentContainer = document.getElementById("comments-container");
 
       for (const commentObject of commentsObjectsArray) {
-        let text = document.createElement("p");
-        let date = document.createElement("p");
-        let score = document.createElement("p");
+        let commentText = document.createElement("p");
+        let commentDate = document.createElement("p");
+        let commentScore = document.createElement("p");
 
-        text.innerText = commentObject.description;
-        date.innerText = commentObject.dateTime;
-        score.innerText = commentObject.score;
+        commentText.innerText = commentObject.description;
+        commentDate.innerText = commentObject.dateTime;
+        commentScore.innerText = commentObject.score;
 
-        commentContainer.appendChild(text);
-        commentContainer.appendChild(date);
-        commentContainer.appendChild(score);
+        commentContainer.appendChild(commentText);
+        commentContainer.appendChild(commentDate);
+        commentContainer.appendChild(commentScore);
       }
     });
 }
 
-//// ADDING EVENT LISTENERS ////
+function insertCommentInput() {
+  let commentsFormElement = document.createElement("form");
+  let commentInputElement = document.createElement("textarea");
+  let commentSubmitButtonElement = document.createElement("input");
 
-//// ON DOM LOADED ////
+  commentsFormElement.id = "comment-form";
+
+  commentInputElement.id = "comment-input";
+  commentInputElement.placeholder = "Ingresa tu comentario";
+
+  commentSubmitButtonElement.id = "comment-button";
+  commentSubmitButtonElement.type = "button";
+  commentSubmitButtonElement.value = "Enviar comentario";
+  commentSubmitButtonElement.addEventListener("click", (event) => {
+    event.preventDefault();
+    console.log(commentInputElement.value);
+  });
+
+  commentsFormElement.appendChild(commentInputElement);
+  commentsFormElement.appendChild(commentSubmitButtonElement);
+
+  mainContainerElement.appendChild(commentsFormElement);
+}
+
+// ON DOM LOADED
 document.addEventListener("DOMContentLoaded", () => {
   insertNavbar();
   getJSONData(PRODUCT_URL).then((response) => {
@@ -132,5 +151,6 @@ document.addEventListener("DOMContentLoaded", () => {
     insertProductData();
     insertRelatedProducts();
     insertComments();
+    insertCommentInput();
   });
 });
