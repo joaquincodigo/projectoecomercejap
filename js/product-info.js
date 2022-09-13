@@ -1,15 +1,3 @@
-/*
-
-  In is script I use two styles for modifiying the DOM: 
-
-  > Template Literals
-  > Document Object Methods
-
-  I'm doing this because I'm trying to practice both. In a real
-  world page, I would choose just one style and stick with it.
-  
-*/
-
 // DECLARING VARIABLES
 var PRODUCT_OBJECT;
 const PRODUCT_ID = localStorage.getItem("productId");
@@ -93,8 +81,8 @@ function insertComments() {
         }
 
         commentContainer.appendChild(commentScoreElement);
-        commentContainer.appendChild(commentTextElement);
         commentContainer.appendChild(commentDateElement);
+        commentContainer.appendChild(commentTextElement);
       }
     });
 }

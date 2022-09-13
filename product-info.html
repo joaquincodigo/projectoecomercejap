@@ -28,20 +28,22 @@
     <div id="product-data-container">
 
       <div class="product-images">
-        <img id="product-image" src="${images[0]}" alt="Product name">
+        <img id="product-image" class="square" src="${images[0]}" alt="Product name">
       </div>
 
       <div class="product-textual-data">
         <h2 id="product-name">${name}</h2>
-        <hr>
         <div id="product-score">S C O R E </div>
-        <h3><span id="product-currency">${currency}</span><span id="product-cost">${cost}</span></h3>
-        <button class="btn btn-primary">COMPRAR</button>
+        <hr>
+        <div class="price-and-buy-button">
+          <h3 id="cost"><span id="product-currency">${currency}</span><span id="product-cost">${cost}</span></h3>
+          <button class="btn btn-primary">COMPRAR</button>
+        </div>
+        <hr>
         <p id="product-description" class="font-weight-normal">${description}</p>
       </div>
 
     </div>
-    <hr>
 
     <!-- Comments -->
     <div id="comments-container"></div>
