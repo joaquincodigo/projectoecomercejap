@@ -25,6 +25,7 @@ const PRODUCT_DESCRIPTION_ELEMENT = document.getElementById(
   "product-description"
 );
 const COMMENT_BUTTON_ELEMENT = document.getElementById("comment-button");
+const COMMENT_INPUT_ELEMENT = document.getElementById("comment-input");
 const RELATED_PRODUCTS_CONTAINER_ELEMENT = document.getElementById(
   "related-products-container"
 );
@@ -68,27 +69,39 @@ function insertComments() {
   fetch(COMMENTS_URL)
     .then((response) => response.json())
     .then((commentsObjectsArray) => {
-      let commentContainer = document.getElementById("comments-container");
-
       for (const commentObject of commentsObjectsArray) {
-        let commentText = document.createElement("p");
-        let commentDate = document.createElement("p");
-        let commentScore = document.createElement("p");
+        let commentContainer = document.getElementById("comments-container");
+        let commentTextElement = document.createElement("p");
+        let commentDateElement = document.createElement("p");
+        let commentScoreElement = document.createElement("div");
 
-        commentText.innerText = commentObject.description;
-        commentDate.innerText = commentObject.dateTime;
-        commentScore.innerText = commentObject.score;
+        commentTextElement.innerText = commentObject.description;
+        commentTextElement.classList.add("comment-text");
 
-        commentContainer.appendChild(commentText);
-        commentContainer.appendChild(commentDate);
-        commentContainer.appendChild(commentScore);
+        commentDateElement.innerText = commentObject.dateTime;
+        commentDateElement.classList.add("comment-date");
+
+        commentScoreElement.classList.add = "comment-score";
+        for (let i = 1; i <= 5; i++) {
+          let starIcon = document.createElement("span");
+          starIcon.classList.add("fa");
+          starIcon.classList.add("fa-star");
+          if (i <= commentObject.score) {
+            starIcon.classList.add("checked");
+          }
+          commentScoreElement.appendChild(starIcon);
+        }
+
+        commentContainer.appendChild(commentScoreElement);
+        commentContainer.appendChild(commentTextElement);
+        commentContainer.appendChild(commentDateElement);
       }
     });
 }
 
 COMMENT_BUTTON_ELEMENT.addEventListener("click", (event) => {
   event.preventDefault();
-  console.log(commentInputElement.value);
+  alert(COMMENT_INPUT_ELEMENT.value);
 });
 
 // ON DOM LOADED
