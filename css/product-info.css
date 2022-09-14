@@ -1,3 +1,6 @@
+body {
+  background-color: f8f9fa;
+}
 .checked {
   color: orange;
 }
@@ -15,6 +18,9 @@
 
 img {
   width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: contain;
+  border:solid 4px green;
 }
 
 .product-images {
@@ -36,4 +42,55 @@ img {
   padding: 0;
   margin: 0;
   vertical-align: middle;
+}
+
+#comments-container {
+  width: 70%;
+  margin-top: 5%;
+}
+
+#comment-input-container {
+  width: 70%;
+  border: solid 4px red;
+}
+
+#comment-input {
+  width: 70%;
+}
+
+#comment-button {
+  width: 20%;
+}
+
+#related-products-heading {
+  margin: 0px;
+}
+
+#related-products-container {
+  margin-top: 3%;
+  width: 70%;
+  border: solid 4px gold;
+}
+
+.related-product {
+  display: inline-block;
+  border: solid 1px lightgray;
+  border-radius: 3%;
+  margin-left: 2%;
+  margin-top: 2%;
+  padding-left: 1%;
+  padding-right: 1%;
+  padding-bottom: 1%;
+}
+
+.related-product:hover {
+  background-color: rgb(238, 236, 236);
+}
+
+.related-product-name {
+  margin: 0px;
+}
+
+.related-product-image {
+  width: 100px;
 }

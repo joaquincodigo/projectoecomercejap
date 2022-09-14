@@ -32,39 +32,43 @@
       </div>
 
       <div class="product-textual-data">
-        <h2 id="product-name">${name}</h2>
+        <h2 id="product-name">Cargando...</h2>
         <div id="product-score">S C O R E </div>
         <hr>
         <div class="price-and-buy-button">
-          <h3 id="cost"><span id="product-currency">${currency}</span><span id="product-cost">${cost}</span></h3>
-          <button class="btn btn-primary">COMPRAR</button>
+          <h3 id="cost"><span id="product-currency">Cargando...</span><span id="product-cost">${cost}</span></h3>
+          <button class="btn btn-primary">Comprar</button>
         </div>
         <hr>
-        <p id="product-description" class="font-weight-normal">${description}</p>
+        <p id="product-description" class="font-weight-normal">Cargando...</p>
       </div>
 
     </div>
 
+    <!-- Related Products -->
+    <div id="related-products-container">
+      <h5 id="related-products-heading"">Productos relacionados:</h5>
+    </div>
+
     <!-- Comments -->
-    <div id="comments-container"></div>
+    <div id="comments-container">
+    </div>
 
     <!-- Comment Input -->
     <div id="comment-input-container">
       <form action="POST" id="comment-form">
-        <span class="fa fa-star"></span>
-        <span class="fa fa-star"></span>
-        <span class="fa fa-star"></span>
-        <span class="fa fa-star"></span>
-        <span class="fa fa-star"></span>
-        <textarea name="comment-input" id="comment-input" cols="30" rows="10"
-          placeholder="Ingresa tu comentario"></textarea>
-        <input type="button" value="Enviar Comentario" id="comment-button">
+        <div class="comment-stars">
+          <span class="fa fa-star"></span>
+          <span class="fa fa-star"></span>
+          <span class="fa fa-star"></span>
+          <span class="fa fa-star"></span>
+          <span class="fa fa-star"></span>
+        </div>
+        <input name="comment-input" id="comment-input" cols="30" rows="10" placeholder="Ingresa tu comentario"></input>
+        <input type="button" value="Comentar" id="comment-button">
       </form>
     </div>
     </div>
-
-    <!-- Related Products -->
-    <div id="related-products-container">RELATED PRODUCT CONTAINER</div>
   </main>
 
 

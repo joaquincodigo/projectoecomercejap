@@ -41,6 +41,7 @@ function insertRelatedProducts() {
     imageElement.classList.add("related-product-image");
     nameElement.classList.add("related-product-name");
     containerElement.classList.add("related-product");
+    imageElement.classList.add("related-product-image");
 
     nameElement.innerText = relatedProduct.name;
     imageElement.src = relatedProduct.image;
@@ -58,16 +59,19 @@ function insertComments() {
     .then((response) => response.json())
     .then((commentsObjectsArray) => {
       for (const commentObject of commentsObjectsArray) {
+        console.log(commentObject);
+
         let commentContainer = document.getElementById("comments-container");
         let commentTextElement = document.createElement("p");
         let commentDateElement = document.createElement("p");
         let commentScoreElement = document.createElement("div");
+        let commentSeparatorElement = document.createElement("hr");
 
-        commentTextElement.innerText = commentObject.description;
         commentTextElement.classList.add("comment-text");
+        commentTextElement.innerText = commentObject.description;
 
-        commentDateElement.innerText = commentObject.dateTime;
         commentDateElement.classList.add("comment-date");
+        commentDateElement.innerText = commentObject.dateTime;
 
         commentScoreElement.classList.add = "comment-score";
         for (let i = 1; i <= 5; i++) {
@@ -83,6 +87,7 @@ function insertComments() {
         commentContainer.appendChild(commentScoreElement);
         commentContainer.appendChild(commentDateElement);
         commentContainer.appendChild(commentTextElement);
+        commentContainer.appendChild(commentSeparatorElement);
       }
     });
 }
