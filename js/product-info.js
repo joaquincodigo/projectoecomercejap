@@ -17,7 +17,9 @@ const COMMENT_INPUT_ELEMENT = document.getElementById("comment-input");
 const RELATED_PRODUCTS_CONTAINER_ELEMENT = document.getElementById(
   "related-products-container"
 );
-const COMMENT_INPUT_STARS = document.getElementsByClassName("comment-input-star")
+const COMMENT_INPUT_STARS =
+  document.getElementsByClassName("comment-input-star");
+const COMMENT_CONTAINER_ELEMENT = document.getElementById("comments-container");
 
 //DEFINING FUNCTIONS
 function insertBreadcrumsBar() {
@@ -54,66 +56,72 @@ function insertRelatedProducts() {
   }
 }
 
-function insertComments() {
+function fetchAndInsertComments() {
   // Modifying the DOM by using the document object methods
   fetch(COMMENTS_URL)
     .then((response) => response.json())
     .then((commentsObjectsArray) => {
       for (const commentObject of commentsObjectsArray) {
-        console.log(commentObject);
+        insertComment(commentObject.description, commentObject.score, commentObject.dateTime);
+      }
+    });
+}
 
-        let commentContainer = document.getElementById("comments-container");
-        let commentTextElement = document.createElement("p");
+function insertComment(commentText, commmentScore, commentaDate) {
+  let commentTextElement = document.createElement("p");
         let commentDateElement = document.createElement("p");
         let commentScoreElement = document.createElement("div");
         let commentSeparatorElement = document.createElement("hr");
 
         commentTextElement.classList.add("comment-text");
-        commentTextElement.innerText = commentObject.description;
+        commentTextElement.innerText = commentText;
 
         commentDateElement.classList.add("comment-date");
-        commentDateElement.innerText = commentObject.dateTime;
+        commentDateElement.innerText = commentaDate;
 
         commentScoreElement.classList.add = "comment-score";
         for (let i = 1; i <= 5; i++) {
           let starIcon = document.createElement("span");
           starIcon.classList.add("fa");
           starIcon.classList.add("fa-star");
-          starIcon.classList.add("comment-score")
-          if (i <= commentObject.score) {
+          starIcon.classList.add("comment-score");
+          if (i <= commmentScore) {
             starIcon.classList.add("checked");
           }
           commentScoreElement.appendChild(starIcon);
         }
 
-        commentContainer.appendChild(commentScoreElement);
-        commentContainer.appendChild(commentDateElement);
-        commentContainer.appendChild(commentTextElement);
-        commentContainer.appendChild(commentSeparatorElement);
+        COMMENT_CONTAINER_ELEMENT.appendChild(commentScoreElement);
+        COMMENT_CONTAINER_ELEMENT.appendChild(commentDateElement);
+        COMMENT_CONTAINER_ELEMENT.appendChild(commentTextElement);
+        COMMENT_CONTAINER_ELEMENT.appendChild(commentSeparatorElement)
+}
+
+
+function addCommentInputStarsHoverAnimation() {
+  
+  // Adding event listener to each star
+  for (let i = 0; i < COMMENT_INPUT_STARS.length; i++) {
+    COMMENT_INPUT_STARS[i].addEventListener("mouseover", () => {
+
+      // Uncheking all the stars (reset)
+      for (const star of COMMENT_INPUT_STARS) {
+        star.classList.remove("checked");
+      }
+
+      // Checking all the stars up to the selected one
+      for (let j = 0; j <= i; j++) {
+        COMMENT_INPUT_STARS[j].classList.add("checked");
       }
     });
-}
-
-function commentInputStars() {
-  for (let i = 0; i < COMMENT_INPUT_STARS.length; i++) {
-    
-    COMMENT_INPUT_STARS[i].addEventListener("mouseout", () => {
-      for (const star of COMMENT_INPUT_STARS) {
-        star.classList.remove("checked")
-      }
-    })
-
-    COMMENT_INPUT_STARS[i].addEventListener("mouseover", () => {
-      for (let j = 0; j <= i; j++) {
-        COMMENT_INPUT_STARS[j].classList.add("checked")
-      }
-    })
   }
 }
-  
+
 COMMENT_BUTTON_ELEMENT.addEventListener("click", (event) => {
   event.preventDefault();
-  alert(COMMENT_INPUT_ELEMENT.value);
+  let commentInputStarsArray = Array.from(COMMENT_INPUT_STARS)  
+  let commentInputStarsChecked = commentInputStarsArray.filter((star) => star.classList.contains("checked") )
+  alert(COMMENT_INPUT_ELEMENT.value + " " + commentInputStarsChecked.length);
 });
 
 // ON DOM LOADED
@@ -124,6 +132,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // insertBreadcrumsBar();
     insertProductData();
     insertRelatedProducts();
-    insertComments();
+    fetchAndInsertComments();
+    addCommentInputStarsHoverAnimation();
   });
 });

@@ -48,6 +48,13 @@ img {
   margin-top: 5%;
 }
 
+.comment-date{
+  font-size: small;
+  color: gray;
+  margin: 0px;
+  display: inline-block;
+}
+
 #comment-input-container {
   width: 70%;
   border: solid 4px red;
