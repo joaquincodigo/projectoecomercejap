@@ -9,7 +9,7 @@ body {
   width: 70%;
   display: grid;
   grid-template-columns: 30% 1fr;
-  border: solid 4px red;
+  border: solid 4px black;
 }
 
 #product-currency {
@@ -34,7 +34,6 @@ img {
 
 .price-and-buy-button {
   border: solid 4px blue;
-  text-align: center;
 }
 
 #cost {
@@ -93,4 +92,12 @@ img {
 
 .related-product-image {
   width: 100px;
+}
+
+.comment-input-stars{
+  display: flex;
+}
+
+.comment-input-star{
+  padding: 2px;
 }

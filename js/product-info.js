@@ -17,6 +17,7 @@ const COMMENT_INPUT_ELEMENT = document.getElementById("comment-input");
 const RELATED_PRODUCTS_CONTAINER_ELEMENT = document.getElementById(
   "related-products-container"
 );
+const COMMENT_INPUT_STARS = document.getElementsByClassName("comment-input-star")
 
 //DEFINING FUNCTIONS
 function insertBreadcrumsBar() {
@@ -78,6 +79,7 @@ function insertComments() {
           let starIcon = document.createElement("span");
           starIcon.classList.add("fa");
           starIcon.classList.add("fa-star");
+          starIcon.classList.add("comment-score")
           if (i <= commentObject.score) {
             starIcon.classList.add("checked");
           }
@@ -92,6 +94,23 @@ function insertComments() {
     });
 }
 
+function commentInputStars() {
+  for (let i = 0; i < COMMENT_INPUT_STARS.length; i++) {
+    
+    COMMENT_INPUT_STARS[i].addEventListener("mouseout", () => {
+      for (const star of COMMENT_INPUT_STARS) {
+        star.classList.remove("checked")
+      }
+    })
+
+    COMMENT_INPUT_STARS[i].addEventListener("mouseover", () => {
+      for (let j = 0; j <= i; j++) {
+        COMMENT_INPUT_STARS[j].classList.add("checked")
+      }
+    })
+  }
+}
+  
 COMMENT_BUTTON_ELEMENT.addEventListener("click", (event) => {
   event.preventDefault();
   alert(COMMENT_INPUT_ELEMENT.value);
