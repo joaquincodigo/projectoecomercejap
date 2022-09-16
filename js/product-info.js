@@ -11,7 +11,7 @@ const PRODUCT_CURRENCY_ELEM = document.getElementById("product-currency");
 const PRODUCT_COST_ELEM = document.getElementById("product-cost");
 const PRODUCT_DESCRIPTION_ELEM = document.getElementById("product-description");
 const COMMENT_INPUT_BUTTON_ELEM = document.getElementById("comment-button");
-const COMMENT_INPUT_ELEM = document.getElementById("comment-input");
+const COMMENT_INPUT_TEXT_ELEM = document.getElementById("comment-input");
 const RELATED_PRODUCTS_CONTAINER_ELEM = document.getElementById(
   "related-products-container"
 );
@@ -55,30 +55,30 @@ function insertRelatedProducts() {
   }
 }
 
-function insertAPIComments() {
+function insertCommmentsFromAPI() {
   // Modifying the DOM by using the document object methods
   fetch(COMMENTS_URL)
     .then((response) => response.json())
     .then((commentsObjectsArray) => {
       for (const commentObject of commentsObjectsArray) {
         ({ description, score, dateTime } = commentObject);
-        insertComment(description, score, dateTime);
+        COMMENTS_CONTAINER_ELEM.appendChild(
+          generateCommentElem(description, score, dateTime)
+        );
       }
     });
 }
 
-function insertComment(commentText, commmentScore, commentaDate) {
+function generateCommentElem(commentText, commmentScore, commentaDate) {
+  let commentElem = document.createElement("div");
   let commentTextElem = document.createElement("p");
   let commentDateElem = document.createElement("p");
   let commentScoreElem = document.createElement("div");
   let commentSeparatorElem = document.createElement("hr");
 
+  commentElem.classList.add("comment");
   commentTextElem.classList.add("comment-text");
-  commentTextElem.innerText = commentText;
-
   commentDateElem.classList.add("comment-date");
-  commentDateElem.innerText = commentaDate;
-
   commentScoreElem.classList.add = "comment-score";
   for (let i = 1; i <= 5; i++) {
     let starIcon = document.createElement("span");
@@ -88,34 +88,20 @@ function insertComment(commentText, commmentScore, commentaDate) {
     if (i <= commmentScore) {
       starIcon.classList.add("checked");
     }
+
+    commentTextElem.innerText = commentText;
+    commentDateElem.innerText = commentaDate;
+
     commentScoreElem.appendChild(starIcon);
+
+    commentElem.appendChild(commentDateElem);
+    commentElem.appendChild(commentScoreElem);
+    commentElem.appendChild(commentTextElem);
+    commentElem.appendChild(commentSeparatorElem);
   }
 
-  COMMENTS_CONTAINER_ELEM.appendChild(commentScoreElem);
-  COMMENTS_CONTAINER_ELEM.appendChild(commentDateElem);
-  COMMENTS_CONTAINER_ELEM.appendChild(commentTextElem);
-  COMMENTS_CONTAINER_ELEM.appendChild(commentSeparatorElem);
+  return commentElem;
 }
-
-// function sortNodes() {
-//   let commen = document.getElementById("mylist");
-//   var items = list.childNodes;
-//   var itemsArr = [];
-//   for (var i in items) {
-//     if (items[i].nodeType == 1) {
-//       // get rid of the whitespace text nodes
-//       itemsArr.push(items[i]);
-//     }
-//   }
-
-//   itemsArr.sort(function (a, b) {
-//     return a.innerHTML == b.innerHTML ? 0 : a.innerHTML > b.innerHTML ? 1 : -1;
-//   });
-
-//   for (i = 0; i < itemsArr.length; ++i) {
-//     list.appendChild(itemsArr[i]);
-//   }
-// }
 
 function addCommentInputStarsHoverAnimation() {
   // Adding event listener to each star
@@ -141,10 +127,18 @@ COMMENT_INPUT_BUTTON_ELEM.addEventListener("click", (event) => {
   let commentInputStarsChecked = commentInputStarsArray.filter((star) =>
     star.classList.contains("checked")
   );
-  let commentText = COMMENT_INPUT_ELEM.value
-  let commentScore = commentInputStarsChecked.length
+  let commentText = COMMENT_INPUT_TEXT_ELEM.value;
+  let commentScore = commentInputStarsChecked.length;
   let commentDate = new Date(Date.now()).toLocaleDateString();
-  insertComment(commentText, commentScore, commentDate)
+  let commentElement = generateCommentElem(
+    commentText,
+    commentScore,
+    commentDate
+  );
+  COMMENTS_CONTAINER_ELEM.insertBefore(
+    commentElement,
+    COMMENTS_CONTAINER_ELEM.firstChild
+  );
 });
 
 // ON DOM LOADED
@@ -155,7 +149,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // insertBreadcrumsBar();
     insertProductData();
     insertRelatedProducts();
-    insertAPIComments();
+    insertCommmentsFromAPI();
     addCommentInputStarsHoverAnimation();
   });
 });

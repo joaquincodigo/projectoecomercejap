@@ -16,13 +16,13 @@
   <!-- Navbar -->
   <div id="navbar-container"></div>
 
-  <!-- Breadcrums Bar -->
-  <div id="category-container">
-    <p>eMercado > ${PRODUCT_OBJECT.category}</p>
-  </div>
 
   <!-- Main -->
   <main>
+    <!-- Breadcrums Bar -->
+    <div id="category-container">
+      <p>eMercado > ${PRODUCT_OBJECT.category}</p>
+    </div>
 
     <!-- Product Data -->
     <div id="product-data-container">
@@ -49,20 +49,24 @@
     <div id="related-products-container">
       <h5 id="related-products-heading"">Productos relacionados:</h5>
     </div>
-
+    
     <!-- Comment Input -->
     <div id="comment-input-container">
-      <form action="POST" id="comment-form">
-        <div class="comment-input-stars">
-          <span class="fa fa-star comment-input-star"></span>
-          <span class="fa fa-star comment-input-star"></span>
-          <span class="fa fa-star comment-input-star"></span>
-          <span class="fa fa-star comment-input-star"></span>
-          <span class="fa fa-star comment-input-star"></span>
-        </div>
-        <input name="comment-input" id="comment-input" cols="30" rows="10" placeholder="Ingresa tu comentario"></input>
-        <input type="submit" value="Comentar" id="comment-button">
-      </form>
+      <h5 class="comment-input-heading">Dejá un comentario sobre el producto</h5>
+        <form action="POST" id="comment-form">
+          <div class="comment-input-stars">
+            <span class="fa fa-star comment-input-star"></span>
+            <span class="fa fa-star comment-input-star"></span>
+            <span class="fa fa-star comment-input-star"></span>
+            <span class="fa fa-star comment-input-star"></span>
+            <span class="fa fa-star comment-input-star"></span>
+          </div>
+          <div class="comment-input-text-box">
+            <input name="comment-input" id="comment-input" cols="30" rows="10"
+              placeholder="Ingresa tu comentario"></input>
+            <input type="submit" value="Comentar" id="comment-button">
+          </div>
+        </form>
     </div>
 
     <!-- Comments -->

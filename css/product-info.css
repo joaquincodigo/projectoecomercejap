@@ -1,8 +1,12 @@
 body {
   background-color: f8f9fa;
 }
-.checked {
-  color: orange;
+
+main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 #product-data-container {
@@ -17,10 +21,11 @@ body {
 }
 
 img {
-  width: 100%;
+  height: 100%;
+  max-width: 100%;
   aspect-ratio: 1 / 1;
   object-fit: contain;
-  border:solid 4px green;
+  border: solid 4px green;
 }
 
 .product-images {
@@ -45,27 +50,58 @@ img {
 
 #comments-container {
   width: 70%;
-  margin-top: 5%;
+  margin-bottom: 10%;
 }
 
-.comment-date{
+.comment-date {
   font-size: small;
   color: gray;
   margin: 0px;
   display: inline-block;
 }
 
+.comment-input-heading {
+  text-align: left;
+}
+
 #comment-input-container {
   width: 70%;
-  border: solid 4px red;
+  display: flex;
+  flex-direction: column;
+  margin-top: 30px;
+}
+
+#comment-form {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.comment-input-text-box {
+  display: flex;
+  margin-bottom: 30px;
+  margin-top: 3px;
 }
 
 #comment-input {
-  width: 70%;
+  flex: 1;
+  margin-right: -5px;
+  border: solid 1px #0b5ed7;
+  border-radius: 3px;
+  height: 40px;
+}
+
+#comment-input::placeholder {
+  color: rgb(189, 189, 189);
+  padding-left: 7px;
 }
 
 #comment-button {
   width: 20%;
+  background-color: #0b5ed7;
+  border: none;
+  color: white;
+  border-radius: 3px;
 }
 
 #related-products-heading {
@@ -89,6 +125,21 @@ img {
   padding-bottom: 1%;
 }
 
+.comment-input-stars {
+  margin-right: 10px;
+  margin-top: 2px;
+  display: flex;
+  align-items: center;
+}
+
+.comment-input-star {
+  padding: 2px;
+}
+
+.checked {
+  color: orange;
+}
+
 .related-product:hover {
   background-color: rgb(238, 236, 236);
 }
@@ -99,12 +150,4 @@ img {
 
 .related-product-image {
   width: 100px;
-}
-
-.comment-input-stars{
-  display: flex;
-}
-
-.comment-input-star{
-  padding: 2px;
 }
