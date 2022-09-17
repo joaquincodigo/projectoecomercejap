@@ -6,7 +6,9 @@ const PRODUCT_URL = PRODUCT_INFO_URL + PRODUCT_ID + EXT_TYPE;
 const COMMENTS_URL = PRODUCT_INFO_COMMENTS_URL + PRODUCT_ID + EXT_TYPE;
 
 const PRODUCT_NAME_ELEM = document.getElementById("product-name");
-const PRODUCT_IMAGE_ELEM = document.getElementById("product-image");
+const PRODUCT_IMAGE_CONTAINER_ELEM = document.getElementById(
+  "product-images-container"
+);
 const PRODUCT_CURRENCY_ELEM = document.getElementById("product-currency");
 const PRODUCT_COST_ELEM = document.getElementById("product-cost");
 const PRODUCT_DESCRIPTION_ELEM = document.getElementById("product-description");
@@ -27,10 +29,15 @@ function insertBreadcrumsBar() {
 
 function insertProductData() {
   PRODUCT_NAME_ELEM.innerText = PRODUCT_OBJECT.name;
-  PRODUCT_IMAGE_ELEM.src = PRODUCT_OBJECT.images[0];
   PRODUCT_DESCRIPTION_ELEM.innerText = PRODUCT_OBJECT.description;
   PRODUCT_CURRENCY_ELEM.innerText = PRODUCT_OBJECT.currency;
   PRODUCT_COST_ELEM.innerText = PRODUCT_OBJECT.cost;
+  // for (const imageSource of PRODUCT_OBJECT.images) {
+  //   let productImageElem = document.createElement("img");
+  //   productImageElem.classList.add("product-image");
+  //   productImageElem.src = imageSource;
+  //   PRODUCT_IMAGE_CONTAINER_ELEM.appendChild(productImageElem);
+  // }
 }
 
 function insertRelatedProducts() {

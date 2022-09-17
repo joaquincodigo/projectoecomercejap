@@ -1,3 +1,4 @@
+/* GENERAL */
 body {
   background-color: f8f9fa;
 }
@@ -9,36 +10,25 @@ main {
   justify-content: center;
 }
 
+/* PRODUCT INFO */
 #product-data-container {
   width: 70%;
-  display: grid;
-  grid-template-columns: 30% 1fr;
+  display: flex;
+  flex: 10% 10% 1;
   border: solid 4px black;
 }
 
-#product-currency {
-  display: inline-block;
-}
-
-img {
-  height: 100%;
-  max-width: 100%;
-  aspect-ratio: 1 / 1;
-  object-fit: contain;
-  border: solid 4px green;
-}
-
-.product-images {
-  border: solid 4px teal;
-  width: 100%;
-}
-
+/* Textual */
 .product-textual-data {
   border: solid 4px red;
 }
 
 .price-and-buy-button {
   border: solid 4px blue;
+}
+
+#product-currency {
+  display: inline-block;
 }
 
 #cost {
@@ -48,18 +38,33 @@ img {
   vertical-align: middle;
 }
 
-#comments-container {
-  width: 70%;
-  margin-bottom: 10%;
+#buy-button {
+  width: 20%;
+  height: 40px;
+  background-color: #0b5ed7;
+  border: none;
+  color: white;
+  border-radius: 3px;
 }
 
-.comment-date {
-  font-size: small;
-  color: gray;
-  margin: 0px;
-  display: inline-block;
+/* Images */
+
+#product-images-container {
+  background-color: purple;
 }
 
+#x {
+  height: 100% !important;
+  aspect-ratio: 1 / 1;
+  object-fit: contain;
+}
+
+#main-product-image-container {
+  background-color: greenyellow;
+  width: 100px;
+}
+
+/* COMMENT INPUT */
 .comment-input-heading {
   text-align: left;
 }
@@ -104,6 +109,35 @@ img {
   border-radius: 3px;
 }
 
+/* COMMENTS */
+#comments-container {
+  width: 70%;
+  margin-bottom: 10%;
+}
+
+.comment-date {
+  font-size: small;
+  color: gray;
+  margin: 0px;
+  display: inline-block;
+}
+
+.comment-input-stars {
+  margin-right: 10px;
+  margin-top: 2px;
+  display: flex;
+  align-items: center;
+}
+
+.comment-input-star {
+  padding: 2px;
+}
+
+.checked {
+  color: orange;
+}
+
+/* RELATED PRODUCTS */
 #related-products-heading {
   margin: 0px;
 }
@@ -123,21 +157,6 @@ img {
   padding-left: 1%;
   padding-right: 1%;
   padding-bottom: 1%;
-}
-
-.comment-input-stars {
-  margin-right: 10px;
-  margin-top: 2px;
-  display: flex;
-  align-items: center;
-}
-
-.comment-input-star {
-  padding: 2px;
-}
-
-.checked {
-  color: orange;
 }
 
 .related-product:hover {
