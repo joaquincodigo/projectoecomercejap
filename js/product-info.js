@@ -23,23 +23,22 @@ const COMMENT_INPUT_FORM_ELEM = document.getElementById("comment-input");
 const MAIN_IMAGE = document.getElementById("main-image");
 
 //DEFINING FUNCTIONS
-function insertBreadcrumsBar() {
-  return 0;
-}
 
 function insertProductData() {
+  // Text data
   PRODUCT_NAME_ELEM.innerText = PRODUCT_OBJECT.name;
   PRODUCT_DESCRIPTION_ELEM.innerText = PRODUCT_OBJECT.description;
   PRODUCT_CURRENCY_ELEM.innerText = PRODUCT_OBJECT.currency;
   PRODUCT_COST_ELEM.innerText = PRODUCT_OBJECT.cost;
 
+  // Images
   for (let i = 0; i < PRODUCT_OBJECT.images.length; i++) {
     let productImageElem = document.createElement("img");
     productImageElem.classList.add("product-image");
-    // if (i == 0) {
-    //   productImageElem.classList.add("main-image");
-    // }
     productImageElem.src = PRODUCT_OBJECT.images[i];
+    if (i == 0) {
+      setMainImage(productImageElem.src);
+    }
     PRODUCT_IMAGES_CONTAINER_ELEM.appendChild(productImageElem);
   }
 }
@@ -47,22 +46,24 @@ function insertProductData() {
 function insertRelatedProducts() {
   // Modifying the DOM by using the document object methods
   for (const relatedProduct of PRODUCT_OBJECT.relatedProducts) {
-    let containerElement = document.createElement("div");
-    let nameElement = document.createElement("p");
-    let imageElement = document.createElement("img");
+    let containerElem = document.createElement("div");
+    let nameContainerElem = document.createElement("div");
+    let nameElem = document.createElement("p");
+    let imageElem = document.createElement("img");
 
-    imageElement.classList.add("related-product-image");
-    nameElement.classList.add("related-product-name");
-    containerElement.classList.add("related-product");
-    imageElement.classList.add("related-product-image");
+    containerElem.classList.add("related-product");
+    nameContainerElem.classList.add("realted-product-name-container");
+    nameElem.classList.add("related-product-name");
+    imageElem.classList.add("related-product-image");
 
-    nameElement.innerText = relatedProduct.name;
-    imageElement.src = relatedProduct.image;
+    nameElem.innerText = relatedProduct.name;
+    imageElem.src = relatedProduct.image;
 
-    containerElement.appendChild(nameElement);
-    containerElement.appendChild(imageElement);
+    nameContainerElem.appendChild(nameElem);
+    containerElem.appendChild(nameContainerElem);
+    containerElem.appendChild(imageElem);
 
-    RELATED_PRODUCTS_CONTAINER_ELEM.appendChild(containerElement);
+    RELATED_PRODUCTS_CONTAINER_ELEM.appendChild(containerElem);
   }
 }
 
@@ -72,12 +73,24 @@ function insertCommmentsFromAPI() {
     .then((response) => response.json())
     .then((commentsObjectsArray) => {
       for (const commentObject of commentsObjectsArray) {
-        ({ description, score, dateTime } = commentObject);
         COMMENTS_CONTAINER_ELEM.appendChild(
-          generateCommentElem(description, score, dateTime)
+          generateCommentElem(
+            commentObject.description,
+            commentObject.score,
+            formatDate(commentObject.dateTime)
+          )
         );
       }
     });
+}
+
+function formatDate(date) {
+  let datePart = date.match(/\d+/g),
+    year = datePart[0].substring(2),
+    month = datePart[1],
+    day = datePart[2];
+
+  return day + "/" + month + "/" + year; // dd/mm/yy
 }
 
 function generateCommentElem(commentText, commmentScore, commentaDate) {
@@ -110,7 +123,6 @@ function generateCommentElem(commentText, commmentScore, commentaDate) {
     commentElem.appendChild(commentTextElem);
     commentElem.appendChild(commentSeparatorElem);
   }
-
   return commentElem;
 }
 
@@ -135,9 +147,13 @@ function addProductImagesEventListeners() {
   let productImagesElems = document.getElementsByClassName("product-image");
   for (const productImage of productImagesElems) {
     productImage.addEventListener("mouseover", () => {
-      MAIN_IMAGE.src = productImage.src;
+      setMainImage(productImage.src);
     });
   }
+}
+
+function setMainImage(img_src_str) {
+  MAIN_IMAGE.src = img_src_str;
 }
 
 // ADDING EVENT LISTENERS
@@ -149,7 +165,7 @@ COMMENT_INPUT_BUTTON_ELEM.addEventListener("click", (event) => {
   );
   let commentText = COMMENT_INPUT_TEXT_ELEM.value;
   let commentScore = commentInputStarsChecked.length;
-  let commentDate = new Date(Date.now()).toLocaleDateString();
+  let commentDate = getTodayDateFormated();
   let commentElement = generateCommentElem(
     commentText,
     commentScore,
@@ -161,12 +177,30 @@ COMMENT_INPUT_BUTTON_ELEM.addEventListener("click", (event) => {
   );
 });
 
+function getTodayDateFormated() {
+  const today = new Date();
+  const yyyy = today.getFullYear().toString().slice(2, 4);
+  let mm = today.getMonth() + 1; // Months start at 0.
+  let dd = today.getDate();
+
+  if (dd < 10) {
+    dd = "0" + dd;
+  }
+
+  if (mm < 10) {
+    mm = "0" + mm;
+  }
+
+  const formattedToday = dd + "/" + mm + "/" + yyyy;
+
+  return formattedToday;
+}
+
 // ON DOM LOADED
 document.addEventListener("DOMContentLoaded", () => {
   insertNavbar();
   getJSONData(PRODUCT_URL).then((response) => {
     PRODUCT_OBJECT = response.data;
-    // insertBreadcrumsBar();
     insertProductData();
     insertRelatedProducts();
     insertCommmentsFromAPI();

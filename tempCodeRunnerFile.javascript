@@ -1,16 +1,13 @@
-// Transforming input into a tag list
-let searchTags = "oso de goma".toLowerCase().split(" ");
+let miTexto = ""
 
-// These tags aren't useful for searching
-let excludedTags = ["de", "la", "el", "con", "que"];
+miTexto += "hola "
 
-// Removing worthless tags
-for (const tag of searchTags) {
-    // console.log(excludedTags.includes(tag))
-  if (excludedTags.includes(tag)) {
-    searchTags.pop(tag);
-  }
+for (let i = 0; i < 5; i++) {
+    miTexto += i
 }
 
-console.log(searchTags)
+miTexto += " adios"
+
+
+console.log(miTexto)
 

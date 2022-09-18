@@ -19,33 +19,31 @@
 
   <!-- Main -->
   <main>
-    <!-- Breadcrums Bar -->
-    <div id="category-container">
-      <p>eMercado > ${PRODUCT_OBJECT.category}</p>
-    </div>
 
     <!-- Product Data -->
     <div id="product-data-container">
+      <div id="product-images-container"></div>
+      <img id="main-image" src="" alt="">
 
-      <div id="product-images-container">
-      </div>
-      <img id="main-image" src="https://imageio.forbes.com/specials-images/imageserve/5d35eacaf1176b0008974b54/0x0.jpg?format=jpg&crop=4560,2565,x790,y784,safe&width=1200" alt="">
       <div class="product-textual-data">
         <h2 id="product-name">Cargando...</h2>
         <hr>
-        <div class="price-and-buy-button">
-          <h3 id="cost"><span id="product-currency">Cargando...</span><span id="product-cost">${cost}</span></h3>
+        <div class="price-and-buy-button-container">
+          <p id="product-currency"></p>  
+          <p id="product-cost"></p>
           <button id="buy-button">Comprar</button>
         </div>
         <hr>
         <p id="product-description" class="font-weight-normal">Cargando...</p>
       </div>
-
     </div>
 
     <!-- Related Products -->
-    <div id="related-products-container">
-      <h5 id="related-products-heading"">Productos relacionados:</h5>
+    <div id="related-products-section">
+      <hr>
+      <h5 id="related-products-section-heading"">Productos relacionados:</h5>
+      <div id="related-products-container"></div>
+      <hr>  
     </div>
     
     <!-- Comment Input -->
