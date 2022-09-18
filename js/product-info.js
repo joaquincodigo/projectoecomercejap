@@ -1,12 +1,11 @@
 // DECLARING VARIABLES
 var PRODUCT_OBJECT;
 const PRODUCT_ID = localStorage.getItem("productId");
-
 const PRODUCT_URL = PRODUCT_INFO_URL + PRODUCT_ID + EXT_TYPE;
 const COMMENTS_URL = PRODUCT_INFO_COMMENTS_URL + PRODUCT_ID + EXT_TYPE;
 
 const PRODUCT_NAME_ELEM = document.getElementById("product-name");
-const PRODUCT_IMAGE_CONTAINER_ELEM = document.getElementById(
+const PRODUCT_IMAGES_CONTAINER_ELEM = document.getElementById(
   "product-images-container"
 );
 const PRODUCT_CURRENCY_ELEM = document.getElementById("product-currency");
@@ -21,6 +20,7 @@ const COMMENT_INPUT_STARS_ELEMS =
   document.getElementsByClassName("comment-input-star");
 const COMMENTS_CONTAINER_ELEM = document.getElementById("comments-container");
 const COMMENT_INPUT_FORM_ELEM = document.getElementById("comment-input");
+const MAIN_IMAGE = document.getElementById("main-image");
 
 //DEFINING FUNCTIONS
 function insertBreadcrumsBar() {
@@ -32,12 +32,16 @@ function insertProductData() {
   PRODUCT_DESCRIPTION_ELEM.innerText = PRODUCT_OBJECT.description;
   PRODUCT_CURRENCY_ELEM.innerText = PRODUCT_OBJECT.currency;
   PRODUCT_COST_ELEM.innerText = PRODUCT_OBJECT.cost;
-  // for (const imageSource of PRODUCT_OBJECT.images) {
-  //   let productImageElem = document.createElement("img");
-  //   productImageElem.classList.add("product-image");
-  //   productImageElem.src = imageSource;
-  //   PRODUCT_IMAGE_CONTAINER_ELEM.appendChild(productImageElem);
-  // }
+
+  for (let i = 0; i < PRODUCT_OBJECT.images.length; i++) {
+    let productImageElem = document.createElement("img");
+    productImageElem.classList.add("product-image");
+    // if (i == 0) {
+    //   productImageElem.classList.add("main-image");
+    // }
+    productImageElem.src = PRODUCT_OBJECT.images[i];
+    PRODUCT_IMAGES_CONTAINER_ELEM.appendChild(productImageElem);
+  }
 }
 
 function insertRelatedProducts() {
@@ -127,6 +131,15 @@ function addCommentInputStarsHoverAnimation() {
   }
 }
 
+function addProductImagesEventListeners() {
+  let productImagesElems = document.getElementsByClassName("product-image");
+  for (const productImage of productImagesElems) {
+    productImage.addEventListener("mouseover", () => {
+      MAIN_IMAGE.src = productImage.src;
+    });
+  }
+}
+
 // ADDING EVENT LISTENERS
 COMMENT_INPUT_BUTTON_ELEM.addEventListener("click", (event) => {
   event.preventDefault();
@@ -158,5 +171,6 @@ document.addEventListener("DOMContentLoaded", () => {
     insertRelatedProducts();
     insertCommmentsFromAPI();
     addCommentInputStarsHoverAnimation();
+    addProductImagesEventListeners();
   });
 });
