@@ -55,6 +55,7 @@ function insertRelatedProducts() {
     nameContainerElem.classList.add("realted-product-name-container");
     nameElem.classList.add("related-product-name");
     imageElem.classList.add("related-product-image");
+    containerElem.setAttribute("id", relatedProduct.id);
 
     nameElem.innerText = relatedProduct.name;
     imageElem.src = relatedProduct.image;
@@ -156,6 +157,35 @@ function setMainImage(img_src_str) {
   MAIN_IMAGE.src = img_src_str;
 }
 
+function getTodayDateFormated() {
+  const today = new Date();
+  const yyyy = today.getFullYear().toString().slice(2, 4);
+  let mm = today.getMonth() + 1; // Months start at 0.
+  let dd = today.getDate();
+
+  if (dd < 10) {
+    dd = "0" + dd;
+  }
+
+  if (mm < 10) {
+    mm = "0" + mm;
+  }
+
+  const formattedToday = dd + "/" + mm + "/" + yyyy;
+
+  return formattedToday;
+}
+
+function addEventListenersToRelatedProducts() {
+  let relatedProductsElems = document.getElementsByClassName("related-product");
+  for (const relatedProduct of relatedProductsElems) {
+    relatedProduct.addEventListener("click", () => {
+      localStorage.setItem("productId", relatedProduct.id);
+      window.location.href = "product-info.html";
+    });
+  }
+}
+
 // ADDING EVENT LISTENERS
 COMMENT_INPUT_BUTTON_ELEM.addEventListener("click", (event) => {
   event.preventDefault();
@@ -177,25 +207,6 @@ COMMENT_INPUT_BUTTON_ELEM.addEventListener("click", (event) => {
   );
 });
 
-function getTodayDateFormated() {
-  const today = new Date();
-  const yyyy = today.getFullYear().toString().slice(2, 4);
-  let mm = today.getMonth() + 1; // Months start at 0.
-  let dd = today.getDate();
-
-  if (dd < 10) {
-    dd = "0" + dd;
-  }
-
-  if (mm < 10) {
-    mm = "0" + mm;
-  }
-
-  const formattedToday = dd + "/" + mm + "/" + yyyy;
-
-  return formattedToday;
-}
-
 // ON DOM LOADED
 document.addEventListener("DOMContentLoaded", () => {
   insertNavbar();
@@ -206,5 +217,6 @@ document.addEventListener("DOMContentLoaded", () => {
     insertCommmentsFromAPI();
     addCommentInputStarsHoverAnimation();
     addProductImagesEventListeners();
+    addEventListenersToRelatedProducts();
   });
 });

@@ -119,6 +119,7 @@ main {
 
 #comment-input::placeholder {
   color: rgb(189, 189, 189);
+  text-align: left !important;
 }
 
 #comment-button {
