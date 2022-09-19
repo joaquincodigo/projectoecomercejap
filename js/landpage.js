@@ -14,8 +14,4 @@ document.addEventListener("DOMContentLoaded", function () {
     localStorage.setItem("catID", 103);
     window.location = "products.html";
   });
-
-  // // Loading the username into the navbar
-  // navbarUsernameElement = document.getElementById("navbar-username");
-  // navbarUsernameElement.innerText = localStorage.getItem("username");
 });

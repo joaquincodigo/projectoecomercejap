@@ -42,7 +42,7 @@ let getJSONData = function (url) {
     });
 };
 
-let insertNavbar = function () {
+function insertNavbar() {
   let navbarHTML = `
   <nav class="navbar navbar-expand-sm navbar-dark bg-dark p-1">
   <div class="container-fluid">
@@ -95,4 +95,4 @@ let insertNavbar = function () {
 
   let navbarContainerElement = document.getElementById("navbar-container");
   navbarContainerElement.innerHTML = navbarHTML;
-};
+}
