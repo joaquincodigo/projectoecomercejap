@@ -93,6 +93,6 @@ function insertNavbar() {
   </div>
 </nav>`;
 
-  let navbarContainerElement = document.getElementById("navbar-container");
-  navbarContainerElement.innerHTML = navbarHTML;
+  let navbarContainerElem = document.getElementById("navbar-container");
+  navbarContainerElem.innerHTML = navbarHTML;
 }
