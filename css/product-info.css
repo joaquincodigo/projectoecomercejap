@@ -32,14 +32,6 @@ main {
   aspect-ratio: 1/1 !important;
 }
 
-#main-image {
-  padding-left: 10px;
-  padding-right: 10px;
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-}
-
 /* Textual */
 .product-textual-data {
   aspect-ratio: 1/1 !important;
@@ -208,4 +200,10 @@ main {
 
 .related-product-image:hover {
   border: solid 1px #0b5ed7;
+}
+
+/* Carousel */
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  background-color: black;
 }

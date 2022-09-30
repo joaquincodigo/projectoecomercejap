@@ -20,7 +20,9 @@ const COMMENT_INPUT_STARS_ELEMS =
   document.getElementsByClassName("comment-input-star");
 const COMMENTS_CONTAINER_ELEM = document.getElementById("comments-container");
 const COMMENT_INPUT_FORM_ELEM = document.getElementById("comment-input");
-const MAIN_IMAGE = document.getElementById("main-image");
+const MAIN_IMAGE_ELEM = document.getElementById("main-image");
+const CAROUSEL_IMAGE_CONTAINER =
+  document.getElementsByClassName("carousel-inner")[0];
 
 //DEFINING FUNCTIONS
 
@@ -33,13 +35,21 @@ function insertProductData() {
 
   // Images
   for (let i = 0; i < PRODUCT_OBJECT.images.length; i++) {
+    let carouselItemElem = document.createElement("div");
+    carouselItemElem.classList.add("carousel-item");
+    if (i == 0) {
+      carouselItemElem.classList.add("active");
+    }
+
     let productImageElem = document.createElement("img");
     productImageElem.classList.add("product-image");
+    productImageElem.classList.add("d-block");
+    productImageElem.classList.add("w-100");
+    productImageElem.setAttribute("alt", `${i + 1}`);
     productImageElem.src = PRODUCT_OBJECT.images[i];
-    if (i == 0) {
-      setMainImage(productImageElem.src);
-    }
-    PRODUCT_IMAGES_CONTAINER_ELEM.appendChild(productImageElem);
+
+    carouselItemElem.appendChild(productImageElem);
+    CAROUSEL_IMAGE_CONTAINER.appendChild(carouselItemElem);
   }
 }
 
@@ -154,7 +164,7 @@ function addProductImagesEventListeners() {
 }
 
 function setMainImage(img_src_str) {
-  MAIN_IMAGE.src = img_src_str;
+  MAIN_IMAGE_ELEM.src = img_src_str;
 }
 
 function getTodayDateFormated() {
