@@ -15,6 +15,7 @@
     <link href="css/font-awesome.min.css" rel="stylesheet" />
     <link href="css/bootstrap.min.css" rel="stylesheet" />
     <link href="css/styles.css" rel="stylesheet" />
+    <link rel="stylesheet" href="css/products.css" />
   </head>
 
   <body>
@@ -27,56 +28,81 @@
       <h3 id="category-name-heading"></h3>
 
       <!-- Filter, Searching and Sorting -->
-      <div id="search-and-sort-container">
-        <!-- Search -->
-        <input
-          type="text"
-          placeholder="Busca artículos aquí"
-          id="search-input"
-          class="form-control rounded"
-        />
-        <span class="input-group-text border-0" id="search-addon">
-          <i class="fas fa-search" id="search-button"></i>
-        </span>
+      <div id="search-and-sort-container" class="container">
+        <div class="row search-and-sort-container-row">
+          <!-- Search -->
+          <div class="col-3 search-box">
+            <input
+              type="text"
+              placeholder="Busca artículos aquí"
+              id="search-input"
+              class="form-control rounded"
+            />
+            <span class="input-group-text border-0" id="search-addon">
+              <i class="fas fa-search" id="search-button"></i>
+            </span>
+          </div>
 
-        <!-- Sorts -->
-        <input type="radio" class="btn-check" name="options" id="sortAsc" />
-        <label class="btn btn-light" for="sortAsc">Precio ▼</label>
+          <!-- Sorts -->
+          <div class="col-1">
+            <input type="radio" class="btn-check" name="options" id="sortAsc" />
+            <label class="btn btn-light" for="sortAsc">Precio ▼</label>
+          </div>
 
-        <input type="radio" class="btn-check" name="options" id="sortDesc" />
-        <label class="btn btn-light" for="sortDesc">Precio ▲</label>
+          <div class="col-1">
+            <input
+              type="radio"
+              class="btn-check"
+              name="options"
+              id="sortDesc"
+            />
+            <label class="btn btn-light" for="sortDesc">Precio ▲</label>
+          </div>
 
-        <input
-          type="radio"
-          class="btn-check"
-          name="options"
-          id="sortByCount"
-          checked
-        />
-        <label class="btn btn-light" for="sortByCount">Relevancia</label>
+          <div class="col-1">
+            <input
+              type="radio"
+              class="btn-check"
+              name="options"
+              id="sortByCount"
+              checked
+            />
+            <label class="btn btn-light" for="sortByCount">Relevancia</label>
+          </div>
 
-        <!-- Filters -->
-        <input
-          class="form-control filter-input"
-          type="text"
-          placeholder="Precio mínimo"
-          id="rangeFilterCountMin"
-        />
-        <input
-          class="form-control filter-input"
-          type="text"
-          placeholder="Precio máximo"
-          id="rangeFilterCountMax"
-        />
+          <!-- Filters -->
+          <div class="col-2">
+            <input
+              class="form-control filter-input"
+              type="text"
+              placeholder="Precio mínimo"
+              id="rangeFilterCountMin"
+            />
+          </div>
 
-        <button class="btn btn-light btn-block" id="rangeFilterCount">
-          Filtrar
-        </button>
-        <button class="btn btn-light btn-block" id="clearRangeFilter">
-          Eliminar Filtros
-        </button>
+          <div class="col-2">
+            <input
+              class="form-control filter-input"
+              type="text"
+              placeholder="Precio máximo"
+              id="rangeFilterCountMax"
+            />
+          </div>
+
+          <div class="col-1">
+            <button class="btn btn-light btn-block" id="rangeFilterCount">
+              Filtrar
+            </button>
+          </div>
+
+          <div class="col-1">
+            <button class="btn btn-light btn-block" id="clearRangeFilter">
+              Eliminar Filtros
+            </button>
+          </div>
+        </div>
       </div>
-
+      <!-- Product List -->
       <div id="product-list-container">
         <!-- Product list generated in products.js will be added here. -->
       </div>

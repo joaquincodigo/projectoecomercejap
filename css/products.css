@@ -1,0 +1,31 @@
+.search-box {
+  display: flex;
+}
+
+.col-1 {
+  padding: 0px;
+  justify-content: center;
+  align-items: center;
+}
+
+.col-2 {
+  padding: 0px;
+}
+
+.search-and-sort-container-row {
+  justify-content: center;
+  margin: 0px !important;
+  margin-left: 0px !important;
+  margin-right: 0px !important;
+}
+
+.container {
+  padding: 0px !important;
+}
+
+#rangeFilterCount {
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  justify-items: center;
+}
