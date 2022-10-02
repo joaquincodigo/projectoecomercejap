@@ -12,7 +12,6 @@ function isInputEmpty(inputField) {
 // }
 
 function showInvalidInputMessage(messageString, inputElement) {
-  
   // Adding the message to the HTML container
   let invalidInputMessageContainerElement = document.getElementById(
     "invalid-input-message-container"
@@ -29,7 +28,7 @@ function showInvalidInputMessage(messageString, inputElement) {
 
 // Waiting for the DOM to load
 document.addEventListener("DOMContentLoaded", () => {
-  
+  localStorage.removeItem("username");
   // Defining HTML elements
   // let loginPageContainer = document.getElementById("login-page-container");
   // let landPageContainer = document.getElementById("landpage-container");
@@ -48,16 +47,14 @@ document.addEventListener("DOMContentLoaded", () => {
         "El usuario ingresado no es válido.",
         userInputElement
       );
-    }
-    else if (isInputEmpty(passwordInputElement)) {
+    } else if (isInputEmpty(passwordInputElement)) {
       showInvalidInputMessage(
         "La contraseña ingresada no es válida.",
         passwordInputElement
       );
-    }
-    else {
-      localStorage.setItem("username", userInputElement.value)
-      window.location.href = "landpage.html"
+    } else {
+      localStorage.setItem("username", userInputElement.value);
+      window.location.href = "landpage.html";
     }
   });
 });
