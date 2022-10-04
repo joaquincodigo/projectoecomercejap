@@ -18,13 +18,114 @@
 
   <body>
     <div id="navbar-container"></div>
+
     <main>
-      <div class="container">
-        <div class="alert alert-danger text-center" role="alert">
-          <h4 class="alert-heading">[C A R R I T O]</h4>
+      <h1>Carrito de compras</h1>
+      <h2>Articulos a comprar</h2>
+
+      <div class="container table-container">
+        <div class="row table-headers">
+          <div class="col-2 fw-bold" id="product-image-header"></div>
+          <div class="col-2 fw-bold" id="prpduct-name-header">Nombre</div>
+          <div class="col-2 fw-bold" id="product-cost-header">Costo</div>
+          <div class="col-2 fw-bold" id="product-quantity-header">Cantidad</div>
+          <div class="col-2 fw-bold" id="product-subtotal-header">Subtotal</div>
+        </div>
+        <div class="row table-headers-divisor">
+          <div class="col-10">
+            <hr />
+          </div>
+        </div>
+
+        <div id="cart-products">
+          <div class="row product-data-row">
+            <div class="col-2 product-image">IMAGE</div>
+            <div class="col-2 product-name">Auto</div>
+            <div class="col-2 product-cost">333</div>
+            <div class="col-2">
+              <input class="form-control" type="number" />
+            </div>
+            <div class="col-2 product-subtotal fw-bold">666</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="container address-and-shipment-container">
+        <div class="row">
+          <div class="col-6"></div>
+          <form action="" id="address-and-shipment">
+            <fieldset id="shipment-type-selector">
+              <legend>Tipo de envío</legend>
+
+              <input
+                type="radio"
+                id="premium"
+                name="shiptment-type"
+                value="premium"
+              />
+              <label for="premium">Premium 2 a 5 días (15%)</label>
+              <br />
+
+              <input
+                type="radio"
+                id="express"
+                name="shiptment-type"
+                value="express"
+              />
+              <label for="express">Express 5 a 8 días (7%)</label>
+              <br />
+
+              <input
+                type="radio"
+                id="standard"
+                name="shiptment-type"
+                value="standard"
+              />
+              <label for="standard">Standard 12 a 15 días (5%)</label>
+            </fieldset>
+
+            <fieldset id="address-inputs">
+              <div class="row">
+                <legend>Dirección de envío</legend>
+                <div class="col-5">
+                  <label for="address-street">Calle</label>
+                  <br />
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="address-street"
+                    name="address-street"
+                  />
+                </div>
+                <div class="col-3">
+                  <label for="address-number">Número</label>
+                  <br />
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="address-number"
+                    name="address-number"
+                  />
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-5">
+                  <label for="corner-street">Esquina</label>
+                  <br />
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="corner-street"
+                    name="corner-street"
+                  />
+                </div>
+              </div>
+            </fieldset>
+          </form>
         </div>
       </div>
     </main>
+
     <footer class="text-muted">
       <div class="container">
         <p class="float-end">
