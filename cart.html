@@ -21,32 +21,28 @@
 
     <main>
       <h1>Carrito de compras</h1>
-      <h2>Articulos a comprar</h2>
+      <h3>Articulos a comprar</h3>
 
-      <div class="container table-container">
+      <div class="container table-container mt-5 mb-5">
         <div class="row table-headers">
           <div class="col-2 fw-bold" id="product-image-header"></div>
           <div class="col-2 fw-bold" id="prpduct-name-header">Nombre</div>
           <div class="col-2 fw-bold" id="product-cost-header">Costo</div>
-          <div class="col-2 fw-bold" id="product-quantity-header">Cantidad</div>
-          <div class="col-2 fw-bold" id="product-subtotal-header">Subtotal</div>
+          <div class="col-1 fw-bold ps-0" id="product-quantity-header">
+            Cantidad
+          </div>
+          <div class="col-2 fw-bold ms-5" id="product-subtotal-header">
+            Subtotal
+          </div>
         </div>
         <div class="row table-headers-divisor">
           <div class="col-10">
-            <hr />
+            <hr class="mt-1" />
           </div>
         </div>
 
         <div id="cart-products">
-          <div class="row product-data-row">
-            <div class="col-2 product-image">IMAGE</div>
-            <div class="col-2 product-name">Auto</div>
-            <div class="col-2 product-cost">333</div>
-            <div class="col-2">
-              <input class="form-control" type="number" />
-            </div>
-            <div class="col-2 product-subtotal fw-bold">666</div>
-          </div>
+          <!-- Product data generated in JS will be inserted here -->
         </div>
       </div>
 
@@ -54,7 +50,7 @@
         <div class="row">
           <div class="col-6"></div>
           <form action="" id="address-and-shipment">
-            <fieldset id="shipment-type-selector">
+            <fieldset id="shipment-type-selector" class="mb-3">
               <legend>Tipo de envío</legend>
 
               <input

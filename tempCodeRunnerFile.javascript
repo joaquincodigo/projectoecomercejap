@@ -1,1 +1,5 @@
-console.log("hola".slice(1,))
+function getOnlyNumbersFromString(string) {
+    return string.replace(/\D/g, "");
+}
+
+console.log(getOnlyNumbersFromString("123hola123"))
