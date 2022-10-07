@@ -24,7 +24,6 @@ const MAIN_IMAGE_ELEM = document.getElementById("main-image");
 const CAROUSEL_IMAGE_CONTAINER =
   document.getElementsByClassName("carousel-inner")[0];
 const CART_BUTTON_ELEM = document.getElementById("cart-button");
-var CART_ITEMS = localStorage.getItem("cartItems");
 
 //DEFINING FUNCTIONS
 function insertProductData() {
@@ -189,9 +188,10 @@ function addEventListenersToRelatedProducts() {
 }
 
 function addProductToCart() {
-  let cartItemsArray = CART_ITEMS.json();
+  let cartItemsString = localStorage.getItem("cartItems");
+  let cartItemsArray = JSON.parse(cartItemsString);
   cartItemsArray.push(PRODUCT_OBJECT);
-  localStorage.setItem("cartItems", cartItemsArray.toString());
+  localStorage.setItem("cartItems", JSON.stringify(cartItemsArray));
 }
 
 // ADDING EVENT LISTENERS
