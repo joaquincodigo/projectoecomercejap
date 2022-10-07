@@ -84,7 +84,7 @@ function insertNavbar() {
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
             <a class="dropdown-item" href="cart.html">Mi carrito</a>
             <a class="dropdown-item" href="my-profile.html">Mi perfil</a>
-            <a class="dropdown-item" href="index.html">Cerrar sesión</a>
+            <a class="dropdown-item" id="logout-button" href="index.html">Cerrar sesión</a>
           </div>
         </li>
         <li class="nav-item"></li>
@@ -95,4 +95,9 @@ function insertNavbar() {
 
   let navbarContainerElem = document.getElementById("navbar-container");
   navbarContainerElem.innerHTML = navbarHTML;
+
+  let logoutButton = document.getElementById("logout-button");
+  logoutButton.addEventListener("click", () => {
+    localStorage.removeItem("username");
+  });
 }

@@ -1,15 +1,12 @@
-// Defining Functions
+// DEFINING VARIABLES
+let loginFormElement = document.getElementById("login-form");
+let userInputElement = document.getElementById("user-input");
+let passwordInputElement = document.getElementById("password-input");
+
+// DEFINING FUNCTIONS
 function isInputEmpty(inputField) {
   return inputField.value == "";
 }
-
-// function showElement(element) {
-//   element.setAttribute("style", "display: block !important");
-// }
-
-// function hideElement(element) {
-//   element.setAttribute("style", "display: none !important");
-// }
 
 function showInvalidInputMessage(messageString, inputElement) {
   // Adding the message to the HTML container
@@ -26,22 +23,17 @@ function showInvalidInputMessage(messageString, inputElement) {
   );
 }
 
+function initializeCart() {
+  localStorage.setItem("cartItems", "[]");
+}
+
 // Waiting for the DOM to load
 document.addEventListener("DOMContentLoaded", () => {
-  localStorage.removeItem("username");
-  // Defining HTML elements
-  // let loginPageContainer = document.getElementById("login-page-container");
-  // let landPageContainer = document.getElementById("landpage-container");
-  let loginFormElement = document.getElementById("login-form");
-  let userInputElement = document.getElementById("user-input");
-  let passwordInputElement = document.getElementById("password-input");
+  initializeCart();
 
-  // When the form is submitted
   loginFormElement.addEventListener("submit", (event) => {
-    // Stop the page from reloading
     event.preventDefault();
 
-    // Checking if the fields are valid
     if (isInputEmpty(userInputElement)) {
       showInvalidInputMessage(
         "El usuario ingresado no es válido.",
