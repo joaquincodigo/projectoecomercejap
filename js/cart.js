@@ -10,7 +10,7 @@ function fetchCartProductsData() {
 
 function insertCartProducts(cartProductsData) {
   for (const product of cartProductsData) {
-    // Creating Cart Elements
+    // Creating Cart Elements:
 
     // Container Row
     let productDataContainerRowElem = document.createElement("div");
@@ -23,8 +23,8 @@ function insertCartProducts(cartProductsData) {
 
     // Image
     let productImageElem = document.createElement("div");
-    productImageElem.classList.add("col-2", "product-image");
-    productImageElem.innerHTML = `${product.id}`;
+    productImageElem.classList.add("col-1", "product-image");
+    productImageElem.innerHTML = `<img style="width: 100%;" src="${product.image}"></img>`;
     productDataContainerRowElem.appendChild(productImageElem);
 
     // Name
@@ -92,14 +92,14 @@ function insertCartProducts(cartProductsData) {
   }
 }
 
-//  DELETE ME SOON
-// function getOnlyNumbersFromString(string) {
-//   return string.replace(/\D/g, "");
-// }
+function getCartProducts() {
+  return JSON.parse(localStorage.getItem("cartProducts"));
+}
 
 // ON DOM LOADED
 document.addEventListener("DOMContentLoaded", () => {
   insertNavbar();
+  insertCartProducts(getCartProducts());
   fetchCartProductsData().then((cartProductsData) => {
     insertCartProducts(cartProductsData);
   });

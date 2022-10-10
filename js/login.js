@@ -24,7 +24,7 @@ function showInvalidInputMessage(messageString, inputElement) {
 }
 
 function initializeCart() {
-  localStorage.setItem("cartItems", "[]");
+  localStorage.setItem("cartProducts", "[]");
 }
 
 // Waiting for the DOM to load

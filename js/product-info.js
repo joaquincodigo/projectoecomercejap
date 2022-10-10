@@ -188,10 +188,28 @@ function addEventListenersToRelatedProducts() {
 }
 
 function addProductToCart() {
-  let cartItemsString = localStorage.getItem("cartItems");
-  let cartItemsArray = JSON.parse(cartItemsString);
-  cartItemsArray.push(PRODUCT_OBJECT);
-  localStorage.setItem("cartItems", JSON.stringify(cartItemsArray));
+  // Getting products from cart
+  let cartProductsString = localStorage.getItem("cartProducts");
+  let cartProductsArray = JSON.parse(cartProductsString);
+
+  // Checking if the product isn't already in the cart
+  for (const cartProduct of cartProductsArray) {
+    if (cartProduct.id == PRODUCT_OBJECT.id) {
+      return;
+    }
+  }
+
+  // Adding the product to the cart
+  let newCartProduct = {
+    id: PRODUCT_OBJECT.id,
+    name: PRODUCT_OBJECT.name,
+    count: 1,
+    unitCost: PRODUCT_OBJECT.cost,
+    currency: PRODUCT_OBJECT.currency,
+    image: PRODUCT_OBJECT.images[0],
+  };
+  cartProductsArray.push(newCartProduct);
+  localStorage.setItem("cartProducts", JSON.stringify(cartProductsArray));
 }
 
 // ADDING EVENT LISTENERS
@@ -217,6 +235,9 @@ COMMENT_INPUT_BUTTON_ELEM.addEventListener("click", (event) => {
 
 CART_BUTTON_ELEM.addEventListener("click", () => {
   addProductToCart();
+  CART_BUTTON_ELEM.innerText = "Agregado a tu carrito";
+  CART_BUTTON_ELEM.classList.remove("btn-primary");
+  CART_BUTTON_ELEM.classList.add("btn-success");
 });
 
 // ON DOM LOADED
