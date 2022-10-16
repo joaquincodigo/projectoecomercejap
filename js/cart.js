@@ -67,7 +67,7 @@ function insertCartProducts(cartProductsData) {
     productQuantityInputElem.type = "number";
     productQuantityInputElem.value = `${product.count}`;
     productQuantityInputElem.addEventListener("input", () => {
-      if (productQuantityInputElem.value == 0) {
+      if (productQuantityInputElem.value <= 0) {
         productQuantityInputElem.value = 1;
       }
 
@@ -99,8 +99,8 @@ function getCartProducts() {
 // ON DOM LOADED
 document.addEventListener("DOMContentLoaded", () => {
   insertNavbar();
-  insertCartProducts(getCartProducts());
   fetchCartProductsData().then((cartProductsData) => {
     insertCartProducts(cartProductsData);
   });
+  insertCartProducts(getCartProducts());
 });

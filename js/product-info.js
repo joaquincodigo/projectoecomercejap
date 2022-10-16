@@ -188,9 +188,7 @@ function addEventListenersToRelatedProducts() {
 }
 
 function addProductToCart() {
-  // Getting products from cart
-  let cartProductsString = localStorage.getItem("cartProducts");
-  let cartProductsArray = JSON.parse(cartProductsString);
+  let cartProductsArray = getCartProductObjects();
 
   // Checking if the product isn't already in the cart
   for (const cartProduct of cartProductsArray) {
@@ -210,6 +208,40 @@ function addProductToCart() {
   };
   cartProductsArray.push(newCartProduct);
   localStorage.setItem("cartProducts", JSON.stringify(cartProductsArray));
+}
+
+function removeProductFromCart() {
+  let cartProductsArray = getCartProductObjects();
+  let cartArrayWithoutProduct = cartProductsArray.filter(
+    (cartProduct) => cartProduct.id != PRODUCT_ID
+  );
+  localStorage.setItem("cartProducts", JSON.stringify(cartArrayWithoutProduct));
+}
+
+function getCartProductObjects() {
+  return JSON.parse(localStorage.getItem("cartProducts"));
+}
+
+function toggleCartButtonStatus() {
+  if (isProductInCart()) {
+    CART_BUTTON_ELEM.innerText = "Está en tu el carrito";
+    CART_BUTTON_ELEM.classList.remove("btn-primary");
+    CART_BUTTON_ELEM.classList.add("btn-success");
+  } else {
+    CART_BUTTON_ELEM.innerText = "Agregar al carrito";
+    CART_BUTTON_ELEM.classList.remove("btn-success");
+    CART_BUTTON_ELEM.classList.add("btn-primary");
+  }
+}
+
+function isProductInCart() {
+  let cartProductsArray = getCartProductObjects();
+  for (const cartProduct of cartProductsArray) {
+    if (cartProduct.id == parseInt(PRODUCT_ID)) {
+      return true;
+    }
+  }
+  return false;
 }
 
 // ADDING EVENT LISTENERS
@@ -234,10 +266,12 @@ COMMENT_INPUT_BUTTON_ELEM.addEventListener("click", (event) => {
 });
 
 CART_BUTTON_ELEM.addEventListener("click", () => {
-  addProductToCart();
-  CART_BUTTON_ELEM.innerText = "Agregado a tu carrito";
-  CART_BUTTON_ELEM.classList.remove("btn-primary");
-  CART_BUTTON_ELEM.classList.add("btn-success");
+  if (!isProductInCart()) {
+    addProductToCart();
+  } else {
+    removeProductFromCart();
+  }
+  toggleCartButtonStatus();
 });
 
 // ON DOM LOADED
@@ -250,5 +284,6 @@ document.addEventListener("DOMContentLoaded", () => {
     insertCommmentsFromAPI();
     addCommentInputStarsHoverAnimation();
     addEventListenersToRelatedProducts();
+    toggleCartButtonStatus();
   });
 });
