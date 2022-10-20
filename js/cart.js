@@ -1,6 +1,9 @@
 const USER_ID = 25801;
 const CART_URL = CART_INFO_URL + USER_ID + EXT_TYPE;
-const CART_PRODUCTS_CONTAINER_ELEM = document.getElementById("cart-products");
+const CART_TABLE_CONTAINER_ELEM = document.getElementById("cart-products");
+let SUBTOTAL = 0;
+let SHIPPING_COST = 0;
+let TOTAL = 0;
 
 function fetchCartProductsData() {
   return fetch(CART_URL)
@@ -8,7 +11,7 @@ function fetchCartProductsData() {
     .then((CartProductsJSONData) => CartProductsJSONData.articles);
 }
 
-function insertCartProducts(cartProductsData) {
+function insertCartTable(cartProductsData) {
   for (const product of cartProductsData) {
     // Creating Cart Elements:
 
@@ -19,7 +22,7 @@ function insertCartProducts(cartProductsData) {
       "mt-2",
       "product-data-row"
     );
-    CART_PRODUCTS_CONTAINER_ELEM.appendChild(productDataContainerRowElem);
+    CART_TABLE_CONTAINER_ELEM.appendChild(productDataContainerRowElem);
 
     // Image
     let productImageElem = document.createElement("div");
@@ -71,9 +74,17 @@ function insertCartProducts(cartProductsData) {
         productQuantityInputElem.value = 1;
       }
 
+      productSubtotalElem.dataset.value =
+        productQuantityInputElem.value * product.unitCost;
       productSubtotalElem.innerHTML = `
         ${product.currency} 
         ${productQuantityInputElem.value * product.unitCost}`;
+
+      modifyExistingProductQuantityInCart(
+        product.id,
+        productQuantityInputElem.value
+      );
+      updateCartTableSubtotal();
     });
     productQuantityColumnElem.appendChild(productQuantityInputElem);
     productDataContainerRowElem.appendChild(productQuantityColumnElem);
@@ -86,21 +97,134 @@ function insertCartProducts(cartProductsData) {
       "fw-bold",
       "ms-5"
     );
+    productSubtotalElem.setAttribute("data-currency", `${product.currency}`);
+    productSubtotalElem.setAttribute(
+      "data-value",
+      `${product.count * product.unitCost}}`
+    );
     productSubtotalElem.innerHTML = `
       ${product.currency} ${product.count * product.unitCost}`;
     productDataContainerRowElem.appendChild(productSubtotalElem);
   }
 }
 
-function getCartProducts() {
+function getCartProductsObjects() {
   return JSON.parse(localStorage.getItem("cartProducts"));
 }
+
+function isProductInCart(productId) {
+  let cartProducts = getCartProductsObjects();
+  for (const cartProduct of cartProducts) {
+    if (productId == cartProduct.id) {
+      return true;
+    }
+  }
+  return false;
+}
+
+function modifyExistingProductQuantityInCart(productId, quantity) {
+  let cartProducts = getCartProductsObjects();
+  if (isProductInCart(productId)) {
+    for (const cartProduct of cartProducts) {
+      if (cartProduct.id == productId) {
+        if (quantity > 0) {
+          cartProduct.count = quantity;
+        } else {
+          // Remove the item if the value is 0 or less
+          let cartProductIndex = cartProducts.indexOf(cartProduct);
+          cartProducts.splice(cartProductIndex, 1);
+        }
+      }
+    }
+    localStorage.setItem("cartProducts", JSON.stringify(cartProducts));
+  }
+}
+
+function updateCartTableSubtotal() {
+  let productsSubtotals = document.getElementsByClassName("product-subtotal");
+  let subtotalCartElem = document.getElementsByClassName("subtotal-cost")[0];
+
+  let cartSubtotalValueInDolars = 0;
+  for (const productSubtotal of productsSubtotals) {
+    let productSubtotalValue = parseInt(productSubtotal.dataset.value);
+    // We accumulate the subtotal values but if they are in "pesos"
+    // we have to convert them first.
+    if (productSubtotal.dataset.currency == "UYU") {
+      cartSubtotalValueInDolars += convertPesosToDolars(productSubtotalValue);
+    } else {
+      cartSubtotalValueInDolars += productSubtotalValue;
+    }
+  }
+
+  subtotalCartElem.innerHTML = `USD ${cartSubtotalValueInDolars}`;
+}
+
+function convertPesosToDolars(pesosValue) {
+  let dolarValueInPesos = 40;
+
+  return pesosValue / dolarValueInPesos;
+}
+
+// function refreshCartTable() {
+//   CART_TABLE_CONTAINER_ELEM.innerHTML = "";
+//   insertCartTable(getCartProductsObjects());
+// }
 
 // ON DOM LOADED
 document.addEventListener("DOMContentLoaded", () => {
   insertNavbar();
   fetchCartProductsData().then((cartProductsData) => {
-    insertCartProducts(cartProductsData);
+    insertCartTable(cartProductsData);
   });
-  insertCartProducts(getCartProducts());
+  debugger;
+  insertCartTable(getCartProductsObjects());
+  updateCartTableSubtotal();
 });
+
+// validate purchase form
+// > check address fields
+// > check payment fields
+// > check others
+
+// updateShipmentCosts
+//     select shipment cost value
+//     put the selected shipment value
+
+// updateTotalValue
+//     change total value to subtotal value plus shipment cost
+
+// toggleCreditCardFields(status)
+//     select all credit card fills
+//     if statuyou are inactive:
+//         add disabled class
+//     if status sctivive
+//         remove disabled class
+
+// toggle Transfer Card fields(status)
+// select all tranf card fills
+//     if statuyou are inactive:
+//         add disabled class
+//     if status sctivive
+//         remove disabled class
+
+// function getChoosenShipmentType() {
+//   let shipmentTypeSelectorsElems = document.getElementsByClassName(
+//     "shipment-type-selector"
+//   );
+//   for (const selector of shipmentTypeSelectorsElems) {
+//     if (selector.checked) {
+//       return selector.value;
+//     }
+//   }
+//   return "none";
+// }
+
+// function verifyAddressInput() {
+//   let addressInputsElems = document.getElementsByClassName("address-input");
+
+//   for (const input of addressInputsElems) {
+//     if (!input.value) {
+//       highlightRequiredInput(input);
+//     }
+//   }
+// }

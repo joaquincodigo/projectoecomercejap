@@ -59,12 +59,13 @@
         <div class="container address-and-shipment-container me-0 ms-0">
           <div class="row">
             <div class="col-6"></div>
-            <form action="" id="address-and-shipment">
-              <fieldset id="shipment-type-selector" class="mb-3">
+            <form action="" class="needs-validation" id="address-and-shipment">
+              <!-- Shipping Type -->
+              <fieldset id="shipment-type-fieldset" class="mb-3">
                 <legend>Tipo de envío</legend>
-
                 <input
                   type="radio"
+                  class="shipment-type-selector"
                   id="premium"
                   name="shiptment-type"
                   value="premium"
@@ -74,6 +75,7 @@
 
                 <input
                   type="radio"
+                  class="shipment-type-selector"
                   id="express"
                   name="shiptment-type"
                   value="express"
@@ -83,13 +85,17 @@
 
                 <input
                   type="radio"
+                  class="shipment-type-selector"
                   id="standard"
                   name="shiptment-type"
                   value="standard"
+                  checked="checked"
                 />
                 <label for="standard">Standard 12 a 15 días (5%)</label>
               </fieldset>
+              <!-- /Shipping Type -->
 
+              <!-- Address -->
               <fieldset id="address-inputs">
                 <div class="row">
                   <legend>Dirección de envío</legend>
@@ -98,7 +104,7 @@
                     <br />
                     <input
                       type="text"
-                      class="form-control"
+                      class="form-control address-input"
                       id="address-street"
                       name="address-street"
                     />
@@ -108,7 +114,7 @@
                     <br />
                     <input
                       type="text"
-                      class="form-control"
+                      class="form-control address-input"
                       id="address-number"
                       name="address-number"
                     />
@@ -116,7 +122,7 @@
                 </div>
                 <div class="row">
                   <div class="col-5">
-                    <label for="corner-street">Esquina</label>
+                    <label for="corner-street address-input">Esquina</label>
                     <br />
                     <input
                       type="text"
@@ -126,10 +132,28 @@
                     />
                   </div>
                 </div>
+                <div class="col-md-6">
+                  <label for="validationCustom03" class="form-label"
+                    >City</label
+                  >
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="validationCustom03"
+                    required
+                  />
+                  <div class="invalid-feedback">
+                    Please provide a valid city.
+                  </div>
+                </div>
               </fieldset>
+              <!-- Address -->
+
+              <input type="submit" class="btn btn-danger" value="ENVIAR" />
             </form>
           </div>
           <!-- /Address and Shipment -->
+
           <!-- Costs -->
           <div class="mt-5">
             <hr />
@@ -338,7 +362,33 @@
       crossorigin="anonymous"
     ></script>
     <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="js/bootstrapFormValidation.js"></script>
     <script src="js/init.js"></script>
     <script src="js/cart.js"></script>
+    <script>
+      // Example starter JavaScript for disabling form submissions if there are invalid fields
+      (function () {
+        "use strict";
+
+        // Fetch all the forms we want to apply custom Bootstrap validation styles to
+        var forms = document.querySelectorAll(".needs-validation");
+
+        // Loop over them and prevent submission
+        Array.prototype.slice.call(forms).forEach(function (form) {
+          form.addEventListener(
+            "submit",
+            function (event) {
+              if (!form.checkValidity()) {
+                event.preventDefault();
+                event.stopPropagation();
+              }
+
+              form.classList.add("was-validated");
+            },
+            false
+          );
+        });
+      })();
+    </script>
   </body>
 </html>
