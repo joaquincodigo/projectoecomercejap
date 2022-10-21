@@ -1,9 +1,6 @@
 const USER_ID = 25801;
 const CART_URL = CART_INFO_URL + USER_ID + EXT_TYPE;
 const CART_TABLE_CONTAINER_ELEM = document.getElementById("cart-products");
-let SUBTOTAL = 0;
-let SHIPPING_COST = 0;
-let TOTAL = 0;
 
 function fetchCartProductsData() {
   return fetch(CART_URL)
@@ -85,6 +82,7 @@ function insertCartTable(cartProductsData) {
         productQuantityInputElem.value
       );
       updateCartTableSubtotal();
+      updateShippingCost();
     });
     productQuantityColumnElem.appendChild(productQuantityInputElem);
     productDataContainerRowElem.appendChild(productQuantityColumnElem);
@@ -156,6 +154,7 @@ function updateCartTableSubtotal() {
     }
   }
 
+  subtotalCartElem.dataset.value = cartSubtotalValueInDolars;
   subtotalCartElem.innerHTML = `USD ${cartSubtotalValueInDolars}`;
 }
 
@@ -165,20 +164,63 @@ function convertPesosToDolars(pesosValue) {
   return pesosValue / dolarValueInPesos;
 }
 
-// function refreshCartTable() {
-//   CART_TABLE_CONTAINER_ELEM.innerHTML = "";
-//   insertCartTable(getCartProductsObjects());
-// }
+function getChoosenShipmentType() {
+  let shipmentTypeSelectorsElems = document.getElementsByClassName(
+    "shipment-type-selector"
+  );
+  for (const selector of shipmentTypeSelectorsElems) {
+    if (selector.checked) {
+      return selector.value;
+    }
+  }
+  return "none";
+}
+
+function updateShippingCost() {
+  debugger;
+  let shipmentCostElem = document.getElementsByClassName("shipping-cost")[0];
+  let cartSubtotalElem = document.getElementsByClassName("subtotal-cost")[0];
+  let choosenShipmentType = getChoosenShipmentType();
+
+  let shippingCost = 0;
+  if (choosenShipmentType == "standard") {
+    shippingCost = (cartSubtotalElem.dataset.value / 100) * 5;
+  } else if (choosenShipmentType == "express") {
+    shippingCost = (cartSubtotalElem.dataset.value / 100) * 7;
+  } else {
+    // Premium
+    shippingCost = (cartSubtotalElem.dataset.value / 100) * 15;
+  }
+
+  shipmentCostElem.dataset.value = Math.round(shippingCost * 100) / 100;
+  shipmentCostElem.innerHTML = `USD ${Math.round(shippingCost * 100) / 100}`;
+}
+
+// Event Listeners
+let shipmentTypeSelectors = document.getElementsByClassName(
+  "shipment-type-selector"
+);
+for (const shipmentType of shipmentTypeSelectors) {
+  shipmentType.addEventListener("input", () => {
+    updateShippingCost();
+  });
+}
 
 // ON DOM LOADED
 document.addEventListener("DOMContentLoaded", () => {
   insertNavbar();
+
+  // For the cart fetched from the API
   fetchCartProductsData().then((cartProductsData) => {
     insertCartTable(cartProductsData);
+    updateCartTableSubtotal();
+    updateShippingCost();
   });
-  debugger;
+
+  // For the cart in the local storage
   insertCartTable(getCartProductsObjects());
   updateCartTableSubtotal();
+  updateShippingCost();
 });
 
 // validate purchase form
@@ -206,18 +248,6 @@ document.addEventListener("DOMContentLoaded", () => {
 //         add disabled class
 //     if status sctivive
 //         remove disabled class
-
-// function getChoosenShipmentType() {
-//   let shipmentTypeSelectorsElems = document.getElementsByClassName(
-//     "shipment-type-selector"
-//   );
-//   for (const selector of shipmentTypeSelectorsElems) {
-//     if (selector.checked) {
-//       return selector.value;
-//     }
-//   }
-//   return "none";
-// }
 
 // function verifyAddressInput() {
 //   let addressInputsElems = document.getElementsByClassName("address-input");
