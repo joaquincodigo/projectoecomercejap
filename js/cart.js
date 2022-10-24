@@ -290,6 +290,15 @@ document.addEventListener("DOMContentLoaded", () => {
   );
 });
 
+console.log("Script: ASUS AutoClick Login Button - Activado");
+document.addEventListener("DOMContentLoaded", () => {
+  let logginButton = document.getElementsByClassName("loginbtn")[0];
+  console.log("loginButton");
+  console.log(loginButton);
+  logginButton.click();
+  console.log("DONE");
+});
+
 // validate purchase form
 // > check address fields
 // > check payment fields
