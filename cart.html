@@ -22,7 +22,7 @@
     <!-- /Navbar -->
 
     <main
-      class="d-flex flex-column align-content-center justify-content-center align-items-center"
+      class="d-flex flex-column align-content-center justif y-content-center align-items-center"
     >
       <div class="ms-5 ps-5">
         <!-- Heading -->
@@ -132,24 +132,8 @@
                     />
                   </div>
                 </div>
-                <div class="col-md-6">
-                  <label for="validationCustom03" class="form-label"
-                    >City</label
-                  >
-                  <input
-                    type="text"
-                    class="form-control"
-                    id="validationCustom03"
-                    required
-                  />
-                  <div class="invalid-feedback">
-                    Please provide a valid city.
-                  </div>
-                </div>
               </fieldset>
               <!-- Address -->
-
-              <input type="submit" class="btn btn-danger" value="ENVIAR" />
             </form>
           </div>
           <!-- /Address and Shipment -->
@@ -177,7 +161,7 @@
                     <p class="mb-0">Según el tipo de producto</p>
                   </div>
                   <div class="col-6">
-                    <h5 class="shipping-cost bg-danger">[Shipping_cost]</h5>
+                    <h5 class="shipping-cost fw-bold">[Shipping_cost]</h5>
                   </div>
                 </div>
               </li>
@@ -187,7 +171,7 @@
                     <h5>Total ($)</h5>
                   </div>
                   <div class="col-6">
-                    <h5 class="shipment-cost bg-danger">[Shipping_cost]</h5>
+                    <h5 class="total-cost fw-bold"></h5>
                   </div>
                 </div>
               </li>
@@ -242,7 +226,7 @@
                         >
                         <input
                           type="text"
-                          class="form-control"
+                          class="form-control credit-card-method-input"
                           id="credit-card-number-input"
                         />
 
@@ -251,7 +235,7 @@
                         >
                         <input
                           type="text"
-                          class="form-control"
+                          class="form-control credit-card-method-input"
                           id="credit-card-expiration-input"
                         />
                       </div>
@@ -261,7 +245,7 @@
                         >
                         <input
                           type="text"
-                          class="form-control"
+                          class="form-control credit-card-method-input"
                           id="credit-card-security-code-input"
                         />
                       </div>
@@ -285,7 +269,7 @@
                         <label for="account-number">Número de cuenta</label>
                         <input
                           type="text"
-                          class="form-control"
+                          class="form-control transfer-method-input"
                           id="account-number"
                         />
                       </div>
@@ -296,13 +280,10 @@
                 <div class="modal-footer">
                   <button
                     type="button"
-                    class="btn btn-secondary"
+                    class="btn btn-primary"
                     data-bs-dismiss="modal"
                   >
-                    Close
-                  </button>
-                  <button type="button" class="btn btn-primary">
-                    Save changes
+                    Confirmar
                   </button>
                 </div>
               </div>

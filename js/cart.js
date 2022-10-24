@@ -1,6 +1,12 @@
 const USER_ID = 25801;
 const CART_URL = CART_INFO_URL + USER_ID + EXT_TYPE;
 const CART_TABLE_CONTAINER_ELEM = document.getElementById("cart-products");
+const PAYMENT_METHOD_SELECTOR_CREDIT_CARD_ELEM = document.getElementById(
+  "payment-method-selection-credit-card"
+);
+const PAYMENT_METHOD_SELECTOR_TRANSFER = document.getElementById(
+  "payment-method-selection-bank-transfer"
+);
 
 function fetchCartProductsData() {
   return fetch(CART_URL)
@@ -83,6 +89,7 @@ function insertCartTable(cartProductsData) {
       );
       updateCartTableSubtotal();
       updateShippingCost();
+      updateTotalCost();
     });
     productQuantityColumnElem.appendChild(productQuantityInputElem);
     productDataContainerRowElem.appendChild(productQuantityColumnElem);
@@ -177,7 +184,6 @@ function getChoosenShipmentType() {
 }
 
 function updateShippingCost() {
-  debugger;
   let shipmentCostElem = document.getElementsByClassName("shipping-cost")[0];
   let cartSubtotalElem = document.getElementsByClassName("subtotal-cost")[0];
   let choosenShipmentType = getChoosenShipmentType();
@@ -196,6 +202,30 @@ function updateShippingCost() {
   shipmentCostElem.innerHTML = `USD ${Math.round(shippingCost * 100) / 100}`;
 }
 
+function toggleInputsStatus(inputElements, inputsState) {
+  for (const element of inputElements) {
+    if (inputsState == "enabled") {
+      element.disabled = false;
+    }
+
+    if (inputsState == "disabled") {
+      element.disabled = true;
+    }
+  }
+}
+
+function updateTotalCost() {
+  let subtotalCostElem = document.getElementsByClassName("subtotal-cost")[0];
+  let shippingCostElem = document.getElementsByClassName("shipping-cost")[0];
+  let totalCostElem = document.getElementsByClassName("total-cost")[0];
+
+  let totalValue =
+    parseInt(subtotalCostElem.dataset.value) +
+    parseInt(shippingCostElem.dataset.value);
+
+  totalCostElem.innerHTML = `USD ${totalValue}`;
+}
+
 // Event Listeners
 let shipmentTypeSelectors = document.getElementsByClassName(
   "shipment-type-selector"
@@ -203,8 +233,31 @@ let shipmentTypeSelectors = document.getElementsByClassName(
 for (const shipmentType of shipmentTypeSelectors) {
   shipmentType.addEventListener("input", () => {
     updateShippingCost();
+    updateTotalCost();
   });
 }
+
+PAYMENT_METHOD_SELECTOR_CREDIT_CARD_ELEM.addEventListener("input", () => {
+  toggleInputsStatus(
+    document.getElementsByClassName("credit-card-method-input"),
+    "enabled"
+  );
+  toggleInputsStatus(
+    document.getElementsByClassName("transfer-method-input"),
+    "disabled"
+  );
+});
+
+PAYMENT_METHOD_SELECTOR_TRANSFER.addEventListener("input", () => {
+  toggleInputsStatus(
+    document.getElementsByClassName("transfer-method-input"),
+    "enabled"
+  );
+  toggleInputsStatus(
+    document.getElementsByClassName("credit-card-method-input"),
+    "disabled"
+  );
+});
 
 // ON DOM LOADED
 document.addEventListener("DOMContentLoaded", () => {
@@ -215,12 +268,26 @@ document.addEventListener("DOMContentLoaded", () => {
     insertCartTable(cartProductsData);
     updateCartTableSubtotal();
     updateShippingCost();
+    updateTotalCost();
   });
 
   // For the cart in the local storage
   insertCartTable(getCartProductsObjects());
+
+  // For the totals
   updateCartTableSubtotal();
   updateShippingCost();
+  updateTotalCost();
+
+  // For the modal
+  toggleInputsStatus(
+    document.getElementsByClassName("transfer-method-input"),
+    "disabled"
+  );
+  toggleInputsStatus(
+    document.getElementsByClassName("credit-card-method-input"),
+    "disabled"
+  );
 });
 
 // validate purchase form
