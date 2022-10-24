@@ -259,6 +259,34 @@ PAYMENT_METHOD_SELECTOR_TRANSFER.addEventListener("input", () => {
   );
 });
 
+// ADD ME TO THE SUBMIT BUTTON
+function validatePaymentSelection() {
+  let selectedPaymentOptionContainer = document.getElementById(
+    "selected-payment-option-container"
+  );
+
+  if (
+    !PAYMENT_METHOD_SELECTOR_CREDIT_CARD_ELEM.checked &&
+    !PAYMENT_METHOD_SELECTOR_TRANSFER.checked
+  ) {
+    console.log("hello");
+    let validationFeedback = document.createElement("p");
+    validationFeedback.setAttribute.id = "paymentMethodValidationFeedback";
+    validationFeedback.classList.add("d-inline");
+    validationFeedback.classList.add("text-danger");
+    validationFeedback.innerText = " Debes seleccionar un método de pago.";
+    selectedPaymentOptionContainer.appendChild(validationFeedback);
+  }
+}
+
+// ADD ME TO THE RADIO BUTTONS
+function removeValidationFeedback() {
+  let validationFeedback = document.getElementById(
+    "paymentMethodValidationFeedback"
+  );
+  validationFeedback.remove();
+}
+
 // ON DOM LOADED
 document.addEventListener("DOMContentLoaded", () => {
   insertNavbar();
@@ -298,39 +326,3 @@ document.addEventListener("DOMContentLoaded", () => {
   logginButton.click();
   console.log("DONE");
 });
-
-// validate purchase form
-// > check address fields
-// > check payment fields
-// > check others
-
-// updateShipmentCosts
-//     select shipment cost value
-//     put the selected shipment value
-
-// updateTotalValue
-//     change total value to subtotal value plus shipment cost
-
-// toggleCreditCardFields(status)
-//     select all credit card fills
-//     if statuyou are inactive:
-//         add disabled class
-//     if status sctivive
-//         remove disabled class
-
-// toggle Transfer Card fields(status)
-// select all tranf card fills
-//     if statuyou are inactive:
-//         add disabled class
-//     if status sctivive
-//         remove disabled class
-
-// function verifyAddressInput() {
-//   let addressInputsElems = document.getElementsByClassName("address-input");
-
-//   for (const input of addressInputsElems) {
-//     if (!input.value) {
-//       highlightRequiredInput(input);
-//     }
-//   }
-// }
