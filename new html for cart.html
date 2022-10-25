@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <title>eMercado - Todo lo que busques está aquí</title>
+    <link
+      href="https://fonts.googleapis.com/css?family=Raleway:300,300i,400,400i,700,700i,900,900i"
+      rel="stylesheet"
+    />
+    <link href="css/bootstrap.min.css" rel="stylesheet" />
+    <link href="css/font-awesome.min.css" rel="stylesheet" />
+    <link href="css/styles.css" rel="stylesheet" />
+  </head>
+  <body>
+    <header>
+      <!-- NAVBAR -->
+      <div id="navbar-container"></div>
+      <!-- /NAVBAR -->
+    </header>
+
+    <main
+      class="d-flex flex-column align-content-center justif y-content-center align-items-center"
+    >
+      <!-- HEADING -->
+      <h2 class="text-center mt-3 mb-5 me-5 pe-5">Carrito de compras</h2>
+      <!-- /HEADING -->
+
+      <!-- CART TABLE -->
+      <div class="container mt-5 mb-5 me-0 ms-0">
+        <h4 class="d-flex mb-3">Articulos a comprar</h4>
+        <div class="row table-headers">
+          <div class="col-1 fw-bold" id="product-image-header"></div>
+          <div class="col-2 fw-bold" id="prpduct-name-header">Nombre</div>
+          <div class="col-2 fw-bold" id="product-cost-header">Costo</div>
+          <div class="col-1 fw-bold ps-0" id="product-quantity-header">
+            Cantidad
+          </div>
+          <div class="col-2 fw-bold ms-5" id="product-subtotal-header">
+            Subtotal
+          </div>
+        </div>
+        <div class="row table-headers-divisor">
+          <div class="col-10">
+            <hr class="mt-1" />
+          </div>
+        </div>
+
+        <div id="cart-products">
+          <!-- Product data generated in JS will be inserted here -->
+        </div>
+      </div>
+      <!-- /CART TABLE -->
+
+      <!-- ADDRESS AND SHIPMENT -->
+      <div class="container address-and-shipment-container me-0 ms-0">
+        <div class="row">
+          <form
+            action="POST"
+            class="needs-validation bg-secondary"
+            id="address-and-shipment"
+            novalidate
+          >
+            <!-- Shipping Type -->
+            <fieldset id="shipment-type-fieldset" class="mb-3">
+              <div>Tipo de envío</div>
+              <input
+                type="radio"
+                class="shipment-type-selector"
+                id="premium"
+                name="shiptment-type"
+                value="premium"
+              />
+              <label for="premium">Premium 2 a 5 días (15%)</label>
+              <br />
+
+              <input
+                type="radio"
+                class="shipment-type-selector"
+                id="express"
+                name="shiptment-type"
+                value="express"
+              />
+              <label for="express">Express 5 a 8 días (7%)</label>
+              <br />
+
+              <input
+                type="radio"
+                class="shipment-type-selector"
+                id="standard"
+                name="shiptment-type"
+                value="standard"
+                checked="checked"
+              />
+              <label for="standard">Standard 12 a 15 días (5%)</label>
+            </fieldset>
+            <!-- /Shipping Type -->
+
+            <!-- Address -->
+            <fieldset id="address-inputs">
+              <div class="row">
+                <div>Dirección de envío</div>
+                <div class="col-5">
+                  <label for="address-street">Calle</label>
+                  <br />
+                  <input
+                    type="text"
+                    class="form-control address-input"
+                    id="address-street"
+                    name="address-street"
+                    required
+                  />
+                  <div class="invalid-feedback">
+                    Por favor ingresa una calle válida.
+                  </div>
+                </div>
+                <div class="col-3">
+                  <label for="address-number">Número</label>
+                  <br />
+                  <input
+                    type="text"
+                    class="form-control address-input"
+                    id="address-number"
+                    name="address-number"
+                    required
+                  />
+                  <div class="invalid-feedback">
+                    Por favor ingresa un número de puerta válido.
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-5">
+                  <label for="corner-street">Esquina</label>
+                  <br />
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="corner-street"
+                    name="corner-street"
+                    required
+                  />
+                  <div class="invalid-feedback">
+                    Por favor ingresa una calle válida.
+                  </div>
+                </div>
+              </div>
+            </fieldset>
+            <!-- /Address -->
+          </form>
+        </div>
+      </div>
+      <!-- /ADDRESS AND SHIPMENT -->
+
+      <!-- COSTS -->
+      <div class="mt-5">
+        <hr />
+        <h4 class="d-flex mb-3">Costos</h4>
+        <ul class="list-group">
+          <li class="list-group-item">
+            <div class="row">
+              <div class="col-6">
+                <h5>Subtotal</h5>
+                <p class="mb-0">Costo Unitario del producto por cantidad</p>
+              </div>
+              <div class="col-6">
+                <h5 class="subtotal-cost fw-bold">[Subotal_Cost]</h5>
+              </div>
+            </div>
+          </li>
+          <li class="list-group-item">
+            <div class="row">
+              <div class="col-6">
+                <h5>Costo de envío</h5>
+                <p class="mb-0">Según el tipo de producto</p>
+              </div>
+              <div class="col-6">
+                <h5 class="shipping-cost fw-bold">[Shipping_cost]</h5>
+              </div>
+            </div>
+          </li>
+          <li class="list-group-item">
+            <div class="row">
+              <div class="col-6">
+                <h5>Total ($)</h5>
+              </div>
+              <div class="col-6">
+                <h5 class="total-cost fw-bold">Total</h5>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+      <!-- /COSTS -->
+
+      <!-- PAYMENT METHOD MODAL TRIGGER -->
+      <div class="row mt-5">
+        <hr />
+        <h4>Forma de Pago</h4>
+        <div id="selected-payment-option-container" class="col">
+          <p class="selected-payment-method d-inline m-0 p-0">
+            No se ha seleccionado
+          </p>
+          <button
+            type="button"
+            class="btn btn-link ms-2 p-0 d-inline"
+            data-bs-toggle="modal"
+            data-bs-target="#exampleModal"
+          >
+            Seleccionar
+          </button>
+          <p id="paymentMethodValidationFeedback"></p>
+        </div>
+      </div>
+      <!-- PAYMENT METHOD MODAL TRIGGER -->
+
+      <!-- CONFIRM PURCHASE BUTTON -->
+      <div class="row">
+        <button id="complete-purchase-btn" class="mt-5 btn btn-primary">
+          Finalizar compra
+        </button>
+      </div>
+      <!-- /CONFIRM PURCHASE BUTTON S-->
+    </main>
+
+    <!-- MODAL - PAYMENT METHOD-->
+    <div class="modal" tabindex="-1">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Selecciona un método de pago.</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <form action="post">
+              <input type="text" />
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Close
+            </button>
+            <button type="button" class="btn btn-primary">Save changes</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- MODAL - PAYMENT METHOD-->
+
+    <!-- SCRIPTS -->
+    <script
+      src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+      integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/popper.js@1.14.3/dist/umd/popper.min.js"
+      integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"
+      integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+      crossorigin="anonymous"
+    ></script>
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="js/bootstrapFormValidation.js"></script>
+    <script src="js/init.js"></script>
+    <script src="js/cart.js"></script>
+    <script src="js/bootstrapFormValidation.js"></script>
+    <!-- /SCRIPTS -->
+
+    <footer>
+      <div class="container text-muted">
+        <p class="float-end">
+          <a href="#">Volver arriba</a>
+        </p>
+        <p>
+          Este sitio forma parte de
+          <a href="https://jovenesaprogramar.edu.uy/" target="_blank"
+            >Jovenes a Programar</a
+          >
+          - 2022
+        </p>
+        <p>
+          Clickea <a target="_blank" href="Letra.pdf">aquí</a> para descargar la
+          letra del obligatorio.
+        </p>
+      </div>
+    </footer>
+  </body>
+</html>

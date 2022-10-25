@@ -7,6 +7,9 @@ const PAYMENT_METHOD_SELECTOR_CREDIT_CARD_ELEM = document.getElementById(
 const PAYMENT_METHOD_SELECTOR_TRANSFER = document.getElementById(
   "payment-method-selection-bank-transfer"
 );
+const COMPLETE_PURCHASE_BUTTON_ELEM = document.getElementById(
+  "complete-purchase-btn"
+);
 
 function fetchCartProductsData() {
   return fetch(CART_URL)
@@ -226,6 +229,35 @@ function updateTotalCost() {
   totalCostElem.innerHTML = `USD ${totalValue}`;
 }
 
+function validatePaymentSelection() {
+  let selectedPaymentOptionContainer = document.getElementById(
+    "selected-payment-option-container"
+  );
+
+  if (
+    !PAYMENT_METHOD_SELECTOR_CREDIT_CARD_ELEM.checked &&
+    !PAYMENT_METHOD_SELECTOR_TRANSFER.checked
+  ) {
+    let validationFeedback = document.getElementById(
+      "paymentMethodValidationFeedback"
+    );
+    validationFeedback.id = "paymentMethodValidationFeedback";
+    validationFeedback.classList.add("d-inline");
+    validationFeedback.classList.add("text-danger");
+    validationFeedback.innerText = " Debes seleccionar un método de pago.";
+    selectedPaymentOptionContainer.appendChild(validationFeedback);
+  }
+}
+
+function validateSelectedPaymentFields() {}
+
+function removePaymentMethodValidationFeedback() {
+  let validationFeedback = document.getElementById(
+    "paymentMethodValidationFeedback"
+  );
+  validationFeedback.remove();
+}
+
 // Event Listeners
 let shipmentTypeSelectors = document.getElementsByClassName(
   "shipment-type-selector"
@@ -237,7 +269,9 @@ for (const shipmentType of shipmentTypeSelectors) {
   });
 }
 
-PAYMENT_METHOD_SELECTOR_CREDIT_CARD_ELEM.addEventListener("input", () => {
+PAYMENT_METHOD_SELECTOR_CREDIT_CARD_ELEM.addEventListener("click", () => {
+  document.getElementById("selected-payment-method").innerText =
+    "Méotodo de pago: Tarjeta de crédito";
   toggleInputsStatus(
     document.getElementsByClassName("credit-card-method-input"),
     "enabled"
@@ -246,9 +280,12 @@ PAYMENT_METHOD_SELECTOR_CREDIT_CARD_ELEM.addEventListener("input", () => {
     document.getElementsByClassName("transfer-method-input"),
     "disabled"
   );
+  removePaymentMethodValidationFeedback();
 });
 
-PAYMENT_METHOD_SELECTOR_TRANSFER.addEventListener("input", () => {
+PAYMENT_METHOD_SELECTOR_TRANSFER.addEventListener("click", () => {
+  document.getElementById("selected-payment-method").innerText =
+    "Méotodo de pago: Transferencia Bancaria";
   toggleInputsStatus(
     document.getElementsByClassName("transfer-method-input"),
     "enabled"
@@ -257,35 +294,13 @@ PAYMENT_METHOD_SELECTOR_TRANSFER.addEventListener("input", () => {
     document.getElementsByClassName("credit-card-method-input"),
     "disabled"
   );
+  removePaymentMethodValidationFeedback();
 });
 
-// ADD ME TO THE SUBMIT BUTTON
-function validatePaymentSelection() {
-  let selectedPaymentOptionContainer = document.getElementById(
-    "selected-payment-option-container"
-  );
-
-  if (
-    !PAYMENT_METHOD_SELECTOR_CREDIT_CARD_ELEM.checked &&
-    !PAYMENT_METHOD_SELECTOR_TRANSFER.checked
-  ) {
-    console.log("hello");
-    let validationFeedback = document.createElement("p");
-    validationFeedback.setAttribute.id = "paymentMethodValidationFeedback";
-    validationFeedback.classList.add("d-inline");
-    validationFeedback.classList.add("text-danger");
-    validationFeedback.innerText = " Debes seleccionar un método de pago.";
-    selectedPaymentOptionContainer.appendChild(validationFeedback);
-  }
-}
-
-// ADD ME TO THE RADIO BUTTONS
-function removeValidationFeedback() {
-  let validationFeedback = document.getElementById(
-    "paymentMethodValidationFeedback"
-  );
-  validationFeedback.remove();
-}
+COMPLETE_PURCHASE_BUTTON_ELEM.addEventListener("click", () => {
+  validatePaymentSelection();
+  alert("yes");
+});
 
 // ON DOM LOADED
 document.addEventListener("DOMContentLoaded", () => {
@@ -316,13 +331,4 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementsByClassName("credit-card-method-input"),
     "disabled"
   );
-});
-
-console.log("Script: ASUS AutoClick Login Button - Activado");
-document.addEventListener("DOMContentLoaded", () => {
-  let logginButton = document.getElementsByClassName("loginbtn")[0];
-  console.log("loginButton");
-  console.log(loginButton);
-  logginButton.click();
-  console.log("DONE");
 });
