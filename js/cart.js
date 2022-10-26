@@ -299,7 +299,6 @@ PAYMENT_METHOD_SELECTOR_TRANSFER.addEventListener("click", () => {
 
 COMPLETE_PURCHASE_BUTTON_ELEM.addEventListener("click", () => {
   validatePaymentSelection();
-  alert("yes");
 });
 
 // ON DOM LOADED
@@ -323,12 +322,12 @@ document.addEventListener("DOMContentLoaded", () => {
   updateTotalCost();
 
   // For the modal
-  toggleInputsStatus(
-    document.getElementsByClassName("transfer-method-input"),
-    "disabled"
-  );
-  toggleInputsStatus(
-    document.getElementsByClassName("credit-card-method-input"),
-    "disabled"
-  );
+  // toggleInputsStatus(
+  //   document.getElementsByClassName("transfer-method-input"),
+  //   "disabled"
+  // );
+  // toggleInputsStatus(
+  //   document.getElementsByClassName("credit-card-method-input"),
+  //   "disabled"
+  // );
 });
