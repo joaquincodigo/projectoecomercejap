@@ -186,7 +186,7 @@
                           <input
                             type="text"
                             class="form-control credit-card-method-input"
-                            id="credit-card-number-input"
+                            id="credit-card-number-input modal-text-input"
                             required
                             disabled
                           />
@@ -200,7 +200,7 @@
                           <input
                             type="text"
                             class="form-control credit-card-method-input"
-                            id="credit-card-expiration-input"
+                            id="credit-card-expiration-input modal-text-input"
                             required
                             disabled
                           />
@@ -215,7 +215,7 @@
                           <input
                             type="text"
                             class="form-control credit-card-method-input"
-                            id="credit-card-security-code-input"
+                            id="credit-card-security-code-input modal-text-input"
                             required
                             disabled
                           />
@@ -248,7 +248,7 @@
                           <label for="account-number">Número de cuenta</label>
                           <input
                             type="text"
-                            class="form-control transfer-method-input"
+                            class="form-control transfer-method-input modal-text-input"
                             id="account-number"
                             required
                             disabled
@@ -336,7 +336,10 @@
               >
                 Seleccionar
               </button>
-              <p id="paymentMethodValidationFeedback"></p>
+              <p
+                class="d-inline text-danger"
+                id="payment-method-validation-feedback"
+              ></p>
             </div>
           </div>
           <!-- /Payment Medium -->

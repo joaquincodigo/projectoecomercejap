@@ -233,20 +233,32 @@ function validatePaymentSelection() {
   let selectedPaymentOptionContainer = document.getElementById(
     "selected-payment-option-container"
   );
+  let validationFeedback = document.getElementById(
+    "payment-method-validation-feedback"
+  );
+  let modalTextInputs = document.getElementsByClassName("modal-text-input");
 
   if (
     !PAYMENT_METHOD_SELECTOR_CREDIT_CARD_ELEM.checked &&
     !PAYMENT_METHOD_SELECTOR_TRANSFER.checked
   ) {
-    let validationFeedback = document.getElementById(
-      "paymentMethodValidationFeedback"
-    );
-    validationFeedback.id = "paymentMethodValidationFeedback";
-    validationFeedback.classList.add("d-inline");
-    validationFeedback.classList.add("text-danger");
     validationFeedback.innerText = " Debes seleccionar un método de pago.";
-    selectedPaymentOptionContainer.appendChild(validationFeedback);
   }
+
+  if (
+    PAYMENT_METHOD_SELECTOR_CREDIT_CARD_ELEM.checked ||
+    PAYMENT_METHOD_SELECTOR_TRANSFER.checked
+  ) {
+    for (const textInput of modalTextInputs) {
+      if (!textInput.disabled && textInput.value = "") {
+        validationFeedback.innerText = " Debes rellenar todos los datos referentes a la forma de pago seleccionada."
+      }
+    }
+    
+    
+  }
+
+  selectedPaymentOptionContainer.appendChild(validationFeedback);
 }
 
 function validateSelectedPaymentFields() {}
