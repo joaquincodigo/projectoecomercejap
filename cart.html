@@ -170,7 +170,8 @@
                         type="radio"
                         name="payment-method"
                         value="credit-card"
-                        id="payment-method-selection-credit-card"
+                        data-payment-type="Tarjeta de crédito"
+                        id="credit-card-radio-selector"
                         class="payment-selector form-check-input"
                         required
                       />
@@ -185,8 +186,8 @@
                           >
                           <input
                             type="text"
-                            class="form-control credit-card-method-input"
-                            id="credit-card-number-input modal-text-input"
+                            class="form-control credit-card-method-input modal-text-input"
+                            id="credit-card-number-input"
                             required
                             disabled
                           />
@@ -199,8 +200,8 @@
                           >
                           <input
                             type="text"
-                            class="form-control credit-card-method-input"
-                            id="credit-card-expiration-input modal-text-input"
+                            class="form-control credit-card-method-input modal-text-input"
+                            id="credit-card-expiration-input"
                             required
                             disabled
                           />
@@ -214,8 +215,8 @@
                           >
                           <input
                             type="text"
-                            class="form-control credit-card-method-input"
-                            id="credit-card-security-code-input modal-text-input"
+                            class="form-control credit-card-method-input modal-text-input"
+                            id="credit-card-security-code-input"
                             required
                             disabled
                           />
@@ -235,7 +236,8 @@
                         type="radio"
                         name="payment-method"
                         value="bank-transfer"
-                        id="payment-method-selection-bank-transfer"
+                        data-payment-type="Transferencia Bancaria"
+                        id="bank-trasnfer-radio-selector"
                         class="payment-selector form-check-input mt-4"
                         required
                       />
@@ -261,12 +263,14 @@
                     </div>
 
                     <div class="modal-footer">
-                      <input
-                        type="submit"
+                      <button
+                        type="button"
                         data-bs-dismiss="modal"
                         class="btn btn-primary"
-                        value="Confirmar"
-                      />
+                        id="close-modal-button"
+                      >
+                        Cerrar
+                      </button>
                     </div>
                   </div>
                 </div>
@@ -328,27 +332,43 @@
               >
                 No se ha seleccionado
               </p>
+
               <button
                 type="button"
+                id="select-payment-method-button"
                 class="btn btn-link ms-2 p-0 d-inline"
                 data-bs-toggle="modal"
                 data-bs-target="#exampleModal"
               >
                 Seleccionar
               </button>
+
               <p
-                class="d-inline text-danger"
-                id="payment-method-validation-feedback"
-              ></p>
+                class="d-none text-danger"
+                id="no-payment-option-selected-feedback"
+              >
+                Debes seleccionar un método de pago.
+              </p>
+
+              <p
+                class="d-none text-danger"
+                id="invalid-inputs-in-selected-payment-method-feedback"
+              >
+                Debes rellenar todos los campos para el método de pago elegido.
+              </p>
             </div>
           </div>
           <!-- /Payment Medium -->
 
           <!-- Confirm Purchase Button -->
           <div class="row">
-            <button id="complete-purchase-btn" class="mt-5 btn btn-primary">
-              Finalizar compra
-            </button>
+            <input
+              type="submit"
+              form="address-and-shipment"
+              value="Finalizar compra"
+              class="btn btn-primary mt-4"
+              id="form-submit-button"
+            />
           </div>
           <!--  /Confirm Purchase Button -->
         </div>
