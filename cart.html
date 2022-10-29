@@ -21,51 +21,46 @@
     <div id="navbar-container"></div>
     <!-- /Navbar -->
 
-    <main
-      class="d-flex flex-column align-content-center justif y-content-center align-items-center"
-    >
-      <div class="ms-5 ps-5">
-        <!-- Heading -->
-        <h2 class="text-center mt-3 mb-5 me-5 pe-5">Carrito de compras</h2>
-        <!-- /Heading -->
-
-        <!-- Cart -->
-        <div class="container mt-5 mb-5 me-0 ms-0">
-          <h4 class="d-flex mb-3">Articulos a comprar</h4>
-          <div class="row table-headers">
-            <div class="col-1 fw-bold" id="product-image-header"></div>
-            <div class="col-2 fw-bold" id="prpduct-name-header">Nombre</div>
-            <div class="col-2 fw-bold" id="product-cost-header">Costo</div>
-            <div class="col-1 fw-bold ps-0" id="product-quantity-header">
-              Cantidad
-            </div>
-            <div class="col-2 fw-bold ms-5" id="product-subtotal-header">
-              Subtotal
-            </div>
+    <main>
+      <div class="container main-container">
+        <!-- CART -->
+        <div class="row section-title mt-3">
+          <h3 class="text-center">Carrito de Compras</h3>
+        </div>
+        <div class="row cart-table-title mt-3">
+          <h4>Artículos a comprar</h4>
+        </div>
+        <div class="row cart-table-headers mt-1">
+          <div class="col-2 image-header"></div>
+          <div class="col-3 name-header">
+            <p class="fw-bold mb-1">Artículo</p>
           </div>
-          <div class="row table-headers-divisor">
-            <div class="col-10">
-              <hr class="mt-1" />
-            </div>
+          <div class="col-2 cost-header">
+            <p class="fw-bold mb-1">Precio</p>
           </div>
-
-          <div id="cart-products">
-            <!-- Product data generated in JS will be inserted here -->
+          <div class="col-2 quantity-header">
+            <p class="fw-bold mb-1">Cantidad</p>
+          </div>
+          <div class="col-2 subtotal-header">
+            <p class="fw-bold mb-1">Subtotal</p>
           </div>
         </div>
-        <!-- /Cart -->
+        <div class="row table-header-separator">
+          <hr />
+        </div>
+        <div class="table-content-container" id="table-content-container">
+          <!-- Table rows generated in JS will be inserted here -->
+        </div>
 
-        <!-- Address and Shipment -->
-        <div class="container address-and-shipment-container me-0 ms-0">
-          <div class="row">
-            <div class="col-6"></div>
-            <form
-              action="POST"
-              class="needs-validation bg-secondary"
-              id="address-and-shipment"
-              novalidate
-            >
-              <!-- Shipping Type -->
+        <!-- FORM -->
+        <div class="row form-container">
+          <form
+            action="POST"
+            class="needs-validation"
+            id="address-and-shipment"
+            novalidate
+          >
+            <div class="row shipping-type-selection mt-4">
               <fieldset id="shipment-type-fieldset" class="mb-3">
                 <legend>Tipo de envío</legend>
                 <input
@@ -98,13 +93,12 @@
                 />
                 <label for="standard">Standard 12 a 15 días (5%)</label>
               </fieldset>
-              <!-- /Shipping Type -->
-
-              <!-- Address -->
+            </div>
+            <div class="row address-selection mt-4">
               <fieldset id="address-inputs">
                 <legend>Dirección de envío</legend>
                 <div class="row">
-                  <div class="col-5">
+                  <div class="col-8">
                     <label for="address-street">Calle</label>
                     <br />
                     <input
@@ -118,7 +112,7 @@
                       Por favor ingresa una calle válida.
                     </div>
                   </div>
-                  <div class="col-3">
+                  <div class="col-4">
                     <label for="address-number">Número</label>
                     <br />
                     <input
@@ -133,8 +127,8 @@
                     </div>
                   </div>
                 </div>
-                <div class="row">
-                  <div class="col-5">
+                <div class="row mt-2">
+                  <div class="col-8">
                     <label for="corner-street">Esquina</label>
                     <br />
                     <input
@@ -150,141 +144,141 @@
                   </div>
                 </div>
               </fieldset>
-              <!-- /Address -->
+            </div>
 
-              <!-- Payment Medium Modal -->
-              <div class="modal" tabindex="-1" id="exampleModal">
-                <div class="modal-dialog modal-dialog-centered">
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <h5 class="modal-title">
-                        <strong>Forma de pago</strong>
-                      </h5>
+            <!-- MODAL -->
+            <div class="modal" tabindex="-1" id="payment-type-modal">
+              <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title">
+                      <strong>Forma de pago</strong>
+                    </h5>
+                  </div>
+
+                  <div class="modal-body">
+                    <label for="payment-method-selection-credit-card">
+                      Tarjeta de crédito
+                    </label>
+                    <input
+                      type="radio"
+                      name="payment-method"
+                      value="credit-card"
+                      data-payment-type="Tarjeta de crédito"
+                      id="credit-card-radio-selector"
+                      class="payment-selector form-check-input"
+                      required
+                    />
+                    <div class="invalid-feedback">
+                      Debes seleccionar un método de pago.
                     </div>
-
-                    <div class="modal-body">
-                      <label for="payment-method-selection-credit-card">
-                        Tarjeta de crédito
-                      </label>
-                      <input
-                        type="radio"
-                        name="payment-method"
-                        value="credit-card"
-                        data-payment-type="Tarjeta de crédito"
-                        id="credit-card-radio-selector"
-                        class="payment-selector form-check-input"
-                        required
-                      />
-                      <div class="invalid-feedback">
-                        Debes seleccionar un método de pago.
-                      </div>
-                      <hr />
-                      <div class="row mt-3">
-                        <div class="col">
-                          <label for="credit-card-number-input"
-                            >Número de tarjeta</label
-                          >
-                          <input
-                            type="text"
-                            class="form-control credit-card-method-input modal-text-input"
-                            id="credit-card-number-input"
-                            required
-                            disabled
-                          />
-                          <div class="invalid-feedback">
-                            Debes ingresar un número de tarjeta.
-                          </div>
-
-                          <label for="credit-card-expiration-input" class="mt-2"
-                            >Vencimiento MM/AA</label
-                          >
-                          <input
-                            type="text"
-                            class="form-control credit-card-method-input modal-text-input"
-                            id="credit-card-expiration-input"
-                            required
-                            disabled
-                          />
-                          <div class="invalid-feedback">
-                            Debes ingresar el vencimiento de tu tarjeta.
-                          </div>
+                    <hr />
+                    <div class="row mt-3">
+                      <div class="col">
+                        <label for="credit-card-number-input"
+                          >Número de tarjeta</label
+                        >
+                        <input
+                          type="text"
+                          class="form-control credit-card-method-input modal-text-input"
+                          id="credit-card-number-input"
+                          required
+                          disabled
+                        />
+                        <div class="invalid-feedback">
+                          Debes ingresar un número de tarjeta.
                         </div>
-                        <div class="col">
-                          <label for="credit-card-security-code-input"
-                            >Código de seg.</label
-                          >
-                          <input
-                            type="text"
-                            class="form-control credit-card-method-input modal-text-input"
-                            id="credit-card-security-code-input"
-                            required
-                            disabled
-                          />
-                          <div class="invalid-feedback">
-                            Debes ingresar el código de seguridad de tu tarjeta.
-                          </div>
+
+                        <label for="credit-card-expiration-input" class="mt-2"
+                          >Vencimiento MM/AA</label
+                        >
+                        <input
+                          type="text"
+                          class="form-control credit-card-method-input modal-text-input"
+                          id="credit-card-expiration-input"
+                          required
+                          disabled
+                        />
+                        <div class="invalid-feedback">
+                          Debes ingresar el vencimiento de tu tarjeta.
                         </div>
                       </div>
-
-                      <label
-                        for="payment-method-selection-bank-transfer"
-                        class="mt-3"
-                      >
-                        Trasnferencia Bancaria
-                      </label>
-                      <input
-                        type="radio"
-                        name="payment-method"
-                        value="bank-transfer"
-                        data-payment-type="Transferencia Bancaria"
-                        id="bank-trasnfer-radio-selector"
-                        class="payment-selector form-check-input mt-4"
-                        required
-                      />
-                      <div class="invalid-feedback">
-                        Debes seleccionar un método de pago.
-                      </div>
-                      <hr />
-                      <div class="row">
-                        <div class="col-6">
-                          <label for="account-number">Número de cuenta</label>
-                          <input
-                            type="text"
-                            class="form-control transfer-method-input modal-text-input"
-                            id="account-number"
-                            required
-                            disabled
-                          />
-                          <div class="invalid-feedback">
-                            Debes ingresar un número de cuenta válido.
-                          </div>
+                      <div class="col">
+                        <label for="credit-card-security-code-input"
+                          >Código de seg.</label
+                        >
+                        <input
+                          type="text"
+                          class="form-control credit-card-method-input modal-text-input"
+                          id="credit-card-security-code-input"
+                          required
+                          disabled
+                        />
+                        <div class="invalid-feedback">
+                          Debes ingresar el código de seguridad de tu tarjeta.
                         </div>
                       </div>
                     </div>
 
-                    <div class="modal-footer">
-                      <button
-                        type="button"
-                        data-bs-dismiss="modal"
-                        class="btn btn-primary"
-                        id="close-modal-button"
-                      >
-                        Cerrar
-                      </button>
+                    <label
+                      for="payment-method-selection-bank-transfer"
+                      class="mt-3"
+                    >
+                      Trasnferencia Bancaria
+                    </label>
+                    <input
+                      type="radio"
+                      name="payment-method"
+                      value="bank-transfer"
+                      data-payment-type="Transferencia Bancaria"
+                      id="bank-trasnfer-radio-selector"
+                      class="payment-selector form-check-input mt-4"
+                      required
+                    />
+                    <div class="invalid-feedback">
+                      Debes seleccionar un método de pago.
                     </div>
+                    <hr />
+                    <div class="row">
+                      <div class="col-6">
+                        <label for="account-number">Número de cuenta</label>
+                        <input
+                          type="text"
+                          class="form-control transfer-method-input modal-text-input"
+                          id="account-number"
+                          required
+                          disabled
+                        />
+                        <div class="invalid-feedback">
+                          Debes ingresar un número de cuenta válido.
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="modal-footer">
+                    <button
+                      type="button"
+                      data-bs-dismiss="modal"
+                      class="btn btn-primary"
+                      id="close-modal-button"
+                    >
+                      Cerrar
+                    </button>
                   </div>
                 </div>
               </div>
-              <!-- /Payment Medium Modal -->
-            </form>
-          </div>
-          <!-- /Address and Shipment -->
+            </div>
+          </form>
+        </div>
 
-          <!-- Costs -->
-          <div class="mt-5">
-            <hr />
-            <h4 class="d-flex mb-3">Costos</h4>
-            <ul class="list-group">
+        <!-- COSTS -->
+        <div class="row costs mt-4">
+          <div class="row costs-title">
+            <h4 class="">Costos</h4>
+          </div>
+          <div class="row costs-table ms-0 me-0">
+            <ul class="list-group p-0">
               <li class="list-group-item">
                 <div class="row">
                   <div class="col-6">
@@ -292,7 +286,9 @@
                     <p class="mb-0">Costo Unitario del producto por cantidad</p>
                   </div>
                   <div class="col-6">
-                    <h5 class="subtotal-cost fw-bold">[Subotal_Cost]</h5>
+                    <h5 class="subtotal-cost fw-bold text-end">
+                      [Subotal_Cost]
+                    </h5>
                   </div>
                 </div>
               </li>
@@ -303,7 +299,9 @@
                     <p class="mb-0">Según el tipo de producto</p>
                   </div>
                   <div class="col-6">
-                    <h5 class="shipping-cost fw-bold">[Shipping_cost]</h5>
+                    <h5 class="shipping-cost fw-bold text-end">
+                      [Shipping_cost]
+                    </h5>
                   </div>
                 </div>
               </li>
@@ -313,66 +311,63 @@
                     <h5>Total ($)</h5>
                   </div>
                   <div class="col-6">
-                    <h5 class="total-cost fw-bold"></h5>
+                    <h5 class="total-cost fw-bold text-end"></h5>
                   </div>
                 </div>
               </li>
             </ul>
           </div>
-          <!-- /Costs -->
+        </div>
 
-          <!-- Payment Medium -->
-          <div class="row mt-5">
-            <hr />
-            <h4>Forma de Pago</h4>
-            <div id="selected-payment-option-container" class="col">
-              <p
-                id="selected-payment-method"
-                class="selected-payment-method d-inline m-0 p-0"
-              >
-                No se ha seleccionado
-              </p>
+        <!-- SELECTED PAYMENT -->
+        <div class="row selected-payment-medium mt-4">
+          <h4>Forma de Pago</h4>
+          <div id="selected-payment-option-container" class="col">
+            <p
+              id="selected-payment-method"
+              class="selected-payment-method d-inline m-0 p-0"
+            >
+              No se ha seleccionado
+            </p>
 
-              <button
-                type="button"
-                id="select-payment-method-button"
-                class="btn btn-link ms-2 p-0 d-inline"
-                data-bs-toggle="modal"
-                data-bs-target="#exampleModal"
-              >
-                Seleccionar
-              </button>
+            <button
+              type="button"
+              id="select-payment-method-button"
+              class="btn btn-link ms-2 p-0 d-inline"
+              data-bs-toggle="modal"
+              data-bs-target="#payment-type-modal"
+            >
+              Seleccionar
+            </button>
 
-              <p
-                class="d-none text-danger"
-                id="no-payment-option-selected-feedback"
-              >
-                Debes seleccionar un método de pago.
-              </p>
+            <p
+              class="d-none text-danger"
+              id="no-payment-option-selected-feedback"
+            >
+              Debes seleccionar un método de pago.
+            </p>
 
-              <p
-                class="d-none text-danger"
-                id="invalid-inputs-in-selected-payment-method-feedback"
-              >
-                Debes rellenar todos los campos para el método de pago elegido.
-              </p>
-            </div>
+            <p
+              class="d-none text-danger"
+              id="invalid-inputs-in-selected-payment-method-feedback"
+            >
+              Debes rellenar todos los campos para el método de pago elegido.
+            </p>
           </div>
-          <!-- /Payment Medium -->
+        </div>
 
-          <!-- Confirm Purchase Button -->
-          <div class="row">
-            <input
-              type="submit"
-              form="address-and-shipment"
-              value="Finalizar compra"
-              class="btn btn-primary mt-4"
-              id="form-submit-button"
-            />
-          </div>
-          <!--  /Confirm Purchase Button -->
+        <!-- CONFIRM PURCHASE BUTTON -->
+        <div class="row confirm-purchase-button ms-0 me-0">
+          <input
+            type="submit"
+            form="address-and-shipment"
+            value="Finalizar compra"
+            class="btn btn-primary mt-4"
+            id="form-submit-button"
+          />
         </div>
       </div>
+      <!-- ^ MAIN CONTAINER END-->
     </main>
 
     <footer class="text-muted">
@@ -394,15 +389,6 @@
       </div>
     </footer>
 
-    <div id="spinner-wrapper">
-      <div class="lds-ring">
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-      </div>
-    </div>
-
     <script
       src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
       integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
@@ -422,6 +408,7 @@
     <script src="js/bootstrapFormValidation.js"></script>
     <script src="js/init.js"></script>
     <script src="js/cart.js"></script>
+    <script src="js/cartFormValidation.js"></script>
     <script src="js/bootstrapFormValidation.js"></script>
   </body>
 </html>
