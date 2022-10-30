@@ -18,7 +18,6 @@ function fetchCartProductsData() {
 function insertCartTable(cartProductsData) {
   for (const cartProduct of cartProductsData) {
     // Creating Cart Elements:
-    console.log(cartProduct.id);
     // Container Row
     let productTableRowElem = document.createElement("div");
     productTableRowElem.classList.add("row", "mt-2", "product-data-row");

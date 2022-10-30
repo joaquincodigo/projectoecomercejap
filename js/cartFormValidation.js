@@ -25,9 +25,10 @@ const CREDIT_CARD_RADIO_SELECTOR_ELEM = document.getElementById(
 const BANK_TRANSFER__RADIO_SELECTOR_ELEM = document.getElementById(
   "bank-trasnfer-radio-selector"
 );
-// CUESTIONABLE
-const MODAL_BUTTON_ELEM = document.getElementById("close-modal-button");
-// /CUESTIONABLE
+const PAYMENT_OPTIONS_MODAL_BUTTON_ELEM =
+  document.getElementById("close-modal-button");
+const CONFIRM_PURCHASE_BUTTON_ELEM =
+  document.getElementById("form-submit-button");
 
 // DECLARING FUNCTIONS
 function validatePaymentMethodSelectionModal() {
@@ -99,17 +100,26 @@ function setInputsState(inputElements, inputsState) {
   }
 }
 
+function displaySuccessfulPurchaseModal() {
+  CONFIRM_PURCHASE_BUTTON_ELEM.setAttribute("data-bs-toggle", "modal");
+  CONFIRM_PURCHASE_BUTTON_ELEM.setAttribute(
+    "data-bs-target",
+    "#purchase-successfull-modal"
+  );
+  CONFIRM_PURCHASE_BUTTON_ELEM.click();
+}
+
 // ADDING EVENT LISTENERS
 PURCHASE_FORM_ELEM.addEventListener("submit", (event) => {
   event.preventDefault();
   let isThePurchaseFormValid = validatePaymentMethodSelectionModal();
   if (isThePurchaseFormValid) {
-    console.log("EVERYTHING RIGHT");
+    displaySuccessfulPurchaseModal();
   }
 
-  // Once the form was submitted once, the modal buttons
+  // Once the form was submitted once, the modal button
   // starts to validate and give feedback when you click it.
-  MODAL_BUTTON_ELEM.addEventListener("click", (event) => {
+  PAYMENT_OPTIONS_MODAL_BUTTON_ELEM.addEventListener("click", (event) => {
     validatePaymentMethodSelectionModal();
   });
 });
