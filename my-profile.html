@@ -13,33 +13,132 @@
     />
     <link href="css/bootstrap.min.css" rel="stylesheet" />
     <link href="css/styles.css" rel="stylesheet" />
-    <style>
-      .bd-placeholder-img {
-        font-size: 1.125rem;
-        text-anchor: middle;
-        -webkit-user-select: none;
-        -moz-user-select: none;
-        -ms-user-select: none;
-        user-select: none;
-      }
-
-      @media (min-width: 768px) {
-        .bd-placeholder-img-lg {
-          font-size: 3.5rem;
-        }
-      }
-    </style>
   </head>
 
   <body>
     <div id="navbar-container"></div>
+
     <main>
       <div class="container">
-        <div class="alert alert-danger text-center" role="alert">
-          <h4 class="alert-heading">[P E R F I L]</h4>
+        <div class="row section-title mt-4 text-center">
+          <h2>Perfil de Usuario</h2>
         </div>
+        <div class="row profile-form mt-5 justify-content-center">
+          <div class="col-5">
+            <!-- PROFILE FORM -->
+            <form id="profile-form" class="needs-validation d-none" novalidate>
+              <!-- NAME -->
+              <div class="mb-3">
+                <label for="name-input" class="form-label"
+                  >Nombre<strong>*</strong>:</label
+                >
+                <input
+                  type="text"
+                  class="form-control"
+                  id="name-input"
+                  required
+                />
+                <div class="invalid-feedback">
+                  Debes ingresar un nombre para continuar.
+                </div>
+              </div>
+
+              <!-- SECOND NAME -->
+              <div class="mb-3">
+                <label for="second-name-input" class="form-label"
+                  >Segundo nombre:</label
+                >
+                <input
+                  type="text"
+                  class="form-control"
+                  id="second-name-input"
+                />
+              </div>
+
+              <!-- SURNAME -->
+              <div class="mb-3">
+                <label for="surname-input" class="form-label"
+                  >Apellido<strong>*</strong>:</label
+                >
+                <input
+                  type="text"
+                  class="form-control"
+                  id="surname-input"
+                  required
+                />
+                <div class="invalid-feedback">
+                  Debes ingresar un apellido para continuar.
+                </div>
+              </div>
+
+              <!-- SECOND SURNAME -->
+              <div class="mb-3">
+                <label for="second-surname-input" class="form-label"
+                  >Segundo apellido:</label
+                >
+                <input
+                  type="text"
+                  class="form-control"
+                  id="second-surname-input"
+                />
+              </div>
+
+              <!-- EMAIL -->
+              <div class="mb-3">
+                <label for="email-input" class="form-label"
+                  >E-mail<strong>*</strong></label
+                >
+                <input
+                  type="email"
+                  class="form-control"
+                  id="email-input"
+                  aria-describedby="emailHelp"
+                  required
+                />
+                <div class="invalid-feedback">
+                  Debes ingresar una dirección de correo para continuar.
+                </div>
+              </div>
+
+              <!-- PHONE -->
+              <div class="mb-3">
+                <label for="second-surname-input" class="form-label"
+                  >Teléfono de contacto:</label
+                >
+                <input
+                  type="text"
+                  class="form-control"
+                  id="second-surname-input"
+                />
+              </div>
+
+              <!-- SUBMIT BUTTON -->
+              <button type="submit" class="btn mt-3 btn-primary">
+                Guardar cambios
+              </button>
+            </form>
+          </div>
+        </div>
+
+        <!-- USER NOT LOGGED ALERT -->
+        <div
+          class="row not-logged-user-feedback d-none position-relative"
+          id="user-not-logged-alert"
+        >
+          <div
+            class="alert alert-primary position-absolute top-50 start-50 translate-middle"
+            role="alert"
+          >
+            Debes haber iniciado sesión para ver tu perfil de usuario.
+          </div>
+        </div>
+
+        <!-- <div class="position-relative">
+          <div class="position-absolute top-50 start-50 translate-middle"></div>
+        </div> -->
       </div>
     </main>
+
     <footer class="text-muted">
       <div class="container">
         <p class="float-end">
@@ -58,6 +157,7 @@
         </p>
       </div>
     </footer>
+
     <script
       src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
       integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
@@ -73,6 +173,7 @@
       integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
       crossorigin="anonymous"
     ></script>
+    <script src="js/bootstrapFormValidation.js"></script>
     <script src="js/bootstrap.bundle.min.js"></script>
     <script src="js/init.js"></script>
     <script src="js/my-profile.js"></script>

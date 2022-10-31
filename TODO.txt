@@ -1,5 +1,0 @@
-IMPORTANTE
-> 
-
-NO TAN IMPORTANTE
-> Al seleccionar un método de pago, los campos del otro método deben deshabilitarse
