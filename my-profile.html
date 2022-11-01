@@ -13,6 +13,7 @@
     />
     <link href="css/bootstrap.min.css" rel="stylesheet" />
     <link href="css/styles.css" rel="stylesheet" />
+    <link href="css/dropzone.css" rel="stylesheet" />
   </head>
 
   <body>
@@ -102,20 +103,31 @@
 
               <!-- PHONE -->
               <div class="mb-3">
-                <label for="second-surname-input" class="form-label"
+                <label for="phone-input" class="form-label"
                   >Teléfono de contacto:</label
                 >
-                <input
-                  type="text"
-                  class="form-control"
-                  id="second-surname-input"
-                />
+                <input type="text" class="form-control" id="phone-input" />
               </div>
 
               <!-- SUBMIT BUTTON -->
-              <button type="submit" class="btn mt-3 btn-primary">
+              <button
+                type="submit"
+                id="submit-button"
+                class="btn mt-3 btn-primary"
+              >
                 Guardar cambios
               </button>
+
+              <div class="row">
+                <div class="col-md-8 order-md-1">
+                  <label>Imágenes</label>
+                  <div class="needsclick dz-clickable" id="file-upload">
+                    <div class="dz-message needsclick">
+                      Arrastra tus fotos aquí<br />
+                    </div>
+                  </div>
+                </div>
+              </div>
             </form>
           </div>
         </div>
@@ -132,10 +144,6 @@
             Debes haber iniciado sesión para ver tu perfil de usuario.
           </div>
         </div>
-
-        <!-- <div class="position-relative">
-          <div class="position-absolute top-50 start-50 translate-middle"></div>
-        </div> -->
       </div>
     </main>
 
@@ -177,5 +185,6 @@
     <script src="js/bootstrap.bundle.min.js"></script>
     <script src="js/init.js"></script>
     <script src="js/my-profile.js"></script>
+    <script src="js/dropzone.js"></script>
   </body>
 </html>
