@@ -23,11 +23,9 @@
 
   <body>
     <main>
-    
       <!-- Login Page Container -->
       <div id="login-page-container" class="d-flex justify-content-center">
         <div>
-
           <!-- Site logo -->
           <div id="logo-container" class="d-flex justify-content-center">
             <img src="./img/login.png" alt="eComerce Logo" id="login-logo" />
@@ -47,7 +45,7 @@
             <div class="form-outline mb-4">
               <label class="form-label" for="email-input">Usuario:</label>
               <input
-                type="text"
+                type="email"
                 id="user-input"
                 class="login-input"
                 placeholder="Ingresa tu usuario"
@@ -62,7 +60,6 @@
                 id="password-input"
                 class="login-input"
                 placeholder="Ingresa tu contraseña"
-                
               />
             </div>
 
@@ -78,12 +75,10 @@
             />
           </form>
 
-             <!-- Google Button -->
-            <div id="googleButtonDiv"></div> 
-          
+          <!-- Google Button -->
+          <div id="googleButtonDiv"></div>
         </div>
       </div>
-
     </main>
 
     <!-- Footer -->
@@ -112,7 +107,7 @@
 
     <!-- Bootstrap -->
     <script src="js/bootstrap.bundle.min.js"></script>
-  
+
     <!-- Google Button -->
     <script src="js/googleLogin.js"></script>
     <script src="https://accounts.google.com/gsi/client" async defer></script>

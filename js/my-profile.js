@@ -11,7 +11,6 @@ const PHONE_INPUT_ELEM = document.getElementById("phone-input");
 const USER_NOT_LOGGED_ALERT_ELEM = document.getElementById(
   "user-not-logged-alert"
 );
-const SUBMIT_BUTTON_ELEM = document.getElementById("submit-button");
 
 // FUNCTIONS
 function isCurrentUserLoggedIn() {
@@ -27,6 +26,46 @@ function displayElement(element) {
   element.classList.add("d-block");
 }
 
+function fillFormWithProfileData() {
+  let profileData = JSON.parse(localStorage.getItem("profileData"));
+
+  if (profileData.name != undefined) {
+    NAME_INPUT_ELEM.value = profileData.name;
+  } else {
+    NAME_INPUT_ELEM.value = "";
+  }
+
+  if (profileData.secondName != undefined) {
+    SECOND_NAME_INPUT_ELEM.value = profileData.secondName;
+  } else {
+    SECOND_NAME_INPUT_ELEM.value = "";
+  }
+
+  if (profileData.surname != undefined) {
+    SURNAME_INPUT_ELEM.value = profileData.surname;
+  } else {
+    SURNAME_INPUT_ELEM.value = "";
+  }
+
+  if (profileData.secondSurname != undefined) {
+    SECOND_SURNAME_INPUT_ELEM.value = profileData.secondSurname;
+  } else {
+    SECOND_SURNAME_INPUT_ELEM.value = "";
+  }
+
+  if (profileData.email != undefined) {
+    EMAIL_INPUT_ELEM.value = profileData.email;
+  } else {
+    EMAIL_INPUT_ELEM.value = "";
+  }
+
+  if (profileData.phone != undefined) {
+    PHONE_INPUT_ELEM.value = profileData.phone;
+  } else {
+    PHONE_INPUT_ELEM.value = "";
+  }
+}
+
 function saveProfileDataToLocalStorage() {
   let profileData = {
     name: NAME_INPUT_ELEM.value,
@@ -35,7 +74,9 @@ function saveProfileDataToLocalStorage() {
     secondSurname: SECOND_SURNAME_INPUT_ELEM.value,
     email: EMAIL_INPUT_ELEM.value,
     phone: PHONE_INPUT_ELEM.value,
+    profileDataHasBeenModified: true, // cuestionable
   };
+
   localStorage.setItem("profileData", JSON.stringify(profileData));
 }
 
@@ -48,22 +89,21 @@ function setupImageDropzoneElement() {
 }
 
 // EVENT LISTENERS
-SUBMIT_BUTTON_ELEM.addEventListener("", () => {});
+PROFILE_FORM_ELEM.addEventListener("submit", (event) => {
+  event.preventDefault();
+  saveProfileDataToLocalStorage();
+});
 
 // ON DOM LOADED
 document.addEventListener("DOMContentLoaded", () => {
   insertNavbar();
+
   if (isCurrentUserLoggedIn()) {
     displayElement(PROFILE_FORM_ELEM);
+    fillFormWithProfileData();
   } else {
     displayElement(USER_NOT_LOGGED_ALERT_ELEM);
   }
+
   setupImageDropzoneElement();
 });
-
-// TO DO:
-
-// DONE > Solamente se podrá ingresar al perfil si el user esta loggeado.
-// > Al ingresar por primera vez, todos los campos deben estar vacios excepto el email que debe ser el del login.
-// > Al darle al botón, luego de validar, guardar en el local storage.
-// > La siguiente vez que se ingrese ya deben estar todos los datos cargadores desde el LS

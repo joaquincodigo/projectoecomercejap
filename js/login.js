@@ -45,6 +45,8 @@ document.addEventListener("DOMContentLoaded", () => {
         passwordInputElement
       );
     } else {
+      let profileData = { email: userInputElement.value };
+      localStorage.setItem("profileData", JSON.stringify(profileData));
       localStorage.setItem("username", userInputElement.value);
       window.location.href = "landpage.html";
     }
