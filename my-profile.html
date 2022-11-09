@@ -24,10 +24,11 @@
         <div class="row section-title mt-4 text-center">
           <h2>Perfil de Usuario</h2>
         </div>
-        <div class="row profile-form mt-5 justify-content-center">
-          <div class="col-5">
-            <!-- PROFILE FORM -->
-            <form id="profile-form" class="needs-validation d-none" novalidate>
+        <form id="profile-form" class="needs-validation d-none" novalidate>
+          <div class="row profile-form mt-5 justify-content-center">
+            <div class="col-md-5 first-form-column">
+              <!-- PROFILE FORM -->
+
               <!-- NAME -->
               <div class="mb-3">
                 <label for="name-input" class="form-label"
@@ -83,7 +84,8 @@
                   id="second-surname-input"
                 />
               </div>
-
+            </div>
+            <div class="col-md-5 second-form-column">
               <!-- EMAIL -->
               <div class="mb-3">
                 <label for="email-input" class="form-label"
@@ -93,7 +95,6 @@
                   type="email"
                   class="form-control"
                   id="email-input"
-                  aria-describedby="emailHelp"
                   required
                 />
                 <div class="invalid-feedback">
@@ -109,28 +110,39 @@
                 <input type="text" class="form-control" id="phone-input" />
               </div>
 
+              <!-- PHOTO -->
+              <div class="mb-3">
+                <label for="file-upload-input" class="mb-2">
+                  Foto de perfil
+                </label>
+                <br />
+                <input
+                  type="file"
+                  id="file-upload-input"
+                  accept="image/png, image/jpeg"
+                />
+              </div>
+            </div>
+            <div class="col-md-10 mt-4 align-items-center">
               <!-- SUBMIT BUTTON -->
               <button
                 type="submit"
-                id="submit-button"
-                class="btn mt-3 btn-primary"
+                id="submit-form-button"
+                class="btn m-0 btn-primary"
+                form="profile-form"
               >
                 Guardar cambios
               </button>
-
-              <div class="row">
-                <div class="col-md-8 order-md-1">
-                  <label>Imágenes</label>
-                  <div class="needsclick dz-clickable" id="file-upload">
-                    <div class="dz-message needsclick">
-                      Arrastra tus fotos aquí<br />
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </form>
+              <!-- DATA SUCCESSFULLY SAVED FEEDBACK -->
+              <p
+                class="d-none ms-2 mb-0 text-success"
+                id="data-successfully-saved-feedback"
+              >
+                Se han guardado los datos de tu perfil.
+              </p>
+            </div>
           </div>
-        </div>
+        </form>
 
         <!-- USER NOT LOGGED ALERT -->
         <div
@@ -138,7 +150,7 @@
           id="user-not-logged-alert"
         >
           <div
-            class="alert alert-primary position-absolute top-50 start-50 translate-middle"
+            class="alert alert-primary position-absolute top-10 start-50 translate-middle"
             role="alert"
           >
             Debes haber iniciado sesión para ver tu perfil de usuario.
