@@ -66,7 +66,7 @@ function fillFormWithProfileData() {
   }
 }
 
-function saveProfileDataToLocalStorage() {
+function saveProfileTextDataToLocalStorage() {
   let profileData = {
     name: NAME_INPUT_ELEM.value,
     secondName: SECOND_NAME_INPUT_ELEM.value,
@@ -92,9 +92,19 @@ function isFormValid() {
 PROFILE_FORM_ELEM.addEventListener("submit", (event) => {
   event.preventDefault();
   if (isFormValid()) {
-    saveProfileDataToLocalStorage();
+    saveProfileTextDataToLocalStorage();
     showDataSavedSuccessfullyFeedback();
   }
+});
+
+FILE_INPUT_ELEM.addEventListener("change", () => {
+  var uploadedImage = FILE_INPUT_ELEM.files[0];
+  const fileReader = new FileReader();
+  fileReader.addEventListener("load", () => {
+    localStorage.setItem("profile-image", fileReader.result);
+  });
+
+  fileReader.readAsDataURL(uploadedImage);
 });
 
 // ON DOM LOADED
@@ -109,37 +119,31 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 });
 
-function getBase64(file) {
-  var reader = new FileReader();
-  reader.readAsDataURL(file);
-  reader.onload = function () {
-    console.log(reader.result);
-  };
-  reader.onerror = function (error) {
-    console.log("Error: ", error);
-  };
-}
-
 function showDataSavedSuccessfullyFeedback() {
   DATA_SUCCESSFULLY_SAVED_FEEDBACK_ELEM.classList.remove("d-none");
   DATA_SUCCESSFULLY_SAVED_FEEDBACK_ELEM.classList.add("d-inline-block");
 }
 
-function x() {
-  var files = FILE_INPUT_ELEM.files;
-  var reader = new FileReader();
-  reader.onload = function () {
-    console.log(reader.result);
-  };
-  if (files[0]) {
-    // This does not return the text. It just starts reading.
-    // The onload handler is triggered when it is done and the result is available.
-    reader.readAsText(files[0]);
-  }
-}
+// function x() {
+//   var files = FILE_INPUT_ELEM.files;
+//   var reader = new FileReader();
+//   reader.onload = function () {
+//     console.log(reader.result);
+//   };
+//   if (files[0]) {
+//     // This does not return the text. It just starts reading.
+//     // The onload handler is triggered when it is done and the result is available.
+//     reader.readAsText(files[0]);
+//   }
+// }
 
-// Solamente se podrá ingresar al perfil si el usuario se encuentra logueado. Además, al momento de ingresar por primera vez, todos los campos se deben encontrar vacíos, excepto E-mail, que debe contener el ingresado por el usuario al momento del login.
-
-// Al presionar el botón para guardar los datos, se debe validar que los campos obligatorios (*) se encuentren con valor, y de ser así, guardar en el almacenamiento local.
-
-// Las siguientes veces que se ingrese al perfil, ya se deben encontrar los datos cargados en los input, listos para ser modificados por el usuario.
+// function getBase64(file) {
+//   var reader = new FileReader();
+//   reader.readAsDataURL(file);
+//   reader.onload = function () {
+//     console.log(reader.result);
+//   };
+//   reader.onerror = function (error) {
+//     console.log("Error: ", error);
+//   };
+// }
