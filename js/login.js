@@ -1,9 +1,9 @@
-// DEFINING VARIABLES
+// VARIABLES
 let loginFormElement = document.getElementById("login-form");
 let userInputElement = document.getElementById("user-input");
 let passwordInputElement = document.getElementById("password-input");
 
-// DEFINING FUNCTIONS
+// FUNCTIONS
 function isInputEmpty(inputField) {
   return inputField.value == "";
 }
@@ -45,9 +45,19 @@ document.addEventListener("DOMContentLoaded", () => {
         passwordInputElement
       );
     } else {
-      let profileData = { email: userInputElement.value };
-      localStorage.setItem("profileData", JSON.stringify(profileData));
-      localStorage.setItem("username", userInputElement.value);
+      let profileDataObject = JSON.parse(localStorage.getItem("profileData"));
+      if (profileDataObject) {
+        profileDataObject.email = userInputElement.value;
+        localStorage.setItem("profileData", JSON.stringify(profileDataObject));
+        localStorage.setItem("username", userInputElement.value);
+      } else {
+        localStorage.setItem(
+          "profileData",
+          `{"email": "${userInputElement.value}"}`
+        );
+        localStorage.setItem("username", userInputElement.value);
+      }
+
       window.location.href = "landpage.html";
     }
   });

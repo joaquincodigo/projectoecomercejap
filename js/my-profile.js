@@ -15,6 +15,7 @@ const FILE_INPUT_ELEM = document.getElementById("file-upload-input");
 const DATA_SUCCESSFULLY_SAVED_FEEDBACK_ELEM = document.getElementById(
   "data-successfully-saved-feedback"
 );
+const PROFILE_IMAGE_ELEM = document.getElementById("profile-image");
 
 // FUNCTIONS
 function isCurrentUserLoggedIn() {
@@ -74,7 +75,7 @@ function saveProfileTextDataToLocalStorage() {
     secondSurname: SECOND_SURNAME_INPUT_ELEM.value,
     email: EMAIL_INPUT_ELEM.value,
     phone: PHONE_INPUT_ELEM.value,
-    profileDataHasBeenModified: true, // cuestionable
+    profileDataHasBeenModified: true,
   };
 
   localStorage.setItem("profileData", JSON.stringify(profileData));
@@ -88,6 +89,30 @@ function isFormValid() {
   );
 }
 
+function saveUploadedImageToLocalStorage() {
+  let uploadedImage = FILE_INPUT_ELEM.files[0];
+  const fileReader = new FileReader();
+  fileReader.addEventListener("load", () => {
+    localStorage.setItem("profile-image", fileReader.result);
+  });
+  fileReader.readAsDataURL(uploadedImage);
+}
+
+function displayProfileImage() {
+  let profileImageData = localStorage.getItem("profile-image");
+  if (profileImageData) {
+    PROFILE_IMAGE_ELEM.classList.remove("d-none");
+    PROFILE_IMAGE_ELEM.classList.add("d-inline-block");
+    PROFILE_IMAGE_ELEM.src = "";
+    PROFILE_IMAGE_ELEM.src = profileImageData;
+  }
+}
+
+function showDataSavedSuccessfullyFeedback() {
+  DATA_SUCCESSFULLY_SAVED_FEEDBACK_ELEM.classList.remove("d-none");
+  DATA_SUCCESSFULLY_SAVED_FEEDBACK_ELEM.classList.add("d-inline-block");
+}
+
 // EVENT LISTENERS
 PROFILE_FORM_ELEM.addEventListener("submit", (event) => {
   event.preventDefault();
@@ -98,13 +123,9 @@ PROFILE_FORM_ELEM.addEventListener("submit", (event) => {
 });
 
 FILE_INPUT_ELEM.addEventListener("change", () => {
-  var uploadedImage = FILE_INPUT_ELEM.files[0];
-  const fileReader = new FileReader();
-  fileReader.addEventListener("load", () => {
-    localStorage.setItem("profile-image", fileReader.result);
-  });
-
-  fileReader.readAsDataURL(uploadedImage);
+  saveUploadedImageToLocalStorage();
+  displayProfileImage();
+  window.location.href = "my-profile.html";
 });
 
 // ON DOM LOADED
@@ -114,36 +135,8 @@ document.addEventListener("DOMContentLoaded", () => {
   if (isCurrentUserLoggedIn()) {
     displayElement(PROFILE_FORM_ELEM);
     fillFormWithProfileData();
+    displayProfileImage();
   } else {
     displayElement(USER_NOT_LOGGED_ALERT_ELEM);
   }
 });
-
-function showDataSavedSuccessfullyFeedback() {
-  DATA_SUCCESSFULLY_SAVED_FEEDBACK_ELEM.classList.remove("d-none");
-  DATA_SUCCESSFULLY_SAVED_FEEDBACK_ELEM.classList.add("d-inline-block");
-}
-
-// function x() {
-//   var files = FILE_INPUT_ELEM.files;
-//   var reader = new FileReader();
-//   reader.onload = function () {
-//     console.log(reader.result);
-//   };
-//   if (files[0]) {
-//     // This does not return the text. It just starts reading.
-//     // The onload handler is triggered when it is done and the result is available.
-//     reader.readAsText(files[0]);
-//   }
-// }
-
-// function getBase64(file) {
-//   var reader = new FileReader();
-//   reader.readAsDataURL(file);
-//   reader.onload = function () {
-//     console.log(reader.result);
-//   };
-//   reader.onerror = function (error) {
-//     console.log("Error: ", error);
-//   };
-// }
