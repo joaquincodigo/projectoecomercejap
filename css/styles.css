@@ -242,3 +242,25 @@ a.custom-card:hover {
 ::placeholder {
   text-align: center !important;
 }
+
+/* Notification styles */
+.notification {
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  color: white !important;
+  background-color: #b9aeda;
+  padding: 1rem;
+  border-radius: 4px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  z-index: 1050;
+  opacity: 0;  /* Start hidden */
+  transform: translateY(-20px);  /* Start above the final position */
+  transition: opacity 0.5s ease, transform 0.5s ease; /* Transition effects */
+}
+
+/* When the notification is shown */
+.notification.show {
+  opacity: 1;  /* Make visible */
+  transform: translateY(0);  /* Move to final position */
+}

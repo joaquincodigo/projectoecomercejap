@@ -1,116 +1,97 @@
 <!DOCTYPE html>
 <html lang="es">
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1, shrink-to-fit=no"
-    />
-    <title>eMercado - Login</title>
 
-    <link
-      href="https://fonts.googleapis.com/css?family=Raleway:300,300i,400,400i,700,700i,900,900i"
-      rel="stylesheet"
-    />
-    <link href="css/bootstrap.min.css" rel="stylesheet" />
-    <link href="css/styles.css" rel="stylesheet" />
-    <style>
-      body {
-        background-color: rgb(248, 249, 250);
-      }
-    </style>
-  </head>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <title>eMercado - Login</title>
 
-  <body>
-    <main>
-      <!-- Login Page Container -->
-      <div id="login-page-container" class="d-flex justify-content-center">
-        <div>
-          <!-- Site logo -->
-          <div id="logo-container" class="d-flex justify-content-center">
-            <img src="./img/login.png" alt="eComerce Logo" id="login-logo" />
-          </div>
+  <link href="https://fonts.googleapis.com/css?family=Raleway:300,300i,400,400i,700,700i,900,900i" rel="stylesheet" />
+  <link href="css/styles.css" rel="stylesheet" />
+  <link href="css/bootstrap.min.css" rel="stylesheet" />
+  <style>
+    body {
+      background-color: rgb(248, 249, 250);
+    }
+  </style>
+</head>
 
+<body>
+  <main>
+    <div id="notification" class="notification d-none w-50">
+  <span id="notification-text"></span>
+</div>
+    <!-- Login Page Container -->
+    <div id="login-page-container" class="d-flex justify-content-center">
+      <div>
+        <!-- Site logo -->
+        <div id="logo-container" class="d-flex justify-content-center">
+          <img src="./img/login.png" alt="eComerce Logo" id="login-logo" />
+        </div>
+
+        <div id="login-form-wrapper" class="pb-5 pt-1 border border-gray rounded">
           <!-- Login Title -->
-          <h3 class="text-center">Inicio de Sesión</h3>
+          <h3 class="mt-5 text-center mb-5">Inicio de Sesión</h3>
 
           <!-- Login Form -->
-          <form
-            id="login-form"
-            class="text-center"
-            method="POST"
-            action="index.html"
-          >
+          <form id="login-form" class="text-center" method="POST" action="index.html">
+
             <!-- User Input-->
             <div class="form-outline mb-4">
-              <label class="form-label" for="email-input">Usuario:</label>
-              <input
-                type="email"
-                id="user-input"
-                class="login-input"
-                placeholder="Ingresa tu usuario"
-              />
+              <label class="form-label" for="email-input">Correo:</label>
+              <input type="email" id="user-input" class="login-input" placeholder="Ingresa tu usuario" />
             </div>
 
             <!-- Password Input -->
             <div class="form-outline mb-4" id="password-input-container">
               <label class="form-label" for="password-input">Contraseña:</label>
-              <input
-                type="password"
-                id="password-input"
-                class="login-input"
-                placeholder="Ingresa tu contraseña"
-              />
+              <input type="password" id="password-input" class="login-input" placeholder="Ingresa tu contraseña" />
             </div>
 
             <!-- Invalid Input Message Container -->
             <div id="invalid-input-message-container"></div>
 
             <!-- Submit Button -->
-            <input
-              type="submit"
-              id="submit-button"
-              value="Ingresar"
-              class="btn btn-primary btn-block mb-4"
-            />
+            <input type="submit" id="submit-button" value="Ingresar" class="btn btn-primary btn-block mb-5" />
           </form>
 
           <!-- Google Button -->
           <div id="googleButtonDiv"></div>
         </div>
       </div>
-    </main>
+    </div>
+  </main>
 
-    <!-- Footer -->
-    <footer class="text-muted">
-      <div class="container">
-        <p class="float-end">
-          <a href="#">Volver arriba</a>
-        </p>
-        <p>
-          Este sitio forma parte de
-          <a href="https://jovenesaprogramar.edu.uy/" target="_blank"
-            >Jovenes a Programar</a
-          >
-          - 2022
-        </p>
-        <p>
-          Clickea <a target="_blank" href="Letra.pdf">aquí</a> para descargar la
-          letra del obligatorio.
-        </p>
-      </div>
-    </footer>
+  <!-- Footer -->
+  <footer class="text-muted">
+    <div class="container">
+      <p class="float-end">
+        <a href="#">Volver arriba</a>
+      </p>
+      <p>
+        Este sitio forma parte de
+        <a href="https://jovenesaprogramar.edu.uy/" target="_blank">Jovenes a Programar</a>
+        - 2022
+      </p>
+      <p>
+        Clickea <a target="_blank" href="Letra.pdf">aquí</a> para descargar la
+        letra del obligatorio.
+      </p>
+    </div>
+  </footer>
 
-    <!-- Scripts -->
-    <script src="js/login.js"></script>
-    <script src="js/init.js"></script>
+  <!-- Scripts -->
+  <script src="js/login.js"></script>
+  <script src="js/init.js"></script>
 
-    <!-- Bootstrap -->
-    <script src="js/bootstrap.bundle.min.js"></script>
+  <!-- Bootstrap -->
+  <script src="js/bootstrap.bundle.min.js"></script>
 
-    <!-- Google Button -->
-    <script src="js/googleLogin.js"></script>
-    <script src="https://accounts.google.com/gsi/client" async defer></script>
-    <script src="https://apis.google.com/js/platform.js" async defer></script>
-  </body>
+  <!-- Google Button -->
+  <script src="js/googleLogin.js"></script>
+  <script src="https://accounts.google.com/gsi/client" async defer></script>
+  <script src="https://apis.google.com/js/platform.js" async defer></script>
+
+</body>
+
 </html>

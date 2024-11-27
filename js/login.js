@@ -2,8 +2,28 @@
 let loginFormElement = document.getElementById("login-form");
 let userInputElement = document.getElementById("user-input");
 let passwordInputElement = document.getElementById("password-input");
+let submitButtonElement = document.getElementById('submit-button')
 
 // FUNCTIONS
+function showDummyCredentialsNotification(message) {
+  const notification = document.getElementById("notification");
+
+  // Set the message and make the notification visible
+  notification.innerHTML = message;
+  notification.classList.remove("d-none"); // Ensure it's visible in layout
+  setTimeout(() => {
+    notification.classList.add("show"); // Trigger transition
+  }, 10); // Small delay to ensure transition applies
+
+  // Automatically hide after 3 seconds
+  setTimeout(() => {
+    notification.classList.remove("show");
+    setTimeout(() => {
+      notification.classList.add("d-none"); // Hide after transition
+    }, 500); // Wait for transition to finish
+  }, 8000);
+}
+
 function isInputEmpty(inputField) {
   return inputField.value == "";
 }
@@ -31,6 +51,17 @@ function initializeCart() {
 document.addEventListener("DOMContentLoaded", () => {
   initializeCart();
 
+  submitButtonElement.addEventListener("click", (event) => {
+    if (!userInputElement.value.includes("@")) {
+      showDummyCredentialsNotification(`
+      <p>Debes ingresar cualquier mail y contraseña para ingresar a la demo.</p> 
+      <p>Prueba con:</p> 
+      <p class="m-0">- Usuario: <b>usuario@mail.com</b></p> 
+      <p class="m-0">- Contraseña: <b>1234</b></p> 
+      `)
+    }
+  })
+  
   loginFormElement.addEventListener("submit", (event) => {
     event.preventDefault();
 
