@@ -244,11 +244,18 @@ function addLinksToProductListElements() {
 }
 
 //// ADDING EVENT LISTENERS ////
+
+
+searchInputEl.addEventListener('keydown', (event) => {
+  if (event.key === 'Enter') {
+    refreshProductsList(searchProducts(searchInputEl.value.trim()));
+  }
+});
+
 searchButtonEl.addEventListener("click", () => {
   refreshProductsList(searchProducts(searchInputEl.value.trim()));
 });
 
-searchInputEl.addEventListener("submit", () => {});
 
 sortAscendingButtonEl.addEventListener("click", () => {
   let sortedList = sortList("0 -> 9", CURRENTLY_SHOWN_PRODUCTS); // Just for clarity. Sort modifies the original array.
@@ -278,6 +285,7 @@ filterButtonEl.addEventListener("click", () => {
 //// TRIGGERED ON DOM LOADED ////
 document.addEventListener("DOMContentLoaded", () => {
   insertNavbar();
+
   let productListURL = PRODUCTS_URL + CATEGORY_ID + EXT_TYPE;
   getJSONData(productListURL).then((result) => {
     FETCHED_PRODUCTS_LIST = result.data.products;
@@ -285,4 +293,5 @@ document.addEventListener("DOMContentLoaded", () => {
     insertProductsList(FETCHED_PRODUCTS_LIST);
     addLinksToProductListElements();
   });
+
 });
