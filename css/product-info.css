@@ -33,10 +33,6 @@ main {
 }
 
 /* Textual */
-.product-textual-data {
-  aspect-ratio: 1/1 !important;
-}
-
 .price-and-buy-button-container {
   display: flex;
   align-items: center;
@@ -192,3 +188,4 @@ main {
 .carousel-control-next-icon {
   background-color: black;
 }
+
