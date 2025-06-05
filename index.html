@@ -1,97 +1,255 @@
 <!DOCTYPE html>
 <html lang="es">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <title>eMercado - Login</title>
 
-<head>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-  <title>eMercado - Login</title>
+    <link
+      href="https://fonts.googleapis.com/css?family=Raleway:300,300i,400,400i,700,700i,900,900i"
+      rel="stylesheet"
+    />
+    <link href="css/styles.css" rel="stylesheet" />
+    <link href="css/bootstrap.min.css" rel="stylesheet" />
+    <style>
+      body {
+        background-color: rgb(248, 249, 250);
+      }
+      #modal-button:hover {
+        background-color: #0ec75b !important;
+      }
+      .copy-button:hover {
+        background-color: #b2ebca;
+      }
+    </style>
+  </head>
 
-  <link href="https://fonts.googleapis.com/css?family=Raleway:300,300i,400,400i,700,700i,900,900i" rel="stylesheet" />
-  <link href="css/styles.css" rel="stylesheet" />
-  <link href="css/bootstrap.min.css" rel="stylesheet" />
-  <style>
-    body {
-      background-color: rgb(248, 249, 250);
-    }
-  </style>
-</head>
+  <body>
+    <main>
+      <!-- Login Modal -->
+      <div
+        id="simpleModal"
+        style="
+          display: block;
+          position: fixed;
+          top: 20px;
+          right: 40px;
+          background: #d7ffe6;
+          color: black;
+          padding: 1rem;
+          box-shadow: 0 3px 4px rgba(0, 0, 0, 0.2);
+          border-radius: 8px;
+          z-index: 9999;
+          max-width: 290px;
+        "
+      >
+        <p
+          style="
+            white-space: normal;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+          "
+        >
+          ¡Hola! Bienvenido a esta demo.
+        </p>
+        <p
+          style="
+            white-space: normal;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+          "
+        >
+          Puedes utilizar las siguientes credenciales de prueba para iniciar:
+        </p>
 
-<body>
-  <main>
-    <div id="notification" class="notification d-none w-50">
-  <span id="notification-text"></span>
-</div>
-    <!-- Login Page Container -->
-    <div id="login-page-container" class="d-flex justify-content-center">
-      <div>
-        <!-- Site logo -->
-        <div id="logo-container" class="d-flex justify-content-center">
-          <img src="./img/login.png" alt="eComerce Logo" id="login-logo" />
+        <div
+          style="display: flex; flex-direction: row; justify-content: center"
+        >
+          <ul style="list-style: none; padding: 0; margin: 0">
+            <li>
+              Correo: <strong>test@mail.com</strong>
+              <span
+                class="copy-button"
+                style="
+                  border: 1px solid green;
+                  border-radius: 3px;
+                  display: inline-flex;
+                  align-items: center;
+                  line-height: 0;
+                  vertical-align: middle;
+                  margin-bottom: 4px;
+                "
+              >
+                <svg
+                  style="color: rgb(7, 95, 7)"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke-width="1.5"
+                  stroke="currentColor"
+                  width="20"
+                  height="20"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M16.5 8.25V6a2.25 2.25 0 0 0-2.25-2.25H6A2.25 2.25 0 0 0 3.75 6v8.25A2.25 2.25 0 0 0 6 16.5h2.25m8.25-8.25H18a2.25 2.25 0 0 1 2.25 2.25V18A2.25 2.25 0 0 1 18 20.25h-7.5A2.25 2.25 0 0 1 8.25 18v-1.5m8.25-8.25h-6a2.25 2.25 0 0 0-2.25 2.25v6"
+                  />
+                </svg>
+              </span>
+            </li>
+            <li>
+              Contraseña: <strong>12345</strong>
+              <span
+                class="copy-button"
+                style="
+                  border: 1px solid green;
+                  border-radius: 3px;
+                  display: inline-flex;
+                  align-items: center;
+                  line-height: 0;
+                  vertical-align: middle;
+                  margin-bottom: 4px;
+                "
+              >
+                <svg
+                  style="color: rgb(7, 95, 7)"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke-width="1.5"
+                  stroke="currentColor"
+                  width="20"
+                  height="20"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M16.5 8.25V6a2.25 2.25 0 0 0-2.25-2.25H6A2.25 2.25 0 0 0 3.75 6v8.25A2.25 2.25 0 0 0 6 16.5h2.25m8.25-8.25H18a2.25 2.25 0 0 1 2.25 2.25V18A2.25 2.25 0 0 1 18 20.25h-7.5A2.25 2.25 0 0 1 8.25 18v-1.5m8.25-8.25h-6a2.25 2.25 0 0 0-2.25 2.25v6"
+                  />
+                </svg>
+              </span>
+            </li>
+          </ul>
         </div>
-
-        <div id="login-form-wrapper" class="pb-5 pt-1 border border-gray rounded">
-          <!-- Login Title -->
-          <h3 class="mt-5 text-center mb-5">Inicio de Sesión</h3>
-
-          <!-- Login Form -->
-          <form id="login-form" class="text-center" method="POST" action="index.html">
-
-            <!-- User Input-->
-            <div class="form-outline mb-4">
-              <label class="form-label" for="email-input">Correo:</label>
-              <input type="email" id="user-input" class="login-input" placeholder="Ingresa tu usuario" />
-            </div>
-
-            <!-- Password Input -->
-            <div class="form-outline mb-4" id="password-input-container">
-              <label class="form-label" for="password-input">Contraseña:</label>
-              <input type="password" id="password-input" class="login-input" placeholder="Ingresa tu contraseña" />
-            </div>
-
-            <!-- Invalid Input Message Container -->
-            <div id="invalid-input-message-container"></div>
-
-            <!-- Submit Button -->
-            <input type="submit" id="submit-button" value="Ingresar" class="btn btn-primary btn-block mb-5" />
-          </form>
-
-          <!-- Google Button -->
-          <div id="googleButtonDiv"></div>
+        <div
+          style="display: flex; flex-direction: row; justify-content: flex-end"
+        >
+          <button
+            id="modal-button"
+            onclick="document.getElementById('simpleModal').style.display='none'"
+            style="
+              border-radius: 8px;
+              border-width: 0px;
+              background-color: #0b9f48;
+              color: white;
+              padding-top: 0px;
+              padding: 5px 10px 5px 10px;
+            "
+          >
+            Cerrar
+          </button>
         </div>
       </div>
-    </div>
-  </main>
 
-  <!-- Footer -->
-  <footer class="text-muted">
-    <div class="container">
-      <p class="float-end">
-        <a href="#">Volver arriba</a>
-      </p>
-      <p>
-        Este sitio forma parte de
-        <a href="https://jovenesaprogramar.edu.uy/" target="_blank">Jovenes a Programar</a>
-        - 2022
-      </p>
-      <p>
-        Clickea <a target="_blank" href="Letra.pdf">aquí</a> para descargar la
-        letra del obligatorio.
-      </p>
-    </div>
-  </footer>
+      <!-- Login Page Container -->
+      <div id="login-page-container" class="d-flex justify-content-center">
+        <div>
+          <!-- Site logo -->
+          <div id="logo-container" class="d-flex justify-content-center">
+            <img src="./img/login.png" alt="eComerce Logo" id="login-logo" />
+          </div>
 
-  <!-- Scripts -->
-  <script src="js/login.js"></script>
-  <script src="js/init.js"></script>
+          <div
+            id="login-form-wrapper"
+            class="pb-5 pt-1 border border-gray rounded"
+          >
+            <!-- Login Title -->
+            <h3 class="mt-5 text-center mb-5">Inicio de Sesión</h3>
 
-  <!-- Bootstrap -->
-  <script src="js/bootstrap.bundle.min.js"></script>
+            <!-- Login Form -->
+            <form
+              id="login-form"
+              class="text-center"
+              method="POST"
+              action="index.html"
+            >
+              <!-- User Input-->
+              <div class="form-outline mb-4">
+                <label class="form-label" for="email-input">Correo:</label>
+                <input
+                  type="email"
+                  id="user-input"
+                  class="login-input"
+                  placeholder="Ingresa tu usuario"
+                />
+              </div>
 
-  <!-- Google Button -->
-  <script src="js/googleLogin.js"></script>
-  <script src="https://accounts.google.com/gsi/client" async defer></script>
-  <script src="https://apis.google.com/js/platform.js" async defer></script>
+              <!-- Password Input -->
+              <div class="form-outline mb-4" id="password-input-container">
+                <label class="form-label" for="password-input"
+                  >Contraseña:</label
+                >
+                <input
+                  type="password"
+                  id="password-input"
+                  class="login-input"
+                  placeholder="Ingresa tu contraseña"
+                />
+              </div>
 
-</body>
+              <!-- Invalid Input Message Container -->
+              <div id="invalid-input-message-container"></div>
 
+              <!-- Submit Button -->
+              <input
+                type="submit"
+                id="submit-button"
+                value="Ingresar"
+                class="btn btn-primary btn-block mb-5"
+              />
+            </form>
+
+            <!-- Google Button -->
+            <div id="googleButtonDiv"></div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="text-muted">
+      <div class="container">
+        <p class="float-end">
+          <a href="#">Volver arriba</a>
+        </p>
+        <p>
+          Este sitio forma parte de
+          <a href="https://jovenesaprogramar.edu.uy/" target="_blank"
+            >Jovenes a Programar</a
+          >
+          - 2022
+        </p>
+        <p>
+          Clickea <a target="_blank" href="Letra.pdf">aquí</a> para descargar la
+          letra del obligatorio.
+        </p>
+      </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="js/login.js"></script>
+    <script src="js/init.js"></script>
+
+    <!-- Bootstrap -->
+    <script src="js/bootstrap.bundle.min.js"></script>
+
+    <!-- Google Button -->
+    <script src="js/googleLogin.js"></script>
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+  </body>
 </html>
